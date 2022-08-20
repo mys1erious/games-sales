@@ -1,0 +1,21 @@
+High-level tasks:
+-. customers
+-. games
+-. profiles
+-. sales
+-. reports
+-. sales list
+-. sale details
+-. search
+-. dataframes(pandas)
+-. groupby
+-. charts
+-. no data alert
+-. report objects
+-. report list, detail
+-. pdf reports
+-. export of pdfs with chosen reports data
+-. my profile
+-. navbar
+
+
