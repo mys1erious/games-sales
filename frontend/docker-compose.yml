@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  frontend:
+    image: frontend:games_sales
+    container_name: frontend_container
+    build:
+      context: .
+    volumes:
+      - .:/games_sales_frontend
+    ports:
+      - "3000:3000"
+    command: npm start
