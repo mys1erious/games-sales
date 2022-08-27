@@ -5,18 +5,17 @@ services:
     image: postgres:latest
     container_name: postgres_db
     volumes:
-      - ./data/db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - postgres_data:/var/lib/postgresql/data
+    env_file:
+      - backend/config/settings/.env
 
   backend:
     build:
       context: ./backend
+    env_file: backend/config/settings/.env
     ports:
       - "8000:8000"
-    command: sh -c "sleep 5; gunicorn config.wsgi --bind 0.0.0.0:8000"
+    command: sh -c "sleep 5; python manage.py migrate && gunicorn config.wsgi --bind 0.0.0.0:8000"
     depends_on:
       - db
 
@@ -40,3 +39,4 @@ services:
 
 volumes:
   frontend_build:
+  postgres_data:
