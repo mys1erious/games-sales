@@ -123,15 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/django_static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+STATIC_ROOT = '/collectedstatic/'
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-# White listing the localhost:3000 port
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-]

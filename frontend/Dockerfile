@@ -1,6 +1,6 @@
 FROM node:18.7.0-alpine
 
-WORKDIR /frontend
+WORKDIR /games_sales_frontend
 COPY . .
 
 RUN npm run build
