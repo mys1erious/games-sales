@@ -36,7 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'testumba',
 
     'rest_framework',
     'corsheaders',
@@ -124,9 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = '/django_static/'
-#STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 STATIC_ROOT = '/collectedstatic/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
