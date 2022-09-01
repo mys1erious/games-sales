@@ -1,0 +1,2204 @@
+{
+    "samples": [
+        {
+            "game": {
+                "name": "Wii Sports",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Sports",
+                "year_of_release": 2006.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 76.0,
+                    "critic_count": 51.0,
+                    "user_score": "8",
+                    "user_count": 322.0
+                }
+            },
+            "NA_sales": 41.36,
+            "EU_sales": 28.96,
+            "JP_sales": 3.77,
+            "other_sales": 8.45,
+            "global_sales": 82.53
+        },
+        {
+            "game": {
+                "name": "Super Mario Bros.",
+                "platform": "NES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1985.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 29.08,
+            "EU_sales": 3.58,
+            "JP_sales": 6.81,
+            "other_sales": 0.77,
+            "global_sales": 40.24
+        },
+        {
+            "game": {
+                "name": "Mario Kart Wii",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Racing",
+                "year_of_release": 2008.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 82.0,
+                    "critic_count": 73.0,
+                    "user_score": "8.3",
+                    "user_count": 709.0
+                }
+            },
+            "NA_sales": 15.68,
+            "EU_sales": 12.76,
+            "JP_sales": 3.79,
+            "other_sales": 3.29,
+            "global_sales": 35.52
+        },
+        {
+            "game": {
+                "name": "Wii Sports Resort",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Sports",
+                "year_of_release": 2009.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 80.0,
+                    "critic_count": 73.0,
+                    "user_score": "8",
+                    "user_count": 192.0
+                }
+            },
+            "NA_sales": 15.61,
+            "EU_sales": 10.93,
+            "JP_sales": 3.28,
+            "other_sales": 2.95,
+            "global_sales": 32.77
+        },
+        {
+            "game": {
+                "name": "Pokemon Red/Pokemon Blue",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 1996.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 11.27,
+            "EU_sales": 8.89,
+            "JP_sales": 10.22,
+            "other_sales": 1.0,
+            "global_sales": 31.37
+        },
+        {
+            "game": {
+                "name": "Tetris",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Puzzle",
+                "year_of_release": 1989.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 23.2,
+            "EU_sales": 2.26,
+            "JP_sales": 4.22,
+            "other_sales": 0.58,
+            "global_sales": 30.26
+        },
+        {
+            "game": {
+                "name": "New Super Mario Bros.",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Platform",
+                "year_of_release": 2006.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 89.0,
+                    "critic_count": 65.0,
+                    "user_score": "8.5",
+                    "user_count": 431.0
+                }
+            },
+            "NA_sales": 11.28,
+            "EU_sales": 9.14,
+            "JP_sales": 6.5,
+            "other_sales": 2.88,
+            "global_sales": 29.8
+        },
+        {
+            "game": {
+                "name": "Wii Play",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Misc",
+                "year_of_release": 2006.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 58.0,
+                    "critic_count": 41.0,
+                    "user_score": "6.6",
+                    "user_count": 129.0
+                }
+            },
+            "NA_sales": 13.96,
+            "EU_sales": 9.18,
+            "JP_sales": 2.93,
+            "other_sales": 2.84,
+            "global_sales": 28.92
+        },
+        {
+            "game": {
+                "name": "New Super Mario Bros. Wii",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Platform",
+                "year_of_release": 2009.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 87.0,
+                    "critic_count": 80.0,
+                    "user_score": "8.4",
+                    "user_count": 594.0
+                }
+            },
+            "NA_sales": 14.44,
+            "EU_sales": 6.94,
+            "JP_sales": 4.7,
+            "other_sales": 2.24,
+            "global_sales": 28.32
+        },
+        {
+            "game": {
+                "name": "Duck Hunt",
+                "platform": "NES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Shooter",
+                "year_of_release": 1984.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 26.93,
+            "EU_sales": 0.63,
+            "JP_sales": 0.28,
+            "other_sales": 0.47,
+            "global_sales": 28.31
+        },
+        {
+            "game": {
+                "name": "Nintendogs",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Simulation",
+                "year_of_release": 2005.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 9.05,
+            "EU_sales": 10.95,
+            "JP_sales": 1.93,
+            "other_sales": 2.74,
+            "global_sales": 24.67
+        },
+        {
+            "game": {
+                "name": "Mario Kart DS",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Racing",
+                "year_of_release": 2005.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 91.0,
+                    "critic_count": 64.0,
+                    "user_score": "8.6",
+                    "user_count": 464.0
+                }
+            },
+            "NA_sales": 9.71,
+            "EU_sales": 7.47,
+            "JP_sales": 4.13,
+            "other_sales": 1.9,
+            "global_sales": 23.21
+        },
+        {
+            "game": {
+                "name": "Pokemon Gold/Pokemon Silver",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 1999.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 9.0,
+            "EU_sales": 6.18,
+            "JP_sales": 7.2,
+            "other_sales": 0.71,
+            "global_sales": 23.1
+        },
+        {
+            "game": {
+                "name": "Wii Fit",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Sports",
+                "year_of_release": 2007.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 80.0,
+                    "critic_count": 63.0,
+                    "user_score": "7.7",
+                    "user_count": 146.0
+                }
+            },
+            "NA_sales": 8.92,
+            "EU_sales": 8.03,
+            "JP_sales": 3.6,
+            "other_sales": 2.15,
+            "global_sales": 22.7
+        },
+        {
+            "game": {
+                "name": "Kinect Adventures!",
+                "platform": "X360",
+                "publisher": "Microsoft Game Studios",
+                "developer": "Good Science Studio",
+                "genre": "Misc",
+                "year_of_release": 2010.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 61.0,
+                    "critic_count": 45.0,
+                    "user_score": "6.3",
+                    "user_count": 106.0
+                }
+            },
+            "NA_sales": 15.0,
+            "EU_sales": 4.89,
+            "JP_sales": 0.24,
+            "other_sales": 1.69,
+            "global_sales": 21.81
+        },
+        {
+            "game": {
+                "name": "Wii Fit Plus",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Sports",
+                "year_of_release": 2009.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 80.0,
+                    "critic_count": 33.0,
+                    "user_score": "7.4",
+                    "user_count": 52.0
+                }
+            },
+            "NA_sales": 9.01,
+            "EU_sales": 8.49,
+            "JP_sales": 2.53,
+            "other_sales": 1.77,
+            "global_sales": 21.79
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto V",
+                "platform": "PS3",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2013.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 50.0,
+                    "user_score": "8.2",
+                    "user_count": 3994.0
+                }
+            },
+            "NA_sales": 7.02,
+            "EU_sales": 9.09,
+            "JP_sales": 0.98,
+            "other_sales": 3.96,
+            "global_sales": 21.04
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto: San Andreas",
+                "platform": "PS2",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2004.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 95.0,
+                    "critic_count": 80.0,
+                    "user_score": "9",
+                    "user_count": 1588.0
+                }
+            },
+            "NA_sales": 9.43,
+            "EU_sales": 0.4,
+            "JP_sales": 0.41,
+            "other_sales": 10.57,
+            "global_sales": 20.81
+        },
+        {
+            "game": {
+                "name": "Super Mario World",
+                "platform": "SNES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1990.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 12.78,
+            "EU_sales": 3.75,
+            "JP_sales": 3.54,
+            "other_sales": 0.55,
+            "global_sales": 20.61
+        },
+        {
+            "game": {
+                "name": "Brain Age: Train Your Brain in Minutes a Day",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Misc",
+                "year_of_release": 2005.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 77.0,
+                    "critic_count": 58.0,
+                    "user_score": "7.9",
+                    "user_count": 50.0
+                }
+            },
+            "NA_sales": 4.74,
+            "EU_sales": 9.2,
+            "JP_sales": 4.16,
+            "other_sales": 2.04,
+            "global_sales": 20.15
+        },
+        {
+            "game": {
+                "name": "Pokemon Diamond/Pokemon Pearl",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2006.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 6.38,
+            "EU_sales": 4.46,
+            "JP_sales": 6.04,
+            "other_sales": 1.36,
+            "global_sales": 18.25
+        },
+        {
+            "game": {
+                "name": "Super Mario Land",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1989.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 10.83,
+            "EU_sales": 2.71,
+            "JP_sales": 4.18,
+            "other_sales": 0.42,
+            "global_sales": 18.14
+        },
+        {
+            "game": {
+                "name": "Super Mario Bros. 3",
+                "platform": "NES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1988.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 9.54,
+            "EU_sales": 3.44,
+            "JP_sales": 3.84,
+            "other_sales": 0.46,
+            "global_sales": 17.28
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto V",
+                "platform": "X360",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2013.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 58.0,
+                    "user_score": "8.1",
+                    "user_count": 3711.0
+                }
+            },
+            "NA_sales": 9.66,
+            "EU_sales": 5.14,
+            "JP_sales": 0.06,
+            "other_sales": 1.41,
+            "global_sales": 16.27
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto: Vice City",
+                "platform": "PS2",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2002.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 95.0,
+                    "critic_count": 62.0,
+                    "user_score": "8.7",
+                    "user_count": 730.0
+                }
+            },
+            "NA_sales": 8.41,
+            "EU_sales": 5.49,
+            "JP_sales": 0.47,
+            "other_sales": 1.78,
+            "global_sales": 16.15
+        },
+        {
+            "game": {
+                "name": "Pokemon Ruby/Pokemon Sapphire",
+                "platform": "GBA",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2002.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 6.06,
+            "EU_sales": 3.9,
+            "JP_sales": 5.38,
+            "other_sales": 0.5,
+            "global_sales": 15.85
+        },
+        {
+            "game": {
+                "name": "Brain Age 2: More Training in Minutes a Day",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Puzzle",
+                "year_of_release": 2005.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 77.0,
+                    "critic_count": 37.0,
+                    "user_score": "7.1",
+                    "user_count": 19.0
+                }
+            },
+            "NA_sales": 3.43,
+            "EU_sales": 5.35,
+            "JP_sales": 5.32,
+            "other_sales": 1.18,
+            "global_sales": 15.29
+        },
+        {
+            "game": {
+                "name": "Pokemon Black/Pokemon White",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2010.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.51,
+            "EU_sales": 3.17,
+            "JP_sales": 5.65,
+            "other_sales": 0.8,
+            "global_sales": 15.14
+        },
+        {
+            "game": {
+                "name": "Gran Turismo 3: A-Spec",
+                "platform": "PS2",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "Polyphony Digital",
+                "genre": "Racing",
+                "year_of_release": 2001.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 95.0,
+                    "critic_count": 54.0,
+                    "user_score": "8.4",
+                    "user_count": 314.0
+                }
+            },
+            "NA_sales": 6.85,
+            "EU_sales": 5.09,
+            "JP_sales": 1.87,
+            "other_sales": 1.16,
+            "global_sales": 14.98
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Modern Warfare 3",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Infinity Ward, Sledgehammer Games",
+                "genre": "Shooter",
+                "year_of_release": 2011.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 81.0,
+                    "user_score": "3.4",
+                    "user_count": 8713.0
+                }
+            },
+            "NA_sales": 9.04,
+            "EU_sales": 4.24,
+            "JP_sales": 0.13,
+            "other_sales": 1.32,
+            "global_sales": 14.73
+        },
+        {
+            "game": {
+                "name": "Pok\u00e9mon Yellow: Special Pikachu Edition",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 1998.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.89,
+            "EU_sales": 5.04,
+            "JP_sales": 3.12,
+            "other_sales": 0.59,
+            "global_sales": 14.64
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops 3",
+                "platform": "PS4",
+                "publisher": "Activision",
+                "developer": NaN,
+                "genre": "Shooter",
+                "year_of_release": 2015.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 6.03,
+            "EU_sales": 5.86,
+            "JP_sales": 0.36,
+            "other_sales": 2.38,
+            "global_sales": 14.63
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Treyarch",
+                "genre": "Shooter",
+                "year_of_release": 2010.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 87.0,
+                    "critic_count": 89.0,
+                    "user_score": "6.3",
+                    "user_count": 1454.0
+                }
+            },
+            "NA_sales": 9.7,
+            "EU_sales": 3.68,
+            "JP_sales": 0.11,
+            "other_sales": 1.13,
+            "global_sales": 14.61
+        },
+        {
+            "game": {
+                "name": "Pokemon X/Pokemon Y",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2013.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.28,
+            "EU_sales": 4.19,
+            "JP_sales": 4.35,
+            "other_sales": 0.78,
+            "global_sales": 14.6
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops II",
+                "platform": "PS3",
+                "publisher": "Activision",
+                "developer": "Treyarch",
+                "genre": "Shooter",
+                "year_of_release": 2012.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 83.0,
+                    "critic_count": 21.0,
+                    "user_score": "5.3",
+                    "user_count": 922.0
+                }
+            },
+            "NA_sales": 4.99,
+            "EU_sales": 5.73,
+            "JP_sales": 0.65,
+            "other_sales": 2.42,
+            "global_sales": 13.79
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops II",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Treyarch",
+                "genre": "Shooter",
+                "year_of_release": 2012.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 83.0,
+                    "critic_count": 73.0,
+                    "user_score": "4.8",
+                    "user_count": 2256.0
+                }
+            },
+            "NA_sales": 8.25,
+            "EU_sales": 4.24,
+            "JP_sales": 0.07,
+            "other_sales": 1.12,
+            "global_sales": 13.67
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Modern Warfare 2",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Infinity Ward",
+                "genre": "Shooter",
+                "year_of_release": 2009.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 94.0,
+                    "critic_count": 100.0,
+                    "user_score": "6.3",
+                    "user_count": 2698.0
+                }
+            },
+            "NA_sales": 8.52,
+            "EU_sales": 3.59,
+            "JP_sales": 0.08,
+            "other_sales": 1.28,
+            "global_sales": 13.47
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Modern Warfare 3",
+                "platform": "PS3",
+                "publisher": "Activision",
+                "developer": "Infinity Ward, Sledgehammer Games",
+                "genre": "Shooter",
+                "year_of_release": 2011.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 39.0,
+                    "user_score": "3.2",
+                    "user_count": 5234.0
+                }
+            },
+            "NA_sales": 5.54,
+            "EU_sales": 5.73,
+            "JP_sales": 0.49,
+            "other_sales": 1.57,
+            "global_sales": 13.32
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto III",
+                "platform": "PS2",
+                "publisher": "Take-Two Interactive",
+                "developer": "DMA Design",
+                "genre": "Action",
+                "year_of_release": 2001.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 56.0,
+                    "user_score": "8.5",
+                    "user_count": 664.0
+                }
+            },
+            "NA_sales": 6.99,
+            "EU_sales": 4.51,
+            "JP_sales": 0.3,
+            "other_sales": 1.3,
+            "global_sales": 13.1
+        },
+        {
+            "game": {
+                "name": "Super Smash Bros. Brawl",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Game Arts",
+                "genre": "Fighting",
+                "year_of_release": 2008.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 93.0,
+                    "critic_count": 81.0,
+                    "user_score": "8.9",
+                    "user_count": 1662.0
+                }
+            },
+            "NA_sales": 6.62,
+            "EU_sales": 2.55,
+            "JP_sales": 2.66,
+            "other_sales": 1.01,
+            "global_sales": 12.84
+        },
+        {
+            "game": {
+                "name": "Mario Kart 7",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": "Retro Studios, Entertainment Analysis & Development Division",
+                "genre": "Racing",
+                "year_of_release": 2011.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 85.0,
+                    "critic_count": 73.0,
+                    "user_score": "8.2",
+                    "user_count": 632.0
+                }
+            },
+            "NA_sales": 5.03,
+            "EU_sales": 4.02,
+            "JP_sales": 2.69,
+            "other_sales": 0.91,
+            "global_sales": 12.66
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops",
+                "platform": "PS3",
+                "publisher": "Activision",
+                "developer": "Treyarch",
+                "genre": "Shooter",
+                "year_of_release": 2010.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 58.0,
+                    "user_score": "6.4",
+                    "user_count": 1094.0
+                }
+            },
+            "NA_sales": 5.99,
+            "EU_sales": 4.37,
+            "JP_sales": 0.48,
+            "other_sales": 1.79,
+            "global_sales": 12.63
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto V",
+                "platform": "PS4",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2014.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 66.0,
+                    "user_score": "8.3",
+                    "user_count": 2899.0
+                }
+            },
+            "NA_sales": 3.96,
+            "EU_sales": 6.31,
+            "JP_sales": 0.38,
+            "other_sales": 1.97,
+            "global_sales": 12.61
+        },
+        {
+            "game": {
+                "name": "Animal Crossing: Wild World",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Simulation",
+                "year_of_release": 2005.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 86.0,
+                    "critic_count": 57.0,
+                    "user_score": "8.7",
+                    "user_count": 242.0
+                }
+            },
+            "NA_sales": 2.5,
+            "EU_sales": 3.45,
+            "JP_sales": 5.33,
+            "other_sales": 0.86,
+            "global_sales": 12.13
+        },
+        {
+            "game": {
+                "name": "Halo 3",
+                "platform": "X360",
+                "publisher": "Microsoft Game Studios",
+                "developer": "Bungie Software, Bungie",
+                "genre": "Shooter",
+                "year_of_release": 2007.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 94.0,
+                    "critic_count": 86.0,
+                    "user_score": "7.8",
+                    "user_count": 4100.0
+                }
+            },
+            "NA_sales": 7.97,
+            "EU_sales": 2.81,
+            "JP_sales": 0.13,
+            "other_sales": 1.21,
+            "global_sales": 12.12
+        },
+        {
+            "game": {
+                "name": "Super Mario 64",
+                "platform": "N64",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1996.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 6.91,
+            "EU_sales": 2.85,
+            "JP_sales": 1.91,
+            "other_sales": 0.23,
+            "global_sales": 11.89
+        },
+        {
+            "game": {
+                "name": "Pokemon HeartGold/Pokemon SoulSilver",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Action",
+                "year_of_release": 2009.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.34,
+            "EU_sales": 2.71,
+            "JP_sales": 3.96,
+            "other_sales": 0.76,
+            "global_sales": 11.77
+        },
+        {
+            "game": {
+                "name": "Pokemon Omega Ruby/Pokemon Alpha Sapphire",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2014.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.35,
+            "EU_sales": 3.49,
+            "JP_sales": 3.1,
+            "other_sales": 0.74,
+            "global_sales": 11.68
+        },
+        {
+            "game": {
+                "name": "Gran Turismo 4",
+                "platform": "PS2",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "Polyphony Digital",
+                "genre": "Racing",
+                "year_of_release": 2004.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 89.0,
+                    "critic_count": 74.0,
+                    "user_score": "8.5",
+                    "user_count": 272.0
+                }
+            },
+            "NA_sales": 3.01,
+            "EU_sales": 0.01,
+            "JP_sales": 1.1,
+            "other_sales": 7.53,
+            "global_sales": 11.66
+        },
+        {
+            "game": {
+                "name": "Super Mario Galaxy",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Platform",
+                "year_of_release": 2007.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 73.0,
+                    "user_score": "8.9",
+                    "user_count": 2147.0
+                }
+            },
+            "NA_sales": 6.06,
+            "EU_sales": 3.35,
+            "JP_sales": 1.2,
+            "other_sales": 0.74,
+            "global_sales": 11.35
+        },
+        {
+            "game": {
+                "name": "Super Mario Land 2: 6 Golden Coins",
+                "platform": "GB",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Adventure",
+                "year_of_release": 1992.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 6.16,
+            "EU_sales": 2.04,
+            "JP_sales": 2.69,
+            "other_sales": 0.29,
+            "global_sales": 11.18
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto IV",
+                "platform": "X360",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2008.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 98.0,
+                    "critic_count": 86.0,
+                    "user_score": "7.9",
+                    "user_count": 2951.0
+                }
+            },
+            "NA_sales": 6.76,
+            "EU_sales": 3.07,
+            "JP_sales": 0.14,
+            "other_sales": 1.03,
+            "global_sales": 11.01
+        },
+        {
+            "game": {
+                "name": "Gran Turismo",
+                "platform": "PS",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "Polyphony Digital",
+                "genre": "Racing",
+                "year_of_release": 1997.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 96.0,
+                    "critic_count": 16.0,
+                    "user_score": "8.7",
+                    "user_count": 138.0
+                }
+            },
+            "NA_sales": 4.02,
+            "EU_sales": 3.87,
+            "JP_sales": 2.54,
+            "other_sales": 0.52,
+            "global_sales": 10.95
+        },
+        {
+            "game": {
+                "name": "Super Mario 3D Land",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Platform",
+                "year_of_release": 2011.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 90.0,
+                    "critic_count": 82.0,
+                    "user_score": "8.4",
+                    "user_count": 921.0
+                }
+            },
+            "NA_sales": 4.89,
+            "EU_sales": 3.0,
+            "JP_sales": 2.14,
+            "other_sales": 0.78,
+            "global_sales": 10.81
+        },
+        {
+            "game": {
+                "name": "Gran Turismo 5",
+                "platform": "PS3",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "Polyphony Digital",
+                "genre": "Racing",
+                "year_of_release": 2010.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 84.0,
+                    "critic_count": 82.0,
+                    "user_score": "7.5",
+                    "user_count": 1112.0
+                }
+            },
+            "NA_sales": 2.96,
+            "EU_sales": 4.82,
+            "JP_sales": 0.81,
+            "other_sales": 2.11,
+            "global_sales": 10.7
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Modern Warfare 2",
+                "platform": "PS3",
+                "publisher": "Activision",
+                "developer": "Infinity Ward",
+                "genre": "Shooter",
+                "year_of_release": 2009.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 94.0,
+                    "critic_count": 67.0,
+                    "user_score": "6.3",
+                    "user_count": 2073.0
+                }
+            },
+            "NA_sales": 4.99,
+            "EU_sales": 3.64,
+            "JP_sales": 0.38,
+            "other_sales": 1.6,
+            "global_sales": 10.6
+        },
+        {
+            "game": {
+                "name": "Super Mario All-Stars",
+                "platform": "SNES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1993.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.99,
+            "EU_sales": 2.15,
+            "JP_sales": 2.12,
+            "other_sales": 0.29,
+            "global_sales": 10.55
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto IV",
+                "platform": "PS3",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar North",
+                "genre": "Action",
+                "year_of_release": 2008.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 98.0,
+                    "critic_count": 64.0,
+                    "user_score": "7.5",
+                    "user_count": 2833.0
+                }
+            },
+            "NA_sales": 4.76,
+            "EU_sales": 3.69,
+            "JP_sales": 0.44,
+            "other_sales": 1.61,
+            "global_sales": 10.5
+        },
+        {
+            "game": {
+                "name": "Pokemon FireRed/Pokemon LeafGreen",
+                "platform": "GBA",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2004.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.34,
+            "EU_sales": 2.65,
+            "JP_sales": 3.15,
+            "other_sales": 0.35,
+            "global_sales": 10.49
+        },
+        {
+            "game": {
+                "name": "Super Mario 64",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 2004.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.01,
+            "EU_sales": 3.07,
+            "JP_sales": 1.25,
+            "other_sales": 0.97,
+            "global_sales": 10.3
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Ghosts",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Infinity Ward",
+                "genre": "Shooter",
+                "year_of_release": 2013.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 73.0,
+                    "critic_count": 29.0,
+                    "user_score": "2.6",
+                    "user_count": 2117.0
+                }
+            },
+            "NA_sales": 6.73,
+            "EU_sales": 2.56,
+            "JP_sales": 0.04,
+            "other_sales": 0.91,
+            "global_sales": 10.25
+        },
+        {
+            "game": {
+                "name": "Just Dance 3",
+                "platform": "Wii",
+                "publisher": "Ubisoft",
+                "developer": "Ubisoft",
+                "genre": "Misc",
+                "year_of_release": 2011.0,
+                "esrb_rating": "E10+",
+                "rating": {
+                    "critic_score": 74.0,
+                    "critic_count": 15.0,
+                    "user_score": "7.8",
+                    "user_count": 16.0
+                }
+            },
+            "NA_sales": 5.95,
+            "EU_sales": 3.11,
+            "JP_sales": 0.0,
+            "other_sales": 1.06,
+            "global_sales": 10.12
+        },
+        {
+            "game": {
+                "name": "New Super Mario Bros. 2",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Platform",
+                "year_of_release": 2012.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 78.0,
+                    "critic_count": 70.0,
+                    "user_score": "7.2",
+                    "user_count": 424.0
+                }
+            },
+            "NA_sales": 3.66,
+            "EU_sales": 3.14,
+            "JP_sales": 2.47,
+            "other_sales": 0.63,
+            "global_sales": 9.9
+        },
+        {
+            "game": {
+                "name": "Mario Kart 64",
+                "platform": "N64",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Racing",
+                "year_of_release": 1996.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.55,
+            "EU_sales": 1.94,
+            "JP_sales": 2.23,
+            "other_sales": 0.15,
+            "global_sales": 9.87
+        },
+        {
+            "game": {
+                "name": "Halo: Reach",
+                "platform": "X360",
+                "publisher": "Microsoft Game Studios",
+                "developer": "Bungie",
+                "genre": "Shooter",
+                "year_of_release": 2010.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 91.0,
+                    "critic_count": 99.0,
+                    "user_score": "7.9",
+                    "user_count": 2045.0
+                }
+            },
+            "NA_sales": 7.04,
+            "EU_sales": 1.95,
+            "JP_sales": 0.08,
+            "other_sales": 0.79,
+            "global_sales": 9.86
+        },
+        {
+            "game": {
+                "name": "Final Fantasy VII",
+                "platform": "PS",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "SquareSoft",
+                "genre": "Role-Playing",
+                "year_of_release": 1997.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 92.0,
+                    "critic_count": 20.0,
+                    "user_score": "9.2",
+                    "user_count": 1282.0
+                }
+            },
+            "NA_sales": 3.01,
+            "EU_sales": 2.47,
+            "JP_sales": 3.28,
+            "other_sales": 0.96,
+            "global_sales": 9.72
+        },
+        {
+            "game": {
+                "name": "Halo 4",
+                "platform": "X360",
+                "publisher": "Microsoft Game Studios",
+                "developer": "343 Industries",
+                "genre": "Shooter",
+                "year_of_release": 2012.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 87.0,
+                    "critic_count": 87.0,
+                    "user_score": "7",
+                    "user_count": 3260.0
+                }
+            },
+            "NA_sales": 6.65,
+            "EU_sales": 2.28,
+            "JP_sales": 0.04,
+            "other_sales": 0.74,
+            "global_sales": 9.71
+        },
+        {
+            "game": {
+                "name": "Gran Turismo 2",
+                "platform": "PS",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "Polyphony Digital",
+                "genre": "Racing",
+                "year_of_release": 1999.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 93.0,
+                    "critic_count": 23.0,
+                    "user_score": "9",
+                    "user_count": 135.0
+                }
+            },
+            "NA_sales": 3.88,
+            "EU_sales": 3.42,
+            "JP_sales": 1.69,
+            "other_sales": 0.5,
+            "global_sales": 9.49
+        },
+        {
+            "game": {
+                "name": "Just Dance 2",
+                "platform": "Wii",
+                "publisher": "Ubisoft",
+                "developer": "Ubisoft",
+                "genre": "Misc",
+                "year_of_release": 2010.0,
+                "esrb_rating": "E10+",
+                "rating": {
+                    "critic_score": 74.0,
+                    "critic_count": 24.0,
+                    "user_score": "7.3",
+                    "user_count": 24.0
+                }
+            },
+            "NA_sales": 5.8,
+            "EU_sales": 2.85,
+            "JP_sales": 0.01,
+            "other_sales": 0.78,
+            "global_sales": 9.44
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Ghosts",
+                "platform": "PS3",
+                "publisher": "Activision",
+                "developer": "Infinity Ward",
+                "genre": "Shooter",
+                "year_of_release": 2013.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 71.0,
+                    "critic_count": 10.0,
+                    "user_score": "2.6",
+                    "user_count": 1047.0
+                }
+            },
+            "NA_sales": 4.1,
+            "EU_sales": 3.63,
+            "JP_sales": 0.38,
+            "other_sales": 1.25,
+            "global_sales": 9.36
+        },
+        {
+            "game": {
+                "name": "Call of Duty 4: Modern Warfare",
+                "platform": "X360",
+                "publisher": "Activision",
+                "developer": "Infinity Ward",
+                "genre": "Shooter",
+                "year_of_release": 2007.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 94.0,
+                    "critic_count": 70.0,
+                    "user_score": "8.4",
+                    "user_count": 1320.0
+                }
+            },
+            "NA_sales": 5.93,
+            "EU_sales": 2.36,
+            "JP_sales": 0.13,
+            "other_sales": 0.9,
+            "global_sales": 9.31
+        },
+        {
+            "game": {
+                "name": "Donkey Kong Country",
+                "platform": "SNES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1994.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.36,
+            "EU_sales": 1.71,
+            "JP_sales": 3.0,
+            "other_sales": 0.23,
+            "global_sales": 9.3
+        },
+        {
+            "game": {
+                "name": "Minecraft",
+                "platform": "X360",
+                "publisher": "Microsoft Game Studios",
+                "developer": NaN,
+                "genre": "Misc",
+                "year_of_release": 2013.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.7,
+            "EU_sales": 2.65,
+            "JP_sales": 0.02,
+            "other_sales": 0.81,
+            "global_sales": 9.18
+        },
+        {
+            "game": {
+                "name": "Animal Crossing: New Leaf",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": "Nintendo",
+                "genre": "Simulation",
+                "year_of_release": 2012.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 70.0,
+                    "user_score": "8.7",
+                    "user_count": 626.0
+                }
+            },
+            "NA_sales": 2.03,
+            "EU_sales": 2.36,
+            "JP_sales": 4.39,
+            "other_sales": 0.39,
+            "global_sales": 9.16
+        },
+        {
+            "game": {
+                "name": "Mario Party DS",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Hudson Soft",
+                "genre": "Misc",
+                "year_of_release": 2007.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 72.0,
+                    "critic_count": 27.0,
+                    "user_score": "7.8",
+                    "user_count": 85.0
+                }
+            },
+            "NA_sales": 4.4,
+            "EU_sales": 1.85,
+            "JP_sales": 1.98,
+            "other_sales": 0.68,
+            "global_sales": 8.91
+        },
+        {
+            "game": {
+                "name": "The Elder Scrolls V: Skyrim",
+                "platform": "X360",
+                "publisher": "Bethesda Softworks",
+                "developer": "Bethesda Game Studios",
+                "genre": "Role-Playing",
+                "year_of_release": 2011.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 96.0,
+                    "critic_count": 89.0,
+                    "user_score": "8.4",
+                    "user_count": 3589.0
+                }
+            },
+            "NA_sales": 5.05,
+            "EU_sales": 2.79,
+            "JP_sales": 0.1,
+            "other_sales": 0.85,
+            "global_sales": 8.79
+        },
+        {
+            "game": {
+                "name": "Super Mario Kart",
+                "platform": "SNES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Racing",
+                "year_of_release": 1992.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 3.54,
+            "EU_sales": 1.24,
+            "JP_sales": 3.81,
+            "other_sales": 0.18,
+            "global_sales": 8.76
+        },
+        {
+            "game": {
+                "name": "FIFA 16",
+                "platform": "PS4",
+                "publisher": "Electronic Arts",
+                "developer": "EA Sports",
+                "genre": "Sports",
+                "year_of_release": 2015.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 82.0,
+                    "critic_count": 42.0,
+                    "user_score": "4.3",
+                    "user_count": 896.0
+                }
+            },
+            "NA_sales": 1.12,
+            "EU_sales": 6.12,
+            "JP_sales": 0.06,
+            "other_sales": 1.28,
+            "global_sales": 8.57
+        },
+        {
+            "game": {
+                "name": "Halo 2",
+                "platform": "XB",
+                "publisher": "Microsoft Game Studios",
+                "developer": "Bungie Software",
+                "genre": "Shooter",
+                "year_of_release": 2004.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 95.0,
+                    "critic_count": 91.0,
+                    "user_score": "8.2",
+                    "user_count": 1218.0
+                }
+            },
+            "NA_sales": 6.82,
+            "EU_sales": 1.53,
+            "JP_sales": 0.05,
+            "other_sales": 0.08,
+            "global_sales": 8.49
+        },
+        {
+            "game": {
+                "name": "Wii Party",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nd Cube",
+                "genre": "Misc",
+                "year_of_release": 2010.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 68.0,
+                    "critic_count": 42.0,
+                    "user_score": "7.4",
+                    "user_count": 54.0
+                }
+            },
+            "NA_sales": 1.75,
+            "EU_sales": 3.47,
+            "JP_sales": 2.49,
+            "other_sales": 0.67,
+            "global_sales": 8.38
+        },
+        {
+            "game": {
+                "name": "Mario Party 8",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Hudson",
+                "genre": "Misc",
+                "year_of_release": 2007.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 62.0,
+                    "critic_count": 41.0,
+                    "user_score": "6.3",
+                    "user_count": 190.0
+                }
+            },
+            "NA_sales": 3.74,
+            "EU_sales": 2.24,
+            "JP_sales": 1.58,
+            "other_sales": 0.7,
+            "global_sales": 8.27
+        },
+        {
+            "game": {
+                "name": "FIFA Soccer 13",
+                "platform": "PS3",
+                "publisher": "Electronic Arts",
+                "developer": "Electronic Arts",
+                "genre": "Action",
+                "year_of_release": 2012.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 37.0,
+                    "user_score": "6.6",
+                    "user_count": 348.0
+                }
+            },
+            "NA_sales": 1.06,
+            "EU_sales": 5.01,
+            "JP_sales": 0.13,
+            "other_sales": 1.97,
+            "global_sales": 8.16
+        },
+        {
+            "game": {
+                "name": "GoldenEye 007",
+                "platform": "N64",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Shooter",
+                "year_of_release": 1997.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.8,
+            "EU_sales": 2.01,
+            "JP_sales": 0.13,
+            "other_sales": 0.15,
+            "global_sales": 8.09
+        },
+        {
+            "game": {
+                "name": "Pokemon Black 2/Pokemon White 2",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Role-Playing",
+                "year_of_release": 2012.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 2.79,
+            "EU_sales": 1.72,
+            "JP_sales": 3.14,
+            "other_sales": 0.41,
+            "global_sales": 8.07
+        },
+        {
+            "game": {
+                "name": "Final Fantasy X",
+                "platform": "PS2",
+                "publisher": "Sony Computer Entertainment",
+                "developer": "SquareSoft",
+                "genre": "Role-Playing",
+                "year_of_release": 2001.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 92.0,
+                    "critic_count": 53.0,
+                    "user_score": "8.7",
+                    "user_count": 1056.0
+                }
+            },
+            "NA_sales": 2.91,
+            "EU_sales": 2.07,
+            "JP_sales": 2.73,
+            "other_sales": 0.33,
+            "global_sales": 8.05
+        },
+        {
+            "game": {
+                "name": "The Sims 3",
+                "platform": "PC",
+                "publisher": "Electronic Arts",
+                "developer": "The Sims Studio",
+                "genre": "Simulation",
+                "year_of_release": 2009.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 86.0,
+                    "critic_count": 75.0,
+                    "user_score": "7.6",
+                    "user_count": 886.0
+                }
+            },
+            "NA_sales": 0.99,
+            "EU_sales": 6.42,
+            "JP_sales": 0.0,
+            "other_sales": 0.6,
+            "global_sales": 8.01
+        },
+        {
+            "game": {
+                "name": "Mario & Sonic at the Olympic Games",
+                "platform": "Wii",
+                "publisher": "Sega",
+                "developer": NaN,
+                "genre": "Sports",
+                "year_of_release": 2007.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 2.57,
+            "EU_sales": 3.86,
+            "JP_sales": 0.66,
+            "other_sales": 0.91,
+            "global_sales": 7.99
+        },
+        {
+            "game": {
+                "name": "Star Wars Battlefront (2015)",
+                "platform": "PS4",
+                "publisher": "Electronic Arts",
+                "developer": NaN,
+                "genre": "Shooter",
+                "year_of_release": 2015.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 2.99,
+            "EU_sales": 3.49,
+            "JP_sales": 0.22,
+            "other_sales": 1.28,
+            "global_sales": 7.98
+        },
+        {
+            "game": {
+                "name": "Final Fantasy VIII",
+                "platform": "PS",
+                "publisher": "SquareSoft",
+                "developer": "SquareSoft",
+                "genre": "Role-Playing",
+                "year_of_release": 1999.0,
+                "esrb_rating": "T",
+                "rating": {
+                    "critic_score": 90.0,
+                    "critic_count": 24.0,
+                    "user_score": "8.6",
+                    "user_count": 644.0
+                }
+            },
+            "NA_sales": 2.28,
+            "EU_sales": 1.72,
+            "JP_sales": 3.63,
+            "other_sales": 0.23,
+            "global_sales": 7.86
+        },
+        {
+            "game": {
+                "name": "Pac-Man",
+                "platform": "2600",
+                "publisher": "Atari",
+                "developer": NaN,
+                "genre": "Puzzle",
+                "year_of_release": 1982.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 7.28,
+            "EU_sales": 0.45,
+            "JP_sales": 0.0,
+            "other_sales": 0.08,
+            "global_sales": 7.81
+        },
+        {
+            "game": {
+                "name": "Pok\u00e9mon Platinum Version",
+                "platform": "DS",
+                "publisher": "Nintendo",
+                "developer": "Game Freak",
+                "genre": "Role-Playing",
+                "year_of_release": 2008.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 83.0,
+                    "critic_count": 46.0,
+                    "user_score": "8.5",
+                    "user_count": 203.0
+                }
+            },
+            "NA_sales": 2.76,
+            "EU_sales": 1.72,
+            "JP_sales": 2.69,
+            "other_sales": 0.54,
+            "global_sales": 7.72
+        },
+        {
+            "game": {
+                "name": "Grand Theft Auto: Liberty City Stories",
+                "platform": "PSP",
+                "publisher": "Take-Two Interactive",
+                "developer": "Rockstar Leeds",
+                "genre": "Action",
+                "year_of_release": 2005.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 88.0,
+                    "critic_count": 65.0,
+                    "user_score": "7.6",
+                    "user_count": 451.0
+                }
+            },
+            "NA_sales": 2.9,
+            "EU_sales": 2.81,
+            "JP_sales": 0.24,
+            "other_sales": 1.73,
+            "global_sales": 7.69
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Advanced Warfare",
+                "platform": "PS4",
+                "publisher": "Activision",
+                "developer": "Sledgehammer Games",
+                "genre": "Shooter",
+                "year_of_release": 2014.0,
+                "esrb_rating": "M",
+                "rating": {
+                    "critic_score": 83.0,
+                    "critic_count": 39.0,
+                    "user_score": "5.7",
+                    "user_count": 1443.0
+                }
+            },
+            "NA_sales": 2.81,
+            "EU_sales": 3.48,
+            "JP_sales": 0.14,
+            "other_sales": 1.23,
+            "global_sales": 7.66
+        },
+        {
+            "game": {
+                "name": "The Legend of Zelda: Ocarina of Time",
+                "platform": "N64",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Action",
+                "year_of_release": 1998.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.1,
+            "EU_sales": 1.89,
+            "JP_sales": 1.45,
+            "other_sales": 0.16,
+            "global_sales": 7.6
+        },
+        {
+            "game": {
+                "name": "FIFA 17",
+                "platform": "PS4",
+                "publisher": "Electronic Arts",
+                "developer": "EA Sports, EA Vancouver",
+                "genre": "Sports",
+                "year_of_release": 2016.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 85.0,
+                    "critic_count": 41.0,
+                    "user_score": "5",
+                    "user_count": 398.0
+                }
+            },
+            "NA_sales": 0.66,
+            "EU_sales": 5.75,
+            "JP_sales": 0.08,
+            "other_sales": 1.11,
+            "global_sales": 7.59
+        },
+        {
+            "game": {
+                "name": "Crash Bandicoot 2: Cortex Strikes Back",
+                "platform": "PS",
+                "publisher": "Sony Computer Entertainment",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1997.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 3.78,
+            "EU_sales": 2.17,
+            "JP_sales": 1.31,
+            "other_sales": 0.31,
+            "global_sales": 7.58
+        },
+        {
+            "game": {
+                "name": "Super Smash Bros. for Wii U and 3DS",
+                "platform": "3DS",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Fighting",
+                "year_of_release": 2014.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 3.27,
+            "EU_sales": 1.37,
+            "JP_sales": 2.43,
+            "other_sales": 0.48,
+            "global_sales": 7.55
+        },
+        {
+            "game": {
+                "name": "Super Mario Galaxy 2",
+                "platform": "Wii",
+                "publisher": "Nintendo",
+                "developer": "Nintendo EAD Tokyo",
+                "genre": "Platform",
+                "year_of_release": 2010.0,
+                "esrb_rating": "E",
+                "rating": {
+                    "critic_score": 97.0,
+                    "critic_count": 87.0,
+                    "user_score": "9.1",
+                    "user_count": 1854.0
+                }
+            },
+            "NA_sales": 3.56,
+            "EU_sales": 2.35,
+            "JP_sales": 0.98,
+            "other_sales": 0.62,
+            "global_sales": 7.51
+        },
+        {
+            "game": {
+                "name": "Super Mario Bros. 2",
+                "platform": "NES",
+                "publisher": "Nintendo",
+                "developer": NaN,
+                "genre": "Platform",
+                "year_of_release": 1988.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 5.39,
+            "EU_sales": 1.18,
+            "JP_sales": 0.7,
+            "other_sales": 0.19,
+            "global_sales": 7.46
+        },
+        {
+            "game": {
+                "name": "Call of Duty: Black Ops 3",
+                "platform": "XOne",
+                "publisher": "Activision",
+                "developer": NaN,
+                "genre": "Shooter",
+                "year_of_release": 2015.0,
+                "esrb_rating": NaN,
+                "rating": {
+                    "critic_score": NaN,
+                    "critic_count": NaN,
+                    "user_score": NaN,
+                    "user_count": NaN
+                }
+            },
+            "NA_sales": 4.59,
+            "EU_sales": 2.11,
+            "JP_sales": 0.01,
+            "other_sales": 0.68,
+            "global_sales": 7.39
+        }
+    ]
+}
