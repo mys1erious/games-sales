@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Header from "./features/core/components/Header";
 import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
+import Footer from "./features/core/components/Footer";
 
 
 
@@ -26,6 +27,7 @@ function App() {
                     <Route exact path="/" element={<Home />} />
                 </Routes>
             </div>
+            <Footer />
         </ThemeProvider>
         </Router>
     );
