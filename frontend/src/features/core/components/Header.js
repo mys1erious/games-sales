@@ -15,7 +15,11 @@ import {
 import { BaseButton as Button } from "./BaseButton";
 
 
-const Header = () => {
+const Header = ({isDarkTheme, setIsDarkTheme}) => {
+
+    const changeTheme = () => {
+        setIsDarkTheme(currTheme => !currTheme);
+    };
 
     return (
         <React.Fragment>
@@ -30,6 +34,9 @@ const Header = () => {
                         <Button to={"#"} text={"Reports"} />
                     </Typography>
                     <Typography variant={"h6"} color={"inherit"}>
+                        <FormControlLabel
+                            control={ <Switch checked={isDarkTheme} onChange={changeTheme} /> }
+                            label={"Dark Mode"} labelPlacement={"start"}/>
                         {
                             localStorage.getItem('access_token') !== null
                                 ?
