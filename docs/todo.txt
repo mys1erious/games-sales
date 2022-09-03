@@ -19,3 +19,32 @@ High-level tasks:
 -. navbar
 
 
+(After recopy)
+
+Backend:
+- Password double confirm on register
+- Finish Search functionality
+- Groupby
+- Data for Charts
+- Results by field
+- Reports
+- Get ideas (possibly from the kaggle) for data visualization
+
+
+Frontend:
+- Sale detail page
+- Charts
+- Modal ?
+- Alerts
+- Report list
+- Report detail page
+- PDFs
+- Dropzone + favicon
+- My profile
+- Protecting views?
+- Navbar?
+- Implement visualization for data
+
+
+Bugs/Fixes:
+- Fix long load when pressing Home and SwitchDarkTheme
