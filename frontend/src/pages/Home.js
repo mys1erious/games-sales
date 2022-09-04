@@ -1,10 +1,11 @@
-import React from "react";
+import React  from "react";
 
 
 const Home = () => {
     return(
         <div>
-            Hello World
+            Home Page <br />
+            ?Later add basic example and how to use the site(instruction)?
         </div>
     )
 };
