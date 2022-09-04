@@ -25,6 +25,31 @@ class Rating(models.Model):
         return f'Rating for {game}'
 
 
+class GameManager(models.Manager):
+    def create(self, **kwargs):
+        rating = Rating(
+            critic_score=kwargs.get('critic_score', None),
+            critic_count=kwargs.get('critic_count', None),
+            user_score=kwargs.get('user_score', None),
+            user_count=kwargs.get('user_count', None)
+        )
+        rating.save()
+
+        game = Game(
+            name=kwargs.get('name'),
+            platform=kwargs.get('platform', ''),
+            publisher=kwargs.get('publisher', ''),
+            developer=kwargs.get('developer', ''),
+            genre=kwargs.get('genre', ''),
+            year_of_release=kwargs.get('year_of_release', None),
+            esrb_rating=kwargs.get('esrb_rating', ''),
+            rating=rating
+        )
+        game.save()
+
+        return game
+
+
 class Game(models.Model):
     class ESRBRatings(models.TextChoices):
         KA = 'K-A', 'Kids to Adults, 6+'
@@ -71,12 +96,32 @@ class Game(models.Model):
         choices=ESRBRatings.choices
     )
 
+    objects = GameManager()
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.name}'
+
+
+class SaleManager(models.Manager):
+    def create(self, **kwargs):
+        sales_data = {
+            'NA_sales': kwargs.pop('NA_sales', None),
+            'EU_sales': kwargs.pop('EU_sales', None),
+            'JP_sales': kwargs.pop('JP_sales', None),
+            'other_sales': kwargs.pop('other_sales', None),
+            'global_sales': kwargs.pop('global_sales', None)
+        }
+
+        game = Game.objects.create(**kwargs)
+
+        sale = Sale(game=game, **sales_data)
+        sale.save()
+
+        return sale
 
 
 class Sale(models.Model):
@@ -107,6 +152,8 @@ class Sale(models.Model):
         help_text='Total Sales in the world (in millions of units)',
         null=True, blank=True
     )
+
+    objects = SaleManager()
 
     def save(self, *args, **kwargs):
         self.slug = f'{self.game.slug}-sales'

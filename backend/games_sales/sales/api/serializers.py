@@ -18,9 +18,6 @@ class GameSerializer(serializers.ModelSerializer):
             'genre', 'year_of_release', 'esrb_rating', 'rating'
         ]
 
-    def create(self, validated_data):
-        return self.Meta.model.objects.create(**validated_data)
-
 
 class SaleSerializer(serializers.ModelSerializer):
     game = GameSerializer(many=False)
@@ -30,4 +27,17 @@ class SaleSerializer(serializers.ModelSerializer):
         fields = ['slug', 'game', 'NA_sales', 'EU_sales', 'JP_sales', 'other_sales', 'global_sales']
 
     def create(self, validated_data):
-        return self.Meta.model.objects.create(**validated_data)
+        game_data = validated_data.pop('game')
+        rating_data = game_data.pop('rating')
+        return Sale.objects.create(
+            **validated_data,
+            **game_data,
+            **rating_data
+        )
+    #
+    # def update(self, instance, validated_data):
+    #     game_data = validated_data.pop('game')
+    #     rating_data = game_data.pop('rating')
+    #
+    #     game = instance.game
+    #     rating = instance.game.rating

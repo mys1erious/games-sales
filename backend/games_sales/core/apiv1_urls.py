@@ -11,5 +11,10 @@ urlpatterns = [
         route='sales/',
         view=sale_views.SaleListAPIView.as_view(),
         name='sales'
+    ),
+    path(
+        route='sales/<slug:slug>/',
+        view=sale_views.SaleDetailAPIView.as_view(),
+        name='sales'
     )
 ]
