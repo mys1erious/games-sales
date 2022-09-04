@@ -4,7 +4,7 @@ import {Box, Container, Grid, Link} from "@mui/material";
 
 const Footer = () => {
     return(
-        <Box>
+        <footer>
             <Container maxWidth={"lg"}>
                 <Grid container spacing={5}>
                     <Grid item xs={12} sm={4}>
@@ -27,7 +27,7 @@ const Footer = () => {
                     </Grid>
                 </Grid>
             </Container>
-        </Box>
+        </footer>
     )
 };
 
