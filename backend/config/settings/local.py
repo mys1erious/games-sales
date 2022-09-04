@@ -18,3 +18,12 @@ DATABASES = {
         'PASSWORD': get_env_var('DATABASE_PASSWORD')
     }
 }
+
+
+INSTALLED_APPS += ['debug_toolbar']
+
+
+INTERNAL_IPS = [
+    'localhost',
+    '127.0.0.1'
+]

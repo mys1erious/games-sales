@@ -39,6 +39,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
+    'drf_spectacular',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,9 +50,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -130,3 +132,29 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    # Change to IsAdminUser
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+    # "DEFAULT_AUTHENTICATION_CLASSES": [
+    # "rest_framework_simplejwt.authentication.JWTAuthentication",
+    # ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Schema for Games Sales API',
+    'DESCRIPTION': 'Schema for API of Games Sales',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+
+    'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
+
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
+    # None will default to DRF's AUTHENTICATION_CLASSES
+    'SERVE_AUTHENTICATION': None,
+}
