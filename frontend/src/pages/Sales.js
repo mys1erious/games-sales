@@ -37,8 +37,10 @@ const Sales = ({sales, setSales}) => {
             {sales ?
                 <Grid container spacing={0} direction="column"
                       alignItems="center">
-                    <Grid item><h1>Sales List</h1></Grid>
-                    <Grid item minWidth={"300px"} width={"30%"}><SalesList sales={sales} /></Grid>
+                    <Grid item marginBottom={"5%"}><h1>Sales List</h1></Grid>
+                    <Grid item minWidth={"300px"} width={"30%"}>
+                        <SalesList sales={sales} currPage={currPage} />
+                    </Grid>
                     <Grid item marginTop={"20px"}>
                         <Typography>Page: {currPage}</Typography>
                         <Pagination boundaryCount={0} siblingCount={1}

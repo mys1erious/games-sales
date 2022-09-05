@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import {Collapse, ListItem, ListItemButton, ListItemIcon, ListItemText, styled} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
@@ -12,8 +12,12 @@ const ListItemSubText = styled(ListItemText)({
 });
 
 
-const SalesListItem = ({sale}) => {
+const SalesListItem = ({sale, currPage}) => {
     const [isExpanded, setIsExpanded] = useState(false);
+
+    useEffect(() => {
+        setIsExpanded(false);
+    }, [currPage]);
 
     const handleItemClick = () => {
         console.log(sale['slug']);

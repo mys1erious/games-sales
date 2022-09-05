@@ -3,12 +3,12 @@ import {Container} from "@mui/material";
 import SalesListItem from "./SalesListItem";
 
 
-const SalesList = ({sales}) => {
+const SalesList = ({sales, currPage}) => {
     return(
         <Container component="main">
             <ul>
                 {sales.map((sale, index) => (
-                    <SalesListItem key={index} sale={sale} />
+                    <SalesListItem key={index} sale={sale} currPage={currPage} />
                 ))}
             </ul>
         </Container>
