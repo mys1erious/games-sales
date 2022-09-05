@@ -27,15 +27,15 @@
                 "name": "Super Mario Bros.",
                 "platform": "NES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1985.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 29.08,
@@ -93,15 +93,15 @@
                 "name": "Pokemon Red/Pokemon Blue",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 1996.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 11.27,
@@ -115,15 +115,15 @@
                 "name": "Tetris",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Puzzle",
                 "year_of_release": 1989.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 23.2,
@@ -203,15 +203,15 @@
                 "name": "Duck Hunt",
                 "platform": "NES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Shooter",
                 "year_of_release": 1984.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 26.93,
@@ -225,15 +225,15 @@
                 "name": "Nintendogs",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Simulation",
                 "year_of_release": 2005.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 9.05,
@@ -269,15 +269,15 @@
                 "name": "Pokemon Gold/Pokemon Silver",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 1999.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 9.0,
@@ -401,15 +401,15 @@
                 "name": "Super Mario World",
                 "platform": "SNES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1990.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 12.78,
@@ -445,15 +445,15 @@
                 "name": "Pokemon Diamond/Pokemon Pearl",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2006.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 6.38,
@@ -467,15 +467,15 @@
                 "name": "Super Mario Land",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1989.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 10.83,
@@ -489,15 +489,15 @@
                 "name": "Super Mario Bros. 3",
                 "platform": "NES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1988.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 9.54,
@@ -555,15 +555,15 @@
                 "name": "Pokemon Ruby/Pokemon Sapphire",
                 "platform": "GBA",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2002.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 6.06,
@@ -599,15 +599,15 @@
                 "name": "Pokemon Black/Pokemon White",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2010.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.51,
@@ -665,15 +665,15 @@
                 "name": "Pok\u00e9mon Yellow: Special Pikachu Edition",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 1998.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.89,
@@ -687,15 +687,15 @@
                 "name": "Call of Duty: Black Ops 3",
                 "platform": "PS4",
                 "publisher": "Activision",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Shooter",
                 "year_of_release": 2015.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 6.03,
@@ -731,15 +731,15 @@
                 "name": "Pokemon X/Pokemon Y",
                 "platform": "3DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2013.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.28,
@@ -995,15 +995,15 @@
                 "name": "Super Mario 64",
                 "platform": "N64",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1996.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 6.91,
@@ -1017,15 +1017,15 @@
                 "name": "Pokemon HeartGold/Pokemon SoulSilver",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Action",
                 "year_of_release": 2009.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.34,
@@ -1039,15 +1039,15 @@
                 "name": "Pokemon Omega Ruby/Pokemon Alpha Sapphire",
                 "platform": "3DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2014.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.35,
@@ -1105,15 +1105,15 @@
                 "name": "Super Mario Land 2: 6 Golden Coins",
                 "platform": "GB",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Adventure",
                 "year_of_release": 1992.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 6.16,
@@ -1237,15 +1237,15 @@
                 "name": "Super Mario All-Stars",
                 "platform": "SNES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1993.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.99,
@@ -1281,15 +1281,15 @@
                 "name": "Pokemon FireRed/Pokemon LeafGreen",
                 "platform": "GBA",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2004.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.34,
@@ -1303,15 +1303,15 @@
                 "name": "Super Mario 64",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 2004.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.01,
@@ -1391,15 +1391,15 @@
                 "name": "Mario Kart 64",
                 "platform": "N64",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Racing",
                 "year_of_release": 1996.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.55,
@@ -1567,15 +1567,15 @@
                 "name": "Donkey Kong Country",
                 "platform": "SNES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1994.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.36,
@@ -1589,15 +1589,15 @@
                 "name": "Minecraft",
                 "platform": "X360",
                 "publisher": "Microsoft Game Studios",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Misc",
                 "year_of_release": 2013.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.7,
@@ -1677,15 +1677,15 @@
                 "name": "Super Mario Kart",
                 "platform": "SNES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Racing",
                 "year_of_release": 1992.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 3.54,
@@ -1809,15 +1809,15 @@
                 "name": "GoldenEye 007",
                 "platform": "N64",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Shooter",
                 "year_of_release": 1997.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.8,
@@ -1831,15 +1831,15 @@
                 "name": "Pokemon Black 2/Pokemon White 2",
                 "platform": "DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Role-Playing",
                 "year_of_release": 2012.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 2.79,
@@ -1897,15 +1897,15 @@
                 "name": "Mario & Sonic at the Olympic Games",
                 "platform": "Wii",
                 "publisher": "Sega",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Sports",
                 "year_of_release": 2007.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 2.57,
@@ -1919,15 +1919,15 @@
                 "name": "Star Wars Battlefront (2015)",
                 "platform": "PS4",
                 "publisher": "Electronic Arts",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Shooter",
                 "year_of_release": 2015.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 2.99,
@@ -1963,15 +1963,15 @@
                 "name": "Pac-Man",
                 "platform": "2600",
                 "publisher": "Atari",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Puzzle",
                 "year_of_release": 1982.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 7.28,
@@ -2051,15 +2051,15 @@
                 "name": "The Legend of Zelda: Ocarina of Time",
                 "platform": "N64",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Action",
                 "year_of_release": 1998.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.1,
@@ -2095,15 +2095,15 @@
                 "name": "Crash Bandicoot 2: Cortex Strikes Back",
                 "platform": "PS",
                 "publisher": "Sony Computer Entertainment",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1997.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 3.78,
@@ -2117,15 +2117,15 @@
                 "name": "Super Smash Bros. for Wii U and 3DS",
                 "platform": "3DS",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Fighting",
                 "year_of_release": 2014.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 3.27,
@@ -2161,15 +2161,15 @@
                 "name": "Super Mario Bros. 2",
                 "platform": "NES",
                 "publisher": "Nintendo",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Platform",
                 "year_of_release": 1988.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 5.39,
@@ -2183,15 +2183,15 @@
                 "name": "Call of Duty: Black Ops 3",
                 "platform": "XOne",
                 "publisher": "Activision",
-                "developer": NaN,
+                "developer": null,
                 "genre": "Shooter",
                 "year_of_release": 2015.0,
-                "esrb_rating": NaN,
+                "esrb_rating": null,
                 "rating": {
-                    "critic_score": NaN,
-                    "critic_count": NaN,
-                    "user_score": NaN,
-                    "user_count": NaN
+                    "critic_score": null,
+                    "critic_count": null,
+                    "user_score": null,
+                    "user_count": null
                 }
             },
             "NA_sales": 4.59,
