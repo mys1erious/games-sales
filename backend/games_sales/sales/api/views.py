@@ -11,11 +11,11 @@ from .serializers import SaleSerializer
 
 
 class SaleListAPIView(APIView, LimitOffsetPagination):
-    page_size = 3
+    page_size = 5
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
-        sales = Sale.objects.all().order_by('id')
+        sales = Sale.objects.all().select_related('game', 'game__rating')
 
         if 'page' in request.query_params:
             page_number = query_params.get('page')

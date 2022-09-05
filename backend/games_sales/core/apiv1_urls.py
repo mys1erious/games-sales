@@ -12,6 +12,7 @@ urlpatterns = [
         view=sale_views.SaleListAPIView.as_view(),
         name='sales'
     ),
+    # {% url 'api:sales' slug %}
     path(
         route='sales/<slug:slug>/',
         view=sale_views.SaleDetailAPIView.as_view(),

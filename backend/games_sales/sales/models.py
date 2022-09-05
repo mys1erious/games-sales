@@ -61,11 +61,11 @@ class Game(models.Model):
         EC = 'EC', 'Early Childhood, 3+'
         T = 'T', 'Teen, 13+'
 
-    slug = models.SlugField(unique=True, blank=True)
-    name = models.CharField(
-        max_length=120,
-        unique=True
+    slug = models.SlugField(
+        unique=True, blank=True,
+        max_length=120
     )
+    name = models.CharField(max_length=120)
 
     platform = models.CharField(
         max_length=30,
@@ -87,7 +87,7 @@ class Game(models.Model):
     year_of_release = models.IntegerField(null=True, blank=True)
     rating = models.OneToOneField(
         to=Rating,
-        on_delete=models.PROTECT,
+        on_delete=models.SET_NULL,
         null=True
     )
     esrb_rating = models.CharField(
@@ -96,10 +96,13 @@ class Game(models.Model):
         choices=ESRBRatings.choices
     )
 
+    class Meta:
+        ordering = ('id',)
+
     objects = GameManager()
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        self.slug = f'{slugify(self.name)}-{slugify(self.platform)}'
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -125,7 +128,10 @@ class SaleManager(models.Manager):
 
 
 class Sale(models.Model):
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(
+        unique=True, blank=True,
+        max_length=120
+    )
     game = models.OneToOneField(
         to=Game,
         on_delete=models.CASCADE
