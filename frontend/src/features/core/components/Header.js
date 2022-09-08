@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import "../css/Header.css";
 import { ReactComponent as Logo } from "../../../assets/logo.svg";
@@ -30,7 +29,7 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                         <Button to={"/"} text={"Home"}
                                 startIcon={<Logo className="logo" />}
                         />
-                        <Button to={"#"} text={"Sales"} />
+                        <Button to={"/sales/"} text={"Sales"} />
                         <Button to={"#"} text={"Reports"} />
                     </Typography>
                     <Typography variant={"h6"} color={"inherit"}>

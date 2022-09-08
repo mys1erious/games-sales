@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import {createTheme, ThemeProvider} from "@mui/material";
+
+import "./assets/App.css";
+
 import Home from "./pages/Home";
+import Sales from "./pages/Sales";
 import Header from "./features/core/components/Header";
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
 import Footer from "./features/core/components/Footer";
+import SaleDetail from "./pages/SaleDetail";
 
 
 
@@ -17,6 +22,7 @@ function App() {
     });
 
     const [isDarkTheme, setIsDarkTheme] = useState(false);
+    const [sales, setSales] = useState([]);
 
     return (
         <Router>
@@ -25,6 +31,10 @@ function App() {
             <div className="body-container">
                 <Routes>
                     <Route exact path="/" element={<Home />} />
+                    <Route path="/sales/" element={<Sales
+                        sales={sales} setSales={setSales} />}
+                    />
+                    <Route path="/sales/:saleSlug/" element={<SaleDetail />} />
                 </Routes>
             </div>
             <Footer />

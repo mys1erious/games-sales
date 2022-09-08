@@ -24,7 +24,7 @@ def post_sale(sale):
         }
     )
     if not req.ok:
-        print(req)
+        print(f'{req}: {sale["game"]["name"]}')
     return req
 
 
@@ -40,4 +40,5 @@ def get_sales():
 
 if __name__ == '__main__':
     samples = get_samples()
-    print(json.dumps(samples, indent=4))
+
+    post_sales(samples)

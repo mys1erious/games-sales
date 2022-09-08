@@ -10,7 +10,7 @@ urlpatterns = [
     path(
         route='api/v1/',
         view=include(apiv1_urls),
-        name='apiv1_urls'
+        name='api'
     ),
 
     path(
