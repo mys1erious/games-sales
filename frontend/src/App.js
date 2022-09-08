@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Sales from "./pages/Sales";
 import Header from "./features/core/components/Header";
 import Footer from "./features/core/components/Footer";
+import SaleDetail from "./pages/SaleDetail";
 
 
 
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/sales/" element={<Sales
                         sales={sales} setSales={setSales} />}
                     />
+                    <Route path="/sales/:saleSlug/" element={<SaleDetail />} />
                 </Routes>
             </div>
             <Footer />

@@ -5,6 +5,7 @@ import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
 import {ReactComponent as GameIcon} from "../../../assets/game_icon.svg";
 import '../SalesListItem.css';
+import {useNavigate} from "react-router-dom";
 
 
 const ListItemSubText = styled(ListItemText)({
@@ -13,6 +14,8 @@ const ListItemSubText = styled(ListItemText)({
 
 
 const SalesListItem = ({sale, currPage}) => {
+    const navigate = useNavigate();
+
     const [isExpanded, setIsExpanded] = useState(false);
 
     useEffect(() => {
@@ -20,7 +23,7 @@ const SalesListItem = ({sale, currPage}) => {
     }, [currPage]);
 
     const handleItemClick = () => {
-        console.log(sale['slug']);
+        navigate(`/sales/${sale.slug}`, {state: {sale: sale}});
     };
 
     const handleExpandClick = () => {
