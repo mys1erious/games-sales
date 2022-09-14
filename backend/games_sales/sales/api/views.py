@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from rest_framework import status
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
@@ -12,7 +13,8 @@ from .serializers import SaleSerializer
 
 
 class SaleListAPIView(APIView, LimitOffsetPagination):
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (AllowAny, )
+    authentication_classes = []
     page_size = 5
 
     def get(self, request, *args, **kwargs):

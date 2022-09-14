@@ -7,14 +7,14 @@ class PasswordConfirmError(Exception):
 
 
 class AccountManager(BaseUserManager):
-    def create_user(self, email, password, password_confirmation, username=None):
+    def create_user(self, email, password=None, password_confirmation=None, username=None):
         if email is None:
             raise TypeError('You need to enter your email.')
 
-        if password is None:
-            raise TypeError('You need to enter your password.')
-        elif password_confirmation is None:
-            raise TypeError('You need to confirm your password.')
+        # if password is None:
+        #     raise TypeError('You need to enter your password.')
+        # elif password_confirmation is None:
+        #     raise TypeError('You need to confirm your password.')
 
         if password != password_confirmation:
             raise PasswordConfirmError('Passwords must match.')

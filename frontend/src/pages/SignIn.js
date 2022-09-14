@@ -4,6 +4,8 @@ import AuthGrid from "../features/auth/components/AuthGrid";
 import {Grid, Typography} from "@mui/material";
 import SignInForm from "../features/auth/components/SignInForm";
 import AuthContainer from "../features/auth/components/AuthContainer";
+import GoogleAuthButton from "../features/auth/components/GoogleAuthButton";
+import {GoogleOAuthProvider} from "@react-oauth/google";
 
 
 const SignIn = () => {
@@ -24,7 +26,6 @@ const SignIn = () => {
                 <Grid item xs={12}>
                     <SignInForm formData={formData} updateFormData={updateFormData} />
                 </Grid>
-                <Grid item xs={12}>Social Auth Soon</Grid>
                 <Grid item xs={12}>
                     <Typography variant="caption">
                         Dont have an account?

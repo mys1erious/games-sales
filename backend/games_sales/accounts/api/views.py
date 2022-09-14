@@ -2,10 +2,14 @@ from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+from oauth2_provider.views.mixins import OAuthLibMixin
+from oauth2_provider.settings import oauth2_settings
 
 from .serializers import UserSignUpSerializer
 from ..models import Account

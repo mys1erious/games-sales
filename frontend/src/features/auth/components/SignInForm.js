@@ -5,6 +5,8 @@ import {Alert, Grid} from "@mui/material";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import {initialAlertData, triggerAlert} from "../utils";
+import {GoogleOAuthProvider} from "@react-oauth/google";
+import GoogleAuthButton from "./GoogleAuthButton";
 
 const SignInForm = ({formData, updateFormData}) => {
     const navigate = useNavigate();
@@ -59,7 +61,12 @@ const SignInForm = ({formData, updateFormData}) => {
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <AuthButton text="Sign In With Email" onClick={handleEmailSignIn} />
+                    <AuthButton text={"Sign In With Email"} onClick={handleEmailSignIn} />
+                </Grid>
+                <Grid item xs={12}>
+                    <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
+                        <GoogleAuthButton text={"Sign In With Google"} />
+                    </GoogleOAuthProvider>
                 </Grid>
             </Grid>
         </form>

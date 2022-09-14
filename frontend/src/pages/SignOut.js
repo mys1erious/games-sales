@@ -7,7 +7,7 @@ const SignOut = () => {
     const navigate = useNavigate();
 
     const handleSignOut = async() => {
-        await axiosInstance.post('/auth/revoke_token/',{
+        await axiosInstance.post('/auth/revoke-token/',{
             token: localStorage.getItem('refresh_token'),
             client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
             client_secret: process.env.REACT_APP_OAUTH_CLIENT_SECRET

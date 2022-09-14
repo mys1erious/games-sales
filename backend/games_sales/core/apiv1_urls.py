@@ -21,7 +21,7 @@ urlpatterns = [
     ),
 
     # -- Auth --
-    path('auth/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
     path(
         route='auth/signup/',
         view=account_views.UserSignUpAPIView.as_view(),

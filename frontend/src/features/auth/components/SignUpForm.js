@@ -6,6 +6,8 @@ import AuthTextField from "./AuthTextField";
 
 import axiosInstance from "../../../lib/axiosInstance";
 import {initialAlertData, triggerAlert} from "../utils";
+import {GoogleOAuthProvider} from "@react-oauth/google";
+import GoogleAuthButton from "./GoogleAuthButton";
 
 
 const SignUpForm = ({formData, updateFormData}) => {
@@ -64,10 +66,12 @@ const SignUpForm = ({formData, updateFormData}) => {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <AuthButton
-                            text="Sign Up with Email"
-                            onClick={handleEmailSignUp}
-                        />
+                        <AuthButton text="Sign Up with Email" onClick={handleEmailSignUp}/>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
+                            <GoogleAuthButton text={"Sign Up With Google"}/>
+                        </GoogleOAuthProvider>
                     </Grid>
                 </Grid>
             </form>
