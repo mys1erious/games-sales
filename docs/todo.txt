@@ -1,28 +1,25 @@
+- Rework Alerts to be self-contained
+- Add Google auth
+- Check: if creating through social-auth, dont need passwords
+- Add password Validation
+
+
 High-level tasks:
--. customers
--. games
 -. profiles
--. sales
 -. reports
--. sales list
--. sale details
 -. search
--. dataframes(pandas)
 -. groupby
 -. charts
--. no data alert
 -. report objects
 -. report list, detail
 -. pdf reports
 -. export of pdfs with chosen reports data
 -. my profile
--. navbar
 
 
 (After recopy)
 
 Backend:
-- Password double confirm on register
 - Finish Search functionality
 - Groupby
 - Data for Charts
@@ -32,19 +29,14 @@ Backend:
 
 
 Frontend:
-- Sale detail page
+- userContext
 - Charts
-- Modal ?
-- Alerts
 - Report list
 - Report detail page
 - PDFs
-- Dropzone + favicon
 - My profile
-- Protecting views?
-- Navbar?
 - Implement visualization for data
 
 
 Bugs/Fixes:
-- Fix long load when pressing Home and SwitchDarkTheme
+- Error handling for everything(signin, signout, signup, sales, ...)
