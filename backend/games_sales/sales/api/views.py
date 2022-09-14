@@ -6,16 +6,18 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
+from core.permissions import IsAdminOrReadOnly
 from ..models import Sale
 from .serializers import SaleSerializer
 
 
 class SaleListAPIView(APIView, LimitOffsetPagination):
+    permission_classes = (IsAdminOrReadOnly, )
     page_size = 5
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
-        sales = Sale.objects.all().select_related('game', 'game__rating')
+        sales = Sale.objects.all().select_related('game', 'game__rating').order_by('id')
 
         if 'page' in request.query_params:
             page_number = query_params.get('page')
@@ -49,6 +51,7 @@ class SaleListAPIView(APIView, LimitOffsetPagination):
 
 
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAdminOrReadOnly, )
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
     lookup_field = 'slug'

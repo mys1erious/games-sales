@@ -36,11 +36,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'core',
     'sales',
+    'accounts',
 
     'rest_framework',
     'corsheaders',
     'drf_spectacular',
+    'oauth2_provider',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -59,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -138,12 +141,33 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     # Change to IsAdminUser
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAdminUser',
     ],
-    # "DEFAULT_AUTHENTICATION_CLASSES": [
-    # "rest_framework_simplejwt.authentication.JWTAuthentication",
-    # ],
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication'
+    ],
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+
+AUTHENTICATION_BACKENDS = [
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend'
+]
+AUTH_USER_MODEL = 'accounts.Account'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = get_env_var('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = get_env_var('EMAIL_HOST_PASSWORD')
+
+
+OAUTH2_PROVIDER = {
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'},
+    'OAUTH2_BACKEND_CLASS': 'oauth2_provider.oauth2_backends.JSONOAuthLibCore'
 }
 
 
