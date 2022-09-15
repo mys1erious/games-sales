@@ -26,7 +26,8 @@ def get_access_token():
 
     req = requests.post(
         url=URL + '/auth/token/',
-        data=json.dumps(data)
+        data=json.dumps(data),
+        headers={'Content-Type': 'application/json'}
     )
 
     return json.loads(req.text)['access_token']
@@ -34,7 +35,7 @@ def get_access_token():
 
 URL = get_env_var('BASE_API_URL')
 FILE_PATH = 'samples.json'
-NUM_OF_SAMPLES = 30
+NUM_OF_SAMPLES = 100
 ACCESS_TOKEN = get_access_token()
 
 
