@@ -40,13 +40,13 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                             localStorage.getItem('access_token') !== null
                                 ?
                                 <React.Fragment>
-                                    <Button to={"#"} text={"Profile"} />
-                                    <Button to={"#"} text={"Sign Out"} />
+                                    <Button to={"/profile/"} text={"Profile"} />
+                                    <Button to={"/sign-out/"} text={"Sign Out"} />
                                 </React.Fragment>
                                 :
                                 <React.Fragment>
-                                    <Button to={"#"} text={"Sign In"} />
-                                    <Button to={"#"} text={"Sign Up"} />
+                                    <Button to={"/signin/"} text={"Sign In"} />
+                                    <Button to={"/signup/"} text={"Sign Up"} />
                                 </React.Fragment>
                         }
                     </Typography>

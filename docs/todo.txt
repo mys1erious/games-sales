@@ -1,30 +1,42 @@
+Current todo:
+- Code refactor for best practices
+- Rework Alerts to be self-contained
+
+- Left panel with Search/Filter functionality
+- Search by:
+	(name, platform, publisher, developer)
+	genre
+	esrb_rating
+	yor
+	min/max Rating
+	min/max region sales
+- Filter by:
+	alphabet
+	yor
+	platform
+	publisher
+	dev
+	genre
+	esrb rating
+	Rating
+	region sales
+
+
 High-level tasks:
--. customers
--. games
 -. profiles
--. sales
 -. reports
--. sales list
--. sale details
 -. search
--. dataframes(pandas)
--. groupby
 -. charts
--. no data alert
 -. report objects
 -. report list, detail
 -. pdf reports
 -. export of pdfs with chosen reports data
--. my profile
--. navbar
 
 
 (After recopy)
 
 Backend:
-- Password double confirm on register
-- Finish Search functionality
-- Groupby
+- Search functionality
 - Data for Charts
 - Results by field
 - Reports
@@ -32,19 +44,17 @@ Backend:
 
 
 Frontend:
-- Sale detail page
+- userContext
 - Charts
-- Modal ?
-- Alerts
 - Report list
 - Report detail page
 - PDFs
-- Dropzone + favicon
 - My profile
-- Protecting views?
-- Navbar?
 - Implement visualization for data
 
 
 Bugs/Fixes:
-- Fix long load when pressing Home and SwitchDarkTheme
+- Error handling for everything(signin, signout, signup, sales, ...)
+- Check: if creating through social-auth, dont need passwords
+- Add password Validation
+- Add 'Remember me'
