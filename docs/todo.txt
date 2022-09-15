@@ -1,7 +1,4 @@
 Current todo:
-- Code refactor for best practices
-- Rework Alerts to be self-contained
-
 - Left panel with Search/Filter functionality
 - Search by:
 	(name, platform, publisher, developer)
@@ -33,28 +30,28 @@ High-level tasks:
 -. export of pdfs with chosen reports data
 
 
-(After recopy)
-
 Backend:
-- Search functionality
-- Data for Charts
-- Results by field
+- Search/Filter functionality
 - Reports
 - Get ideas (possibly from the kaggle) for data visualization
+- Profiles
+- Save Reports to user
+- History of Reports
 
 
 Frontend:
-- userContext
-- Charts
-- Report list
-- Report detail page
-- PDFs
-- My profile
 - Implement visualization for data
+- Report list
+- When open a report(pdf), make it so its opened in new browser tab
+- PDFs
+- userContext
+- My profile
 
 
 Bugs/Fixes:
-- Error handling for everything(signin, signout, signup, sales, ...)
-- Check: if creating through social-auth, dont need passwords
 - Add password Validation
+- Check: if creating through social-auth, dont need passwords
+- Sale Editing(update)
+- Fix alert messages
 - Add 'Remember me'
+- Error handling with alerts for all errors (possibly make Alert global?)
