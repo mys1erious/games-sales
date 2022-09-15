@@ -16,8 +16,8 @@ const theme = createTheme({
 const BaseButton = ({text, color, onClick}) => {
     return(
         <ThemeProvider theme={theme}>
-            <Button type="submit" size="small" variant="contained"
-                    color={color} onClick={onClick} sx={{width: "70px"}}
+            <Button size="small" variant="contained" color={color}
+                    onClick={onClick} sx={{width: "70px"}}
             >{text}
             </Button>
         </ThemeProvider>

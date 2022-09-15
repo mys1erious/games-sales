@@ -1,12 +1,12 @@
 import React from "react";
-import {useGoogleLogin} from "@react-oauth/google";
+import {GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
 import AuthBaseButton from "./AuthBaseButton";
 import {useNavigate} from "react-router-dom";
 import {setTokensToLocalStorage} from "../utils";
 import {googleSignIn} from "../services";
 
 
-const AuthGoogleButton = ({text}) => {
+const AuthGoogleButtonLogic = ({text}) => {
     const navigate = useNavigate();
 
     const onSuccess = async(googleResponse) => {
@@ -30,9 +30,17 @@ const AuthGoogleButton = ({text}) => {
 
     return(
         <AuthBaseButton text={text} onClick={() => login()}/>
-
     )
 };
+
+
+const AuthGoogleButton = ({text}) => {
+    return(
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+            <AuthGoogleButtonLogic text={text} />
+        </GoogleOAuthProvider>
+    )
+}
 
 
 export default AuthGoogleButton;

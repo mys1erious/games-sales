@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
 import {setTokensToLocalStorage} from "../utils";
-import {GoogleOAuthProvider} from "@react-oauth/google";
 import AuthGoogleButton from "./AuthGoogleButton";
 import {emailSignIn} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
@@ -30,7 +29,6 @@ const SignInForm = ({formData, updateFormData}) => {
         }
     };
 
-    // Rework alerts to be self-contained to not create data for em in each component u need
     return(
         <React.Fragment>
             {alert.isAlert ? <AuthAlert alert={alert}/> : null}
@@ -41,9 +39,7 @@ const SignInForm = ({formData, updateFormData}) => {
                                name={"password"} label={"Password"} type={"password"} />,
             ]} buttons={[
                 <AuthBaseButton text={"Sign In With Email"} onClick={handleEmailSignIn} />,
-                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-                    <AuthGoogleButton text={"Sign In With Google"} />
-                </GoogleOAuthProvider>
+                <AuthGoogleButton text={"Sign In With Google"} />
             ]} />
         </React.Fragment>
     );

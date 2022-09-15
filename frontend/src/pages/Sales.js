@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {Grid, Pagination, Typography} from "@mui/material";
 
@@ -12,13 +12,16 @@ import SalesList from "../features/sales/components/SalesList";
 const Sales = ({sales, setSales}) => {
     const navigate = useNavigate();
 
-    const [currPage, setCurrPage] = useState(1);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [currPage, setCurrPage] = useState(parseInt(searchParams.get('page')) || 1);
     const [numPages, setNumPages] = useState(1);
 
     useEffect(() => {
         getSales();
         navigate(`/sales/?page=${currPage}`);
+
     }, [currPage]);
+
 
     const getSales = () => {
         axiosInstance.get(`/sales/?page=${currPage}`)
@@ -46,7 +49,7 @@ const Sales = ({sales, setSales}) => {
                         <Pagination boundaryCount={0} siblingCount={1}
                                     color="primary" count={numPages}
                                     showFirstButton showLastButton
-                                    onChange={changePage}/>
+                                    page={currPage} onChange={changePage} />
                     </Grid>
                 </Grid>
             : <DataLoadingItem />

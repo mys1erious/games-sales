@@ -96,9 +96,6 @@ class Game(models.Model):
         choices=ESRBRatings.choices
     )
 
-    class Meta:
-        ordering = ('id',)
-
     objects = GameManager()
 
     def save(self, *args, **kwargs):

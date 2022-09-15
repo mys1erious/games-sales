@@ -13,7 +13,7 @@ def post_delete_game_on_sale(sender, **kwargs):
 
 
 @receiver(post_delete, sender=Game)
-def post_delete_game_on_sale(sender, **kwargs):
+def post_delete_rating_on_game(sender, **kwargs):
     try:
         if kwargs['instance'].rating:
             kwargs['instance'].rating.delete()

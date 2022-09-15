@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
 
-import {GoogleOAuthProvider} from "@react-oauth/google";
 import AuthGoogleButton from "./AuthGoogleButton";
 import {signUp} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
@@ -44,9 +43,7 @@ const SignUpForm = ({formData, updateFormData}) => {
                                name="passwordConfirmation" label="Confirm Password" type="password" />
             ]} buttons={[
                 <AuthBaseButton text="Sign Up with Email" onClick={handleEmailSignUp}/>,
-                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-                    <AuthGoogleButton text={"Sign Up With Google"}/>
-                </GoogleOAuthProvider>
+                <AuthGoogleButton text={"Sign Up With Google"}/>
             ]} />
         </React.Fragment>
     )

@@ -57,7 +57,7 @@ class Account(AbstractBaseUser):
         auto_now=True
     )
 
-    is_active = models.BooleanField(default=True)  # Change to False if not verified
+    is_active = models.BooleanField(default=True)  # Later change to False if not verified
     is_verified = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)

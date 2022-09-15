@@ -34,10 +34,3 @@ class SaleSerializer(serializers.ModelSerializer):
             **game_data,
             **rating_data
         )
-    #
-    # def update(self, instance, validated_data):
-    #     game_data = validated_data.pop('game')
-    #     rating_data = game_data.pop('rating')
-    #
-    #     game = instance.game
-    #     rating = instance.game.rating

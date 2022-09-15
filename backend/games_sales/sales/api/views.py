@@ -16,21 +16,21 @@ class SaleListAPIView(APIView, LimitOffsetPagination):
     permission_classes = (AllowAny, )
     authentication_classes = []
     page_size = 5
+    default_page = 1
 
     def get(self, request, *args, **kwargs):
         query_params = request.query_params
-        sales = Sale.objects.all().select_related('game', 'game__rating').order_by('id')
 
-        if 'page' in request.query_params:
-            page_number = query_params.get('page')
-        else:
-            page_number = 1
+        sales = Sale.objects.all().select_related('game', 'game__rating')\
+            .order_by(query_params.get('order_by', 'id'))
+
+        page_number = query_params.get('page', self.default_page)
 
         paginator = Paginator(sales, self.page_size)
         try:
             paginator_page = paginator.page(page_number)
         except (PageNotAnInteger, EmptyPage) as e:
-            return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            paginator_page = paginator.page(self.default_page)
 
         serializer = SaleSerializer(
             paginator_page,
