@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Alert, Grid} from "@mui/material";
-import AuthButton from "./AuthButton";
+import {Alert} from "@mui/material";
+import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
 import {initialAlertData, setTokensToLocalStorage, triggerAlert} from "../utils";
 import {GoogleOAuthProvider} from "@react-oauth/google";
-import GoogleAuthButton from "./GoogleAuthButton";
+import AuthGoogleButton from "./AuthGoogleButton";
 import {emailSignIn} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
 
@@ -44,9 +44,9 @@ const SignInForm = ({formData, updateFormData}) => {
                 <AuthTextField formData={formData} updateFormData={updateFormData}
                                name={"password"} label={"Password"} type={"password"} />,
             ]} buttons={[
-                <AuthButton text={"Sign In With Email"} onClick={handleEmailSignIn} />,
+                <AuthBaseButton text={"Sign In With Email"} onClick={handleEmailSignIn} />,
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-                    <GoogleAuthButton text={"Sign In With Google"} />
+                    <AuthGoogleButton text={"Sign In With Google"} />
                 </GoogleOAuthProvider>
             ]} />
         </React.Fragment>

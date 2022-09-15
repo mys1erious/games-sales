@@ -1,4 +1,4 @@
-import '../AuthBase.css';
+import '../Base.css';
 
 
 const AuthContainer = ({content}) => {

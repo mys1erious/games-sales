@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 
-import {Alert, Grid} from "@mui/material";
-import AuthButton from "./AuthButton";
+import {Alert} from "@mui/material";
+import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
 
 import {initialAlertData, triggerAlert} from "../utils";
 import {GoogleOAuthProvider} from "@react-oauth/google";
-import GoogleAuthButton from "./GoogleAuthButton";
+import AuthGoogleButton from "./AuthGoogleButton";
 import {signUp} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
 
@@ -44,13 +44,13 @@ const SignUpForm = ({formData, updateFormData}) => {
                 <AuthTextField formData={formData} updateFormData={updateFormData}
                                name="username" label="Username" />,
                 <AuthTextField formData={formData} updateFormData={updateFormData}
-                                   name="password" label="Password" type="password" />,
+                               name="password" label="Password" type="password" />,
                 <AuthTextField formData={formData} updateFormData={updateFormData}
-                                   name="passwordConfirmation" label="Confirm Password" type="password" />
+                               name="passwordConfirmation" label="Confirm Password" type="password" />
             ]} buttons={[
-                <AuthButton text="Sign Up with Email" onClick={handleEmailSignUp}/>,
+                <AuthBaseButton text="Sign Up with Email" onClick={handleEmailSignUp}/>,
                 <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-                    <GoogleAuthButton text={"Sign Up With Google"}/>
+                    <AuthGoogleButton text={"Sign Up With Google"}/>
                 </GoogleOAuthProvider>
             ]} />
         </React.Fragment>

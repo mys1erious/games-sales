@@ -1,6 +1,6 @@
 import {Button} from "@mui/material";
 
-const AuthButton = ({text, onClick}) => {
+const AuthBaseButton = ({text, onClick}) => {
     return(
         <Button variant="outlined" color="primary" size="large"
                 fullWidth onClick={onClick} sx={{borderRadius: "20px"}}>
@@ -10,4 +10,4 @@ const AuthButton = ({text, onClick}) => {
 };
 
 
-export default AuthButton;
+export default AuthBaseButton;

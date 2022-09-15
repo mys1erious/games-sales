@@ -1,27 +1,42 @@
+Current todo:
+- Code refactor for best practices
 - Rework Alerts to be self-contained
-- Add Google auth
-- Check: if creating through social-auth, dont need passwords
-- Add password Validation
+
+- Left panel with Search/Filter functionality
+- Search by:
+	(name, platform, publisher, developer)
+	genre
+	esrb_rating
+	yor
+	min/max Rating
+	min/max region sales
+- Filter by:
+	alphabet
+	yor
+	platform
+	publisher
+	dev
+	genre
+	esrb rating
+	Rating
+	region sales
 
 
 High-level tasks:
 -. profiles
 -. reports
 -. search
--. groupby
 -. charts
 -. report objects
 -. report list, detail
 -. pdf reports
 -. export of pdfs with chosen reports data
--. my profile
 
 
 (After recopy)
 
 Backend:
-- Finish Search functionality
-- Groupby
+- Search functionality
 - Data for Charts
 - Results by field
 - Reports
@@ -40,3 +55,6 @@ Frontend:
 
 Bugs/Fixes:
 - Error handling for everything(signin, signout, signup, sales, ...)
+- Check: if creating through social-auth, dont need passwords
+- Add password Validation
+- Add 'Remember me'
