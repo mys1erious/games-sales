@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Alert} from "@mui/material";
 import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
-import {initialAlertData, setTokensToLocalStorage, triggerAlert} from "../utils";
+import {setTokensToLocalStorage} from "../utils";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import AuthGoogleButton from "./AuthGoogleButton";
 import {emailSignIn} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
+import AuthAlert, {initialAlertData, triggerAlert} from "./AuthAlert";
 
 const SignInForm = ({formData, updateFormData}) => {
     const navigate = useNavigate();
@@ -33,11 +33,7 @@ const SignInForm = ({formData, updateFormData}) => {
     // Rework alerts to be self-contained to not create data for em in each component u need
     return(
         <React.Fragment>
-            {
-                alert.isAlert
-                    ? <Alert severity={alert.type}>{alert.text}</Alert>
-                    : null
-            }
+            {alert.isAlert ? <AuthAlert alert={alert}/> : null}
             <AuthBaseForm textFields={[
                  <AuthTextField formData={formData} updateFormData={updateFormData}
                                 name={"email"} label={"Email Address"} />,

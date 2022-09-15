@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 
-import {Alert} from "@mui/material";
 import AuthBaseButton from "./AuthBaseButton";
 import AuthTextField from "./AuthTextField";
 
-import {initialAlertData, triggerAlert} from "../utils";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import AuthGoogleButton from "./AuthGoogleButton";
 import {signUp} from "../services";
 import AuthBaseForm from "./AuthBaseForm";
+import AuthAlert, {initialAlertData, triggerAlert} from "./AuthAlert";
 
 
 const SignUpForm = ({formData, updateFormData}) => {
@@ -33,11 +32,7 @@ const SignUpForm = ({formData, updateFormData}) => {
     };
     return(
         <React.Fragment>
-            {
-                alert.isAlert
-                    ? <Alert severity={alert.type}>{alert.text}</Alert>
-                    : null
-            }
+            {alert.isAlert ? <AuthAlert alert={alert} /> : null}
             <AuthBaseForm textFields={[
                 <AuthTextField formData={formData} updateFormData={updateFormData}
                                name="email" label="Email Address" />,
