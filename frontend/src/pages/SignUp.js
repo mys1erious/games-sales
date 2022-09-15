@@ -1,14 +1,11 @@
 import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
 import AuthContainer from "../features/auth/components/AuthContainer";
-import AuthGrid from "../features/auth/components/AuthGrid";
+import AuthMainGrid from "../features/auth/components/AuthMainGrid";
 import {Grid, Typography} from "@mui/material";
 import SignUpForm from "../features/auth/components/SignUpForm";
 
 
 const SignUp = () => {
-    const navigate = useNavigate();
-
     const initialFormData = Object.freeze({
         username: '',
         email: '',
@@ -20,7 +17,7 @@ const SignUp = () => {
 
     return(
         <AuthContainer content={
-            <AuthGrid content={
+            <AuthMainGrid content={
                 <>
                 <Grid item xs={12}>
                     <Typography variant="h4">Sign Up</Typography>

@@ -4,10 +4,11 @@ import {Alert, Grid} from "@mui/material";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 
-import axiosInstance from "../../../lib/axiosInstance";
 import {initialAlertData, triggerAlert} from "../utils";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 import GoogleAuthButton from "./GoogleAuthButton";
+import {signUp} from "../services";
+import AuthBaseForm from "./AuthBaseForm";
 
 
 const SignUpForm = ({formData, updateFormData}) => {
@@ -15,16 +16,14 @@ const SignUpForm = ({formData, updateFormData}) => {
 
     const handleEmailSignUp = async(e) => {
         e.preventDefault();
-        axiosInstance.defaults.headers['Authorization'] = null;
-        axiosInstance.defaults.timeout = 10000;
 
         try {
-            const response = await axiosInstance.post('/auth/signup/', {
-                username: formData.username,
-                email: formData.email,
-                password: formData.password,
-                password_confirmation: formData.passwordConfirmation
-            });
+            const response = await signUp(
+                formData.username,
+                formData.email,
+                formData.password,
+                formData.passwordConfirmation
+            );
             triggerAlert(response, alert, updateAlert);
         }
         catch (e) {
@@ -39,42 +38,21 @@ const SignUpForm = ({formData, updateFormData}) => {
                     ? <Alert severity={alert.type}>{alert.text}</Alert>
                     : null
             }
-            <form noValidate style={{marginTop: "20px"}}>
-                <Grid item xs={12} container spacing={1}>
-                    <Grid item xs={12}>
-                        <AuthTextField
-                            formData={formData} updateFormData={updateFormData}
-                            name="email" label="Email Address"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AuthTextField
-                            formData={formData} updateFormData={updateFormData}
-                            name="username" label="Username"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AuthTextField
-                            formData={formData} updateFormData={updateFormData}
-                            name="password" label="Password" type="password"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AuthTextField
-                            formData={formData} updateFormData={updateFormData}
-                            name="passwordConfirmation" label="Confirm Password" type="password"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <AuthButton text="Sign Up with Email" onClick={handleEmailSignUp}/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-                            <GoogleAuthButton text={"Sign Up With Google"}/>
-                        </GoogleOAuthProvider>
-                    </Grid>
-                </Grid>
-            </form>
+            <AuthBaseForm textFields={[
+                <AuthTextField formData={formData} updateFormData={updateFormData}
+                               name="email" label="Email Address" />,
+                <AuthTextField formData={formData} updateFormData={updateFormData}
+                               name="username" label="Username" />,
+                <AuthTextField formData={formData} updateFormData={updateFormData}
+                                   name="password" label="Password" type="password" />,
+                <AuthTextField formData={formData} updateFormData={updateFormData}
+                                   name="passwordConfirmation" label="Confirm Password" type="password" />
+            ]} buttons={[
+                <AuthButton text="Sign Up with Email" onClick={handleEmailSignUp}/>,
+                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
+                    <GoogleAuthButton text={"Sign Up With Google"}/>
+                </GoogleOAuthProvider>
+            ]} />
         </React.Fragment>
     )
 };

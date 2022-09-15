@@ -1,10 +1,9 @@
 import {Grid} from "@mui/material";
 
-const AuthGrid = ({content}) => {
+const AuthMainGrid = ({content}) => {
     return(
         <Grid container rowSpacing={4} direction="column"
               alignItems="center" justifyContent="center"
-              sx={{border: 1}}
         >
             {content}
         </Grid>
@@ -12,4 +11,4 @@ const AuthGrid = ({content}) => {
 };
 
 
-export default AuthGrid;
+export default AuthMainGrid;

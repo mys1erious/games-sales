@@ -1,30 +1,36 @@
 import React from "react";
-import {GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
-import axiosSocialAuth from "../../../lib/axiosSocialAuth";
+import {useGoogleLogin} from "@react-oauth/google";
 import AuthButton from "./AuthButton";
+import {useNavigate} from "react-router-dom";
+import {setTokensToLocalStorage} from "../utils";
+import {googleSignIn} from "../services";
 
 
 const GoogleAuthButton = ({text}) => {
-    const onSuccess = async(res) => {
-        console.log(res.access_token);
-        const backendRes = await axiosSocialAuth(res.access_token, 'google-oauth2');
-        console.log(backendRes);
+    const navigate = useNavigate();
+
+    const onSuccess = async(googleResponse) => {
+        const response = await googleSignIn(googleResponse);
+        setTokensToLocalStorage(response);
+
+        navigate('/');
+        // For now, until not implemented user handling
+        window.location.reload();
     };
 
-    const onError = (res) => {
-        console.log(res);
+    const onError = (googleResponse) => {
+        console.log(googleResponse);
     };
 
     const login = useGoogleLogin({
-        onSuccess: onSuccess,
-        onError: onError,
+        onSuccess: response => onSuccess(response),
+        onError: response => onError(response),
         flow: 'implicit'
     });
 
     return(
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
-            <AuthButton onClick={() => login()} text={text}/>
-        </GoogleOAuthProvider>
+        <AuthButton text={text} onClick={() => login()}/>
+
     )
 };
 

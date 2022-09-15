@@ -1,6 +1,8 @@
 import React from "react";
 
 
+// Decouple this file
+
 export const initialAlertData = Object.freeze({
     isAlert: false,
     type: '',
@@ -48,12 +50,19 @@ const setTempAlertData = (r, tempAlertData) => {
     tempAlertData['text'] = parseErrorResponseData(r.data);
 }
 
-const handleFormChange = (input, alertData, updateAlert) => {
-        updateAlert({
-            ...alertData,
-            ...input
-        });
-    };
+const handleObjectStateChange = (input, formData, updateForm) => {
+    updateForm({
+        ...formData,
+        ...input
+    });
+};
+
+export const handleFormStateChange = (e, formData, updateFormData) => {
+    updateFormData({
+        ...formData,
+        [e.target.name]: e.target.value.trim()
+    });
+};
 
 export const triggerAlert = (r, alert, updateAlert) => {
     const tempAlertData = {
@@ -62,5 +71,15 @@ export const triggerAlert = (r, alert, updateAlert) => {
         text: ''
     };
     setTempAlertData(r, tempAlertData);
-    handleFormChange(tempAlertData, alert, updateAlert);
+    handleObjectStateChange(tempAlertData, alert, updateAlert);
+};
+
+export const setTokensToLocalStorage = (response) => {
+    localStorage.setItem('access_token', response.data.access_token);
+    localStorage.setItem('refresh_token', response.data.refresh_token);
+};
+
+export const removeTokensFromLocalStorage = () => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
 };

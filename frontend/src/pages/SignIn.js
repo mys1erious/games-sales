@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 
-import AuthGrid from "../features/auth/components/AuthGrid";
+import AuthMainGrid from "../features/auth/components/AuthMainGrid";
 import {Grid, Typography} from "@mui/material";
 import SignInForm from "../features/auth/components/SignInForm";
 import AuthContainer from "../features/auth/components/AuthContainer";
-import GoogleAuthButton from "../features/auth/components/GoogleAuthButton";
-import {GoogleOAuthProvider} from "@react-oauth/google";
 
 
 const SignIn = () => {
@@ -14,11 +12,12 @@ const SignIn = () => {
         password: ''
     });
 
+    // Do i even need formData here or should i move it to SignInForm ?
     const [formData, updateFormData] = useState(initialFormData);
 
     return(
         <AuthContainer content={
-            <AuthGrid content={
+            <AuthMainGrid content={
                 <>
                 <Grid item xs={12}>
                     <Typography variant="h4">Sign In</Typography>
@@ -34,7 +33,7 @@ const SignIn = () => {
                 </Grid>
                 </>
             }>
-            </AuthGrid>
+            </AuthMainGrid>
         }>
         </AuthContainer>
     );
