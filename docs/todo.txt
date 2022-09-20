@@ -1,22 +1,16 @@
+(First make a design in Figma; Check example on Rozetka)
 Current todo:
 - Left panel with Search/Filter functionality
+- Sort by:
+    name, platform, publisher, developer, genre, esrb_rating, your, Rating, region saels
 - Search by:
-	(name, platform, publisher, developer)
+	default(on top) = (name, platform, publisher, developer)
+- Filter by:
 	genre
 	esrb_rating
 	yor
 	min/max Rating
 	min/max region sales
-- Filter by:
-	alphabet
-	yor
-	platform
-	publisher
-	dev
-	genre
-	esrb rating
-	Rating
-	region sales
 
 
 High-level tasks:
