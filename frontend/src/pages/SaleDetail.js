@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import axiosInstance from "../lib/axiosInstance";
-import {AxiosError} from "axios";
 import {Container} from "@mui/material";
 import { BaseButton as Button } from "../features/sales/components/BaseButton";
+import {deleteSale, editSale, getSale} from "../features/sales/services";
 
 
 const SaleDetail = () => {
@@ -14,13 +13,13 @@ const SaleDetail = () => {
     const [sale, setSale] = useState({});
 
     useEffect(() => {
-        getSale();
+        handleGetSale();
     }, [saleSlug]);
 
-    async function getSale() {
+    async function handleGetSale() {
         try {getSaleFromState();}
         catch (e) {
-            await getSaleFromAPI();
+            await getSale(saleSlug);
         }
     }
 
@@ -33,33 +32,21 @@ const SaleDetail = () => {
         return sale;
     }
 
-    async function getSaleFromAPI() {
-        try{
-            let response = await axiosInstance.get(`/sales/${saleSlug}/`);
-            let data = await response.data;
-            setSale(data);
-        }
-        catch (e) {
-            if (e.name === 'AxiosError')
-                throw new AxiosError('Probably wrong url.');
-        }
+    async function handleEditSale () {
+        await editSale();
     }
 
-    async function handleEdit () {
-        console.log('Soon');
-    }
-
-    async function handleDelete () {
-       await axiosInstance.delete(`/sales/${saleSlug}`);
-       navigate(-1);
+    async function handleDeleteSale () {
+        await deleteSale(saleSlug);
+        navigate(-1);
     }
 
     // Rework to look normally (like a table or sth)
     return(
         <Container component="main" maxWidth="xl" >
             <Button text={"Back"} color={"red"} onClick={() => navigate(-1)}/>
-            <Button text={"Edit"} color={"red"} onClick={handleEdit}/>
-            <Button text={"Delete"} color={"red"} onClick={handleDelete}/>
+            <Button text={"Edit"} color={"red"} onClick={handleEditSale}/>
+            <Button text={"Delete"} color={"red"} onClick={handleDeleteSale}/>
             <h3>Sale info:</h3>
             <pre>
                 {JSON.stringify(sale, {}, 4)}

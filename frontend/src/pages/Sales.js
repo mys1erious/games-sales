@@ -3,10 +3,9 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 
 import {Grid, Pagination, Typography} from "@mui/material";
 
-import axiosInstance from "../lib/axiosInstance";
-
 import DataLoadingItem from "../features/core/components/DataLoadingItem";
 import SalesList from "../features/sales/components/SalesList";
+import {getSales} from "../features/sales/services";
 
 
 const Sales = ({sales, setSales}) => {
@@ -16,20 +15,15 @@ const Sales = ({sales, setSales}) => {
     const [currPage, setCurrPage] = useState(parseInt(searchParams.get('page')) || 1);
     const [numPages, setNumPages] = useState(1);
 
+
     useEffect(() => {
-        getSales();
+        getSales().then((response) => {
+            setSales(response.data.sales);
+            setNumPages(response.data.num_pages);
+        });
         navigate(`/sales/?page=${currPage}`);
 
     }, [currPage]);
-
-
-    const getSales = () => {
-        axiosInstance.get(`/sales/?page=${currPage}`)
-            .then((response) => {
-                setSales(response.data.sales);
-                setNumPages(response.data.num_pages);
-            });
-    };
 
     const changePage = (e, p) => {
         setCurrPage(p);
