@@ -1,5 +1,8 @@
 from django.db import models
+from django.db.models import Q
 from django.utils.text import slugify
+
+from core.utils import is_int
 
 
 class Rating(models.Model):
@@ -123,6 +126,9 @@ class SaleManager(models.Manager):
 
         return sale
 
+    def all(self):
+        return super().all().select_related('game', 'game__rating')
+
 
 class Sale(models.Model):
     slug = models.SlugField(
@@ -157,6 +163,67 @@ class Sale(models.Model):
     )
 
     objects = SaleManager()
+
+    @staticmethod
+    def get_all_genres():
+        return Sale.objects.order_by().values_list('game__genre', flat=True).distinct()
+
+    @staticmethod
+    def order_by_mapping(value, default='id'):
+        if not value:
+            value = default
+
+        in_reverse = False
+        if value[0] == '-':
+            value = value[1:]
+            in_reverse = True
+
+        game_fields = ['name', 'platform', 'publisher', 'developer', 'genre', 'esrb_rating']
+        rating_fields = ['critic_score', 'critic_count', 'user_score', 'user_count']
+        sale_fields = ['id', 'EU_sales', 'JP_sales', 'NA_sales', 'global_sales', 'other_sales']
+
+        if value in game_fields:
+            value = f'game__{value}'
+        elif value in rating_fields:
+            value = f'game__rating__{value}'
+        elif value in sale_fields:
+            pass
+
+        if in_reverse:
+            value = f'-{value}'
+
+        return value
+
+    @staticmethod
+    def filter_by_params(sales, params):
+        filters_map = {
+            'genre': lambda: sales.filter(
+                Q(game__genre__contains=params['genre'])),
+            'esrb_rating': lambda: sales.filter(
+                Q(game__esrb_rating__contains=params['esrb_rating'])),
+            'yor_lt': lambda: sales.filter(
+                Q(game__year_of_release__lt=int(params['yor_lt']))),
+            'yor_gt': lambda: sales.filter(
+                Q(game__year_of_release__gt=int(params['yor_gt'])))
+        }
+        for param in params:
+            sales = filters_map[param]()
+
+        return sales
+
+    @staticmethod
+    def search_by_text(sales, text):
+        # Add ability to search with whitespace (split by ' ' or sth)
+        if is_int(text):
+            return sales.filter(game__year_of_release__exact=int(text))
+
+        return sales.filter(
+            Q(game__name__icontains=text) |
+            Q(game__platform__icontains=text) |
+            Q(game__publisher__icontains=text) |
+            Q(game__developer__icontains=text) |
+            Q(game__genre__icontains=text)
+        )
 
     def save(self, *args, **kwargs):
         self.slug = f'{self.game.slug}-sales'
