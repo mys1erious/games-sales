@@ -1,10 +1,7 @@
-(First make a design in Figma; Check example on Rozetka)
 Current todo:
 - Left panel with Search/Filter functionality
 - Sort by:
-    name, platform, publisher, developer, genre, esrb_rating, your, Rating, region saels
-- Search by:
-	default(on top) = (name, platform, publisher, developer)
+    name, platform, publisher, developer, genre, esrb_rating, your, Rating, region sales
 - Filter by:
 	genre
 	esrb_rating
@@ -16,7 +13,6 @@ Current todo:
 High-level tasks:
 -. profiles
 -. reports
--. search
 -. charts
 -. report objects
 -. report list, detail
@@ -25,7 +21,6 @@ High-level tasks:
 
 
 Backend:
-- Search/Filter functionality
 - Reports
 - Get ideas (possibly from the kaggle) for data visualization
 - Profiles
@@ -46,6 +41,6 @@ Bugs/Fixes:
 - Add password Validation
 - Check: if creating through social-auth, dont need passwords
 - Sale Editing(update)
-- Fix alert messages
+- Fix alert messages(better parsing)
 - Add 'Remember me'
 - Error handling with alerts for all errors (possibly make Alert global?)
