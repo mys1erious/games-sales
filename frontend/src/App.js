@@ -39,7 +39,7 @@ function App() {
                     <Route path="/sales/" element={<Sales
                         sales={sales} setSales={setSales} />}
                     />
-                    <Route path="/sales/:saleSlug/" element={<SaleDetail />} />
+                    <Route path="/sales/:saleSlug/" element={<SaleDetail />} />*/}
 
                     <Route path="/signin/" element={<SignIn />}/>
                     <Route path="/sign-out/" element={<SignOut />}/>

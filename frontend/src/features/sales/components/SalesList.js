@@ -8,7 +8,7 @@ const SalesList = ({sales, currPage}) => {
         <Container component="main">
             <ul>
                 {sales.map((sale, index) => (
-                    <SalesListItem key={index} sale={sale} currPage={currPage} />
+                    <SalesListItem key={index} sale={sale} currPage={currPage}/>
                 ))}
             </ul>
         </Container>

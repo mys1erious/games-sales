@@ -30,16 +30,18 @@ const SalesListItem = ({sale, currPage}) => {
         setIsExpanded(currIsExpanded => !currIsExpanded);
     };
 
+    const listItemTextSx = !isExpanded
+        ? {whiteSpace: 'nowrap', overflow: 'hidden'}
+        : {};
+
     return(
         <React.Fragment>
-            <ListItem
-                      component="nav"
-                      divider={true}
-                      disablePadding>
+            <ListItem component="nav" divider={true} disablePadding>
                 <ListItemButton sx={{width: '90%'}}
                                 onClick={handleItemClick}>
                     <ListItemIcon><GameIcon className="icon" /></ListItemIcon>
-                    <ListItemText primary={sale.game.name} />
+                    <ListItemText primary={sale.game.name} sx={listItemTextSx}
+                    />
                 </ListItemButton>
                 <ListItemButton onClick={handleExpandClick}>
                     {isExpanded ? <ExpandLess /> : <ExpandMore />}

@@ -24,7 +24,7 @@ class SaleListAPIView(APIView, LimitOffsetPagination):
 
 # publisher, developer, genre, esrb_rating, your, Rating, region sales
 
-    page_size = 5
+    page_size = 8
     default_page = 1
 
     def get(self, request, *args, **kwargs):

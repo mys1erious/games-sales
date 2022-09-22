@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import "../css/Header.css";
 import { ReactComponent as Logo } from "../../../assets/logo.svg";
@@ -12,9 +12,12 @@ import {
 } from "@mui/material";
 
 import { BaseButton as Button } from "./BaseButton";
+import SalesSearchBar from "../../sales/components/SalesSearchBar";
+
 
 
 const Header = ({isDarkTheme, setIsDarkTheme}) => {
+    const [searchText, setSearchText] = useState('');
 
     const changeTheme = () => {
         setIsDarkTheme(currTheme => !currTheme);
@@ -31,6 +34,7 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                         />
                         <Button to={"/sales/"} text={"Sales"} />
                         <Button to={"#"} text={"Reports"} />
+                        <SalesSearchBar searchText={searchText} setSearchText={setSearchText} />
                     </Typography>
                     <Typography variant={"h6"} color={"inherit"}>
                         <FormControlLabel
