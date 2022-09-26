@@ -1,11 +1,7 @@
 Current todo:
-- Left panel with Search/Filter functionality
-- Sort by:
-    name, platform, publisher, developer, genre, esrb_rating, your, Rating, region sales
+- Rework hardcoded values in Year filters
+- Change reset on Year::
 - Filter by:
-	genre
-	esrb_rating
-	yor
 	min/max Rating
 	min/max region sales
 
@@ -35,12 +31,16 @@ Frontend:
 - PDFs
 - userContext
 - My profile
+- Add 'Remember me'
 
 
 Bugs/Fixes:
+- Fix hardcoded css
+- Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
+- Support for multiple filters of the same type eg.: genre=action,racing
+- Rework Header to look better on smaller screen
 - Add password Validation
 - Check: if creating through social-auth, dont need passwords
 - Sale Editing(update)
 - Fix alert messages(better parsing)
-- Add 'Remember me'
 - Error handling with alerts for all errors (possibly make Alert global?)
