@@ -27,5 +27,6 @@ export const deleteSale = async(saleSlug) => {
    return await axiosInstance.delete(`/sales/${saleSlug}`);
 };
 
-
-
+export const getFilterFieldsData = async() => {
+    return await axiosInstance.get('/sale-filters/');
+};
