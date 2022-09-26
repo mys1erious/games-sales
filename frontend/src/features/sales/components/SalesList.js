@@ -1,17 +1,17 @@
 import React from "react";
-import {Container} from "@mui/material";
+import {Box, Container} from "@mui/material";
 import SalesListItem from "./SalesListItem";
 
 
 const SalesList = ({sales, currPage}) => {
     return(
-        <Container component="main">
+        <Box>
             <ul>
                 {sales.map((sale, index) => (
                     <SalesListItem key={index} sale={sale} currPage={currPage}/>
                 ))}
             </ul>
-        </Container>
+        </Box>
     )
 };
 

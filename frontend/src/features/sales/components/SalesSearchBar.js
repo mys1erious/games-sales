@@ -1,14 +1,21 @@
 import React from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {Search} from '@mui/icons-material';
-import {useNavigate} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 
 
 const SalesSearchBar = ({searchText, setSearchText}) => {
-    const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams({});
 
     const search = () => {
-        navigate(`/sales/?text=${searchText}`, {state:{newSearch: true}});
+        if (searchText) {
+            searchParams.set('text', searchText);
+            setSearchParams(searchParams, {state: {newSearch: true}});
+        }
+        else {
+            searchParams.delete('text');
+            setSearchParams(searchParams);
+        }
     };
 
     return(
@@ -20,7 +27,7 @@ const SalesSearchBar = ({searchText, setSearchText}) => {
                        placeholder="Search..."
                        size="small" sx={{marginLeft: "30px"}}
             />
-            <IconButton type="submit" aria-label="search"
+            <IconButton type="submit" aria-label="search" color="primary"
                         onClick={search}>
                 <Search />
             </IconButton>
