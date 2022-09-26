@@ -10,7 +10,7 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 from core.permissions import IsAdminOrReadOnly
 from core.utils import intersected_params
-from ..models import Sale
+from ..models import Sale, Game, SALE_ORDER_BY_FIELDS
 from .serializers import SaleSerializer
 
 
@@ -19,7 +19,7 @@ class SaleListAPIView(APIView, LimitOffsetPagination):
     authentication_classes = []
 
     query_search_param = 'text'
-    filter_params = ['genre', 'esrb_rating', 'yor_lt', 'yor_gt']
+    filter_params = ['genre', 'esrb_rating', 'yor_lt', 'yor_gt', 'year_of_release']
     default_order_by = 'id'
 
 # publisher, developer, genre, esrb_rating, your, Rating, region sales
@@ -95,10 +95,21 @@ class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'slug'
 
 
-class SaleGenreListAPIView(APIView):
+class SaleFilterFieldsListAPIView(APIView):
     permission_classes = (AllowAny, )
+    authentication_classes = []
 
     def get(self, request, *args, **kwargs):
-        genres = Sale.get_all_genres()
+        genres = Sale.get_all_genres().order_by('game__genre')
+        order_by = SALE_ORDER_BY_FIELDS
 
-        return Response(genres, status=status.HTTP_200_OK)
+        # Add readable form ->
+        esrb_ratings = Game.ESRBRatings.names
+
+        data = {
+            'order_by': order_by,
+            'genres': genres,
+            'esrb_ratings': esrb_ratings
+        }
+
+        return Response(data, status=status.HTTP_200_OK)

@@ -24,7 +24,7 @@ class SaleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sale
-        fields = ['slug', 'game', 'NA_sales', 'EU_sales', 'JP_sales', 'other_sales', 'global_sales']
+        fields = ['slug', 'game', 'na_sales', 'eu_sales', 'jp_sales', 'other_sales', 'global_sales']
 
     def create(self, validated_data):
         game_data = validated_data.pop('game')

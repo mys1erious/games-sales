@@ -21,9 +21,9 @@ urlpatterns = [
     ),
     # {% url 'api:sale_genres' %}
     path(
-        route='sale-genres/',
-        view=sale_views.SaleGenreListAPIView.as_view(),
-        name='sale_genres'
+        route='sale-filters/',
+        view=sale_views.SaleFilterFieldsListAPIView.as_view(),
+        name='sale_filters'
     ),
 
     # -- Auth --

@@ -112,9 +112,9 @@ class Game(models.Model):
 class SaleManager(models.Manager):
     def create(self, **kwargs):
         sales_data = {
-            'NA_sales': kwargs.pop('NA_sales', None),
-            'EU_sales': kwargs.pop('EU_sales', None),
-            'JP_sales': kwargs.pop('JP_sales', None),
+            'na_sales': kwargs.pop('na_sales', None),
+            'eu_sales': kwargs.pop('eu_sales', None),
+            'jp_sales': kwargs.pop('jp_sales', None),
             'other_sales': kwargs.pop('other_sales', None),
             'global_sales': kwargs.pop('global_sales', None)
         }
@@ -130,6 +130,14 @@ class SaleManager(models.Manager):
         return super().all().select_related('game', 'game__rating')
 
 
+# Better way of handling?
+SALE_ORDER_BY_FIELDS = [
+    'Name', 'Platform', 'Publisher', 'Developer', 'Genre', 'ESRB Rating', 'Year of Release',
+    'Critic Score', 'Critic Count', 'User Score', 'User Count',
+    'EU Sales', 'JP Sales', 'NA Sales', 'Global Sales', 'Other Sales'
+]
+
+
 class Sale(models.Model):
     slug = models.SlugField(
         unique=True, blank=True,
@@ -140,15 +148,15 @@ class Sale(models.Model):
         on_delete=models.CASCADE
     )
 
-    NA_sales = models.FloatField(
+    na_sales = models.FloatField(
         help_text='In millions of units',
         null=True, blank=True
     )
-    EU_sales = models.FloatField(
+    eu_sales = models.FloatField(
         help_text='In millions of units',
         null=True, blank=True
     )
-    JP_sales = models.FloatField(
+    jp_sales = models.FloatField(
         help_text='In millions of units',
         null=True, blank=True
     )
@@ -178,16 +186,13 @@ class Sale(models.Model):
             value = value[1:]
             in_reverse = True
 
-        game_fields = ['name', 'platform', 'publisher', 'developer', 'genre', 'esrb_rating']
+        game_fields = ['name', 'platform', 'publisher', 'developer', 'genre', 'esrb_rating', 'year_of_release']
         rating_fields = ['critic_score', 'critic_count', 'user_score', 'user_count']
-        sale_fields = ['id', 'EU_sales', 'JP_sales', 'NA_sales', 'global_sales', 'other_sales']
 
         if value in game_fields:
             value = f'game__{value}'
         elif value in rating_fields:
             value = f'game__rating__{value}'
-        elif value in sale_fields:
-            pass
 
         if in_reverse:
             value = f'-{value}'
@@ -204,7 +209,9 @@ class Sale(models.Model):
             'yor_lt': lambda: sales.filter(
                 Q(game__year_of_release__lt=int(params['yor_lt']))),
             'yor_gt': lambda: sales.filter(
-                Q(game__year_of_release__gt=int(params['yor_gt'])))
+                Q(game__year_of_release__gt=int(params['yor_gt']))),
+            'year_of_release': lambda: sales.filter(
+                Q(game__year_of_release__exact=int(params['year_of_release'])))
         }
         for param in params:
             sales = filters_map[param]()
