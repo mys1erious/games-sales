@@ -25,6 +25,7 @@ function App() {
         palette: {mode: "light"}
     });
 
+
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     const [sales, setSales] = useState([]);
 
