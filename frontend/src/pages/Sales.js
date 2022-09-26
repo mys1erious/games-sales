@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {useLocation, useSearchParams} from "react-router-dom";
 
-import {Box, Grid, Pagination, Typography} from "@mui/material";
+import {Grid, Pagination, Typography} from "@mui/material";
 
 import DataLoadingItem from "../features/core/components/DataLoadingItem";
 import SalesList from "../features/sales/components/SalesList";
 import {getSales} from "../features/sales/services";
+import SalesFilterSidebar from "../features/sales/components/SalesFilterSidebar";
 
 
 const Sales = ({sales, setSales}) => {
-    const navigate = useNavigate();
     const location = useLocation();
 
     const [searchParams, setSearchParams] = useSearchParams();
@@ -17,27 +17,19 @@ const Sales = ({sales, setSales}) => {
     const [numPages, setNumPages] = useState(1);
 
     useEffect(() => {
-        searchParams.delete('page');
-
         if (location.state?.newSearch)
             setCurrPage(1);
 
-        let saleSearchParams = buildSaleSearchParams(currPage, searchParams);
-        getSales(`${saleSearchParams}`)
+        getSales(`?${searchParams.toString()}`)
             .then((response) => {
                 setSales(response.data.sales);
                 setNumPages(response.data.num_pages);
         });
-        navigate(`/sales/${saleSearchParams}`);
+
+        searchParams.set('page', currPage.toString());
+        setSearchParams(searchParams);
 
     }, [currPage, searchParams]);
-
-    const buildSaleSearchParams = (page, searchParams) => {
-        let pageParam = `?page=${page}`;
-        if (searchParams.toString().length === 0)
-            return pageParam;
-        return `${pageParam}&${searchParams.toString()}`;
-    };
 
     const changePage = (e, p) => {
         setCurrPage(p);
@@ -51,15 +43,16 @@ const Sales = ({sales, setSales}) => {
                     <Grid item marginY={"3%"}>
                         <Typography variant="h4">Sales List</Typography>
                     </Grid>
-                    <Grid item minWidth={"300px"} width={"50%"}>
+                    <Grid item minWidth="300px" width="40%">
+                        <SalesFilterSidebar setCurrPage={setCurrPage} />
                         <SalesList sales={sales} currPage={currPage} />
                     </Grid>
                     <Grid item marginTop={"5%"}>
                         <Typography>Page: {currPage}</Typography>
-                        <Pagination boundaryCount={0} siblingCount={1}
-                                    color="primary" count={numPages}
-                                    showFirstButton showLastButton
-                                    page={currPage} onChange={changePage} />
+                        <Pagination boundaryCount={0} siblingCount={1} count={numPages}
+                            showFirstButton showLastButton onChange={changePage} page={currPage}
+                            color="primary"
+                        />
                     </Grid>
                 </Grid>
             : <DataLoadingItem />
