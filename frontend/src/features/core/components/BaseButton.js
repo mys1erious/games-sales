@@ -1,17 +1,13 @@
+import {Button} from "@mui/material";
 import React from "react";
-import { Button } from "@mui/material";
-import {NavLink} from "react-router-dom";
 
 
-const BaseButton = (props) => {
+const BaseButton = ({content, color, onClick, sx}) => {
     return(
-        <Button
-            component={NavLink} to={props.to} color={"inherit"} variant={"text"}
-            startIcon={props.startIcon}
-            style={props.style}
-        >
-            {props.text}
-        </Button>
+            <Button size="small" variant="outlined" color={color}
+                    onClick={onClick} sx={sx}
+            >{content}
+            </Button>
     )
 };
 
