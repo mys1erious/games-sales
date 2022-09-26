@@ -1,5 +1,5 @@
 import {TextField} from "@mui/material";
-import {handleFormStateChange} from "../utils";
+import {handleFormStateChange} from "../../core/utils";
 
 
 const AuthTextField = ({formData, updateFormData, type, name, label}) => {
