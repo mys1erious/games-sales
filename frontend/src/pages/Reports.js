@@ -3,7 +3,7 @@ import React from 'react';
 
 const Reports = () => {
     return (
-        <div>Reports will be here.</div>
+        <div>Reports history will be here</div>
     )
 };
 

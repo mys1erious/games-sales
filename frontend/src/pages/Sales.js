@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useSearchParams} from "react-router-dom";
+import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
-import {Grid, Pagination, Typography} from "@mui/material";
+import {Box, Button, Grid, Pagination, Typography} from "@mui/material";
 
 import DataLoadingItem from "../features/core/components/DataLoadingItem";
 import SalesList from "../features/sales/components/SalesList";
 import {getSales} from "../features/sales/services";
 import SalesFilterSidebar from "../features/sales/components/SalesFilterSidebar";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 
 const Sales = ({sales, setSales}) => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const [searchParams, setSearchParams] = useSearchParams();
     const [currPage, setCurrPage] = useState(parseInt(searchParams.get('page')) || 1);
@@ -35,6 +37,12 @@ const Sales = ({sales, setSales}) => {
         setCurrPage(p);
     };
 
+    const createReport = () => {
+        const params = new URLSearchParams(searchParams);
+        params.delete('page');
+        navigate(`/report-builder/?${params}`);
+    };
+
     return(
         <React.Fragment>
             {sales ?
@@ -44,7 +52,14 @@ const Sales = ({sales, setSales}) => {
                         <Typography variant="h4">Sales List</Typography>
                     </Grid>
                     <Grid item minWidth="300px" width="40%">
-                        <SalesFilterSidebar setCurrPage={setCurrPage} />
+                        <Box sx={{display: "flex", justifyContent: "space-between"}}>
+                            <SalesFilterSidebar setCurrPage={setCurrPage} />
+                            <Button sx={{border: "2px solid gray"}} color="success" size="small"
+                                    onClick={() => createReport()}
+                            >
+                                Create Report <ArrowForwardIcon />
+                            </Button>
+                        </Box>
                         <SalesList sales={sales} currPage={currPage} />
                     </Grid>
                     <Grid item marginTop={"5%"}>

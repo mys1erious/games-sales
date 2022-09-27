@@ -15,6 +15,7 @@ import SignOut from "./pages/SignOut";
 import SignUp from "./pages/SignUp";
 import Profile from "./pages/Profile";
 import Reports from "./pages/Reports";
+import ReportBuilder from "./pages/ReportBuilder";
 
 
 
@@ -39,10 +40,11 @@ function App() {
                     <Route exact path="/" element={<Home />} />
 
                     <Route path="/sales/" element={<Sales
-                        sales={sales} setSales={setSales} />}
-                    />
+                        sales={sales} setSales={setSales} />}/>
                     <Route path="/sales/:saleSlug/" element={<SaleDetail />} />
-                    <Route path="/reports/" element={<Reports />}/>
+
+                    <Route path="/reports/" element={<Reports />} />
+                    <Route path="/report-builder/" element={<ReportBuilder />}/>
 
                     <Route path="/signin/" element={<SignIn />}/>
                     <Route path="/sign-out/" element={<SignOut />}/>
