@@ -1,31 +1,26 @@
-(First make a design in Figma; Check example on Rozetka)
 Current todo:
-- Left panel with Search/Filter functionality
-- Sort by:
-    name, platform, publisher, developer, genre, esrb_rating, your, Rating, region saels
-- Search by:
-	default(on top) = (name, platform, publisher, developer)
+-
+- Refactor for better readability after done with Sales Filtering and basic Reports repr.
 - Filter by:
-	genre
-	esrb_rating
-	yor
 	min/max Rating
 	min/max region sales
+- Support for multiple filters of the same type eg.: genre=action,racing
+- Add password Validation
+- Sale Editing
+- Only see Sale Delete/Edit if admin
 
 
 High-level tasks:
 -. profiles
 -. reports
--. search
 -. charts
 -. report objects
 -. report list, detail
 -. pdf reports
--. export of pdfs with chosen reports data
+-. export of reports as pdf
 
 
 Backend:
-- Search/Filter functionality
 - Reports
 - Get ideas (possibly from the kaggle) for data visualization
 - Profiles
@@ -40,12 +35,13 @@ Frontend:
 - PDFs
 - userContext
 - My profile
+- Add 'Remember me'
 
 
 Bugs/Fixes:
-- Add password Validation
+- Fix hardcoded css
+- Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
+- Rework Header to look better on smaller screen
 - Check: if creating through social-auth, dont need passwords
-- Sale Editing(update)
-- Fix alert messages
-- Add 'Remember me'
+- Fix alert messages(better parsing)
 - Error handling with alerts for all errors (possibly make Alert global?)

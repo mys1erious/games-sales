@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert} from "@mui/material";
-import {handleObjectStateChange} from "../utils";
+import {handleObjectStateChange} from "../../core/utils";
 
 
 const statusAlertTypeMap = {

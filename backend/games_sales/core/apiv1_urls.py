@@ -19,6 +19,12 @@ urlpatterns = [
         view=sale_views.SaleDetailAPIView.as_view(),
         name='sales'
     ),
+    # {% url 'api:sale_genres' %}
+    path(
+        route='sale-filters/',
+        view=sale_views.SaleFilterFieldsListAPIView.as_view(),
+        name='sale_filters'
+    ),
 
     # -- Auth --
     path('auth/', include('drf_social_oauth2.urls', namespace='drf')),

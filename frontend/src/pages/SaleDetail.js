@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {Container} from "@mui/material";
-import { BaseButton as Button } from "../features/sales/components/BaseButton";
+import { BaseButton as Button } from "../features/core/components/BaseButton";
 import {deleteSale, editSale, getSale} from "../features/sales/services";
 
 
@@ -42,11 +42,18 @@ const SaleDetail = () => {
     }
 
     // Rework to look normally (like a table or sth)
+    // Better way of having same width?
     return(
         <Container component="main" maxWidth="xl" >
-            <Button text={"Back"} color={"red"} onClick={() => navigate(-1)}/>
-            <Button text={"Edit"} color={"red"} onClick={handleEditSale}/>
-            <Button text={"Delete"} color={"red"} onClick={handleDeleteSale}/>
+            <Button content="Back" color="primary" sx={{width: "70px"}}
+                    onClick={() => navigate(-1)}
+            />
+            <Button content="Edit" color="primary" sx={{width: "70px"}}
+                    onClick={handleEditSale}
+            />
+            <Button content="Delete" color="error" sx={{width: "70px"}}
+                    onClick={handleDeleteSale}
+            />
             <h3>Sale info:</h3>
             <pre>
                 {JSON.stringify(sale, {}, 4)}

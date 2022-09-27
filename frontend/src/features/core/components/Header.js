@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
 import "../css/Header.css";
 import { ReactComponent as Logo } from "../../../assets/logo.svg";
@@ -11,10 +11,13 @@ import {
     Typography
 } from "@mui/material";
 
-import { BaseButton as Button } from "./BaseButton";
+import {LinkButton} from "./LinkButton";
+import SalesSearchBar from "../../sales/components/SalesSearchBar";
+
 
 
 const Header = ({isDarkTheme, setIsDarkTheme}) => {
+    const [searchText, setSearchText] = useState('');
 
     const changeTheme = () => {
         setIsDarkTheme(currTheme => !currTheme);
@@ -24,13 +27,14 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
         <React.Fragment>
             <CssBaseline />
             <AppBar position={"sticky"} color={"default"} elevation={0}>
-                <Toolbar style={{justifyContent: "space-between"}}>
+                <Toolbar sx={{justifyContent: "space-between"}}>
                     <Typography variant={"h6"} color={"inherit"}>
-                        <Button to={"/"} text={"Home"}
+                        <LinkButton to={"/"} text={"Home"}
                                 startIcon={<Logo className="logo" />}
                         />
-                        <Button to={"/sales/"} text={"Sales"} />
-                        <Button to={"#"} text={"Reports"} />
+                        <LinkButton to={"/sales/"} text={"Sales"} />
+                        <LinkButton to={"#"} text={"Reports"} />
+                        <SalesSearchBar searchText={searchText} setSearchText={setSearchText} />
                     </Typography>
                     <Typography variant={"h6"} color={"inherit"}>
                         <FormControlLabel
@@ -40,13 +44,13 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                             localStorage.getItem('access_token') !== null
                                 ?
                                 <React.Fragment>
-                                    <Button to={"/profile/"} text={"Profile"} />
-                                    <Button to={"/sign-out/"} text={"Sign Out"} />
+                                    <LinkButton to={"/profile/"} text={"Profile"} />
+                                    <LinkButton to={"/sign-out/"} text={"Sign Out"} />
                                 </React.Fragment>
                                 :
                                 <React.Fragment>
-                                    <Button to={"/signin/"} text={"Sign In"} />
-                                    <Button to={"/signup/"} text={"Sign Up"} />
+                                    <LinkButton to={"/signin/"} text={"Sign In"} />
+                                    <LinkButton to={"/signup/"} text={"Sign Up"} />
                                 </React.Fragment>
                         }
                     </Typography>
