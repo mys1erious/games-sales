@@ -33,7 +33,7 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                                 startIcon={<Logo className="logo" />}
                         />
                         <LinkButton to={"/sales/"} text={"Sales"} />
-                        <LinkButton to={"#"} text={"Reports"} />
+                        <LinkButton to={"/reports/"} text={"Reports"} />
                         <SalesSearchBar searchText={searchText} setSearchText={setSearchText} />
                     </Typography>
                     <Typography variant={"h6"} color={"inherit"}>
