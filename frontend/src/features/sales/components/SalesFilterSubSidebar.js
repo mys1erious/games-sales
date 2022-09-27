@@ -3,7 +3,7 @@ import {Box, List, ListItem, ListItemButton, ListItemText, TextField, Typography
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import {useSearchParams} from "react-router-dom";
-import {handleObjectStateChange, slugify} from "../../core/utils";
+import {handleObjectStateChange, slugify, yearParamInitState} from "../../core/utils";
 
 import {BaseButton as Button} from "../../core/components/BaseButton";
 import {getFilterFieldsData} from "../services";
@@ -18,7 +18,7 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          'esrb_rating': [],
          'year_of_release': []
      });
-     const [yearParam, setYearParam] = useState([0, new Date().getFullYear()]);
+     const [yearParam, setYearParam] = useState(yearParamInitState);
 
      const initFieldsData = async() => {
          let fields = await getFilterFieldsData();
@@ -48,7 +48,11 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          setHighlighted(temp);
      };
 
-     // Remove hard coded field checks
+     const handleYearParam = (min, max) => {
+         setYearParam([min, max]);
+     };
+
+     // Remove hard coded field checks (map?)
      const setFilterParam = (text) => {
          highlight(text);
 
@@ -69,6 +73,12 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      const resetFilterParam = () => {
          unhighlight();
 
+         if (field === 'Year of Release'){
+             searchParams.delete('yor_lt');
+             searchParams.delete('yor_gt');
+             setYearParam(yearParamInitState);
+         }
+
          searchParams.delete(slugify(field));
          setSearchParams(searchParams);
      };
@@ -77,10 +87,6 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          highlighted[slugify(field)] === text
          ? {color: 'green', border: '1px solid green'}
          : {};
-
-     const handleYearParam = (min, max) => {
-         setYearParam([min, max]);
-     };
 
      const getListItems = () => {
          const specialFields = ['Year of Release'];

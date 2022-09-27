@@ -47,3 +47,5 @@ export const highlightedInitState = {
     'genre': '',
     'esrb_rating': ''
 };
+
+export const yearParamInitState = [0, new Date().getFullYear()];

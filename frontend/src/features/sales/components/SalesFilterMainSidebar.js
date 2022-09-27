@@ -8,8 +8,6 @@ import {useSearchParams} from "react-router-dom";
 import {highlightedInitState} from "../../core/utils";
 
 
-// For each Field, need to add its values
-// Then from API
 const SalesFilterMainSidebar = (filterFields, toggleMain, toggleSub,
                                 setCurrPage, highlighted, setHighlighted) => {
     const [searchParams, setSearchParams] = useSearchParams();
