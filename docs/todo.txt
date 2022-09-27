@@ -1,9 +1,13 @@
 Current todo:
-- Rework hardcoded values in Year filters
-- Change reset on Year::
+-
+- Refactor for better readability after done with Sales Filtering and basic Reports repr.
 - Filter by:
 	min/max Rating
 	min/max region sales
+- Support for multiple filters of the same type eg.: genre=action,racing
+- Add password Validation
+- Sale Editing
+- Only see Sale Delete/Edit if admin
 
 
 High-level tasks:
@@ -13,7 +17,7 @@ High-level tasks:
 -. report objects
 -. report list, detail
 -. pdf reports
--. export of pdfs with chosen reports data
+-. export of reports as pdf
 
 
 Backend:
@@ -37,10 +41,7 @@ Frontend:
 Bugs/Fixes:
 - Fix hardcoded css
 - Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
-- Support for multiple filters of the same type eg.: genre=action,racing
 - Rework Header to look better on smaller screen
-- Add password Validation
 - Check: if creating through social-auth, dont need passwords
-- Sale Editing(update)
 - Fix alert messages(better parsing)
 - Error handling with alerts for all errors (possibly make Alert global?)
