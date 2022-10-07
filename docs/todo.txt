@@ -1,36 +1,40 @@
 Current todo:
-- Reports init:
-    - For start
-        create report button redirects to /report-builder/ with current params for the sales
-        u get all the sales for those params and return data for those sales
-
-        save that data + file name + remarks to a pdf and db entry
-            name for a file + email make unique name (cant have the same report name for the same user)
-    - Change sales api endpoint to be ble to get all data in 1 request
-    - Pass all Sales(all pages for selected filters) to Report Creation View when press Create Report button
-    - Reports viz (use D3.js):
-        significant sales KPIs and metrics(turnover, net margin, quantity sold) (for company)
-        total sales volume (for company)
-        net/gross sales (for company)
-        KPI percentage comparisons between previous and selected year reports (for company)
+- Reports:
+    Viz:
+        (for each Chart choose between Bar/Pie Charts)
+        t10 Platforms, t10 Genres (can choose for which Region)
+        t10 Publishers, t10 Developers (can choose for which Region)
+        Number of Video games Released in each year
+        User/Critic Score for each genre games
+        Video games Sales - Yearly
+        esrb_rating sales
+        t5 games by genres
+        t5 games by platform
+        t10 Developers by score
 
 
-- Refactor for better readability after done with Sales Filtering and basic Reports repr.
+    ability to download as .html and .pdf
+
+- Refactor for better readability after done with Reports
+
+
 - Sales filter
     - Filter by
         min/max Rating
 	    min/max region sales
 	- Support for multiple filters of the same type eg.: genre=action,racing
+
 - Sales
+    - normal repr for SaleDetail
     - Sale Editing
     - Only see Sale Delete/Edit if admin
+
 - Users
     - Add password Validation
 
 
 Backend:
 - Reports
-    Model
     List/Detail endpoints
     save pdf file in db/storage for history of user reports
 - Profiles
@@ -41,7 +45,6 @@ Backend:
 Frontend:
 - Reports
     Visualization for currently selected Sales
-    Download as pdf
 - Users
     userContext
     My profile View
@@ -50,7 +53,6 @@ Frontend:
 
 
 Bugs/Fixes:
-- Fix Field names in table
 - Fix hardcoded css
 - Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
 - Rework Header to look better on smaller screen
