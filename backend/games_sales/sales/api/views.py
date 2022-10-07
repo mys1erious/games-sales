@@ -1,6 +1,7 @@
 import json
 
 import pandas as pd
+
 import requests
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
@@ -131,17 +132,55 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
     authentication_classes = []
 
     def get(self, request, *args, **kwargs):
+        # name, remarks, settings(for report), type(preview, create)
         query_params = QueryDict.copy(request.query_params)
         query_params['page_size'] = '-1'
 
         sales = self.get_sales(query_params)
+
+        print('SALES ------->: ', len(sales))
 
         df = pd.DataFrame.from_records(sales.values(
             'game__year_of_release', 'na_sales', 'eu_sales', 'jp_sales', 'other_sales', 'global_sales',
             'game__rating__critic_score', 'game__rating__critic_count',
             'game__rating__user_score', 'game__rating__user_count'
         ))
-        data_raw = df.describe().to_json()
-        data_parsed = json.loads(data_raw)
 
-        return Response(data_parsed, status=status.HTTP_200_OK)
+        data_describe = df.describe().to_json()
+
+        top_publishers_series = pd.DataFrame.from_records(sales.values(
+            'global_sales', 'game__publisher'
+        )).groupby('game__publisher')['global_sales']\
+            .sum()\
+            .sort_values(ascending=False)
+
+        top_publishers = [
+            {'publisher': publisher, 'count': count}
+            for publisher, count in zip(
+                list(top_publishers_series.index[:10]),
+                list(top_publishers_series[:10])
+            )
+        ]
+
+
+        top_platforms_series = pd.DataFrame.from_records(sales.values(
+            'global_sales', 'game__platform'
+        )).groupby('game__platform')['global_sales']\
+            .sum()\
+            .sort_values(ascending=False)
+
+        top_platforms = [
+            {'platform': platform, 'count': count}
+            for platform, count in zip(
+                list(top_platforms_series.index[:10]),
+                list(top_platforms_series[:10])
+            )
+        ]
+
+        data = {
+            'description': json.loads(data_describe),
+            'top_publishers': top_publishers,
+            'top_platforms': top_platforms
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
