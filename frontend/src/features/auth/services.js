@@ -1,5 +1,5 @@
-import axiosInstance from "../../lib/axiosInstance";
-import axios from "axios";
+    import axiosInstance from "../../lib/axiosInstance";
+import axios, {AxiosError} from "axios";
 
 
 export const convertSocialAuthToken = async(accessToken, backendType) => {
@@ -32,13 +32,13 @@ export const emailSignIn = async(email, password) => {
 };
 
 export const signOut = async() => {
-    const response = await axiosInstance.post('/auth/revoke-token/',{
+    const response = await axiosInstance.post('/auth/revoke-token/', {
         token: localStorage.getItem('refresh_token'),
         client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
         client_secret: process.env.REACT_APP_OAUTH_CLIENT_SECRET
     });
-    axiosInstance.defaults.headers['Authorization'] = null;
 
+    axiosInstance.defaults.headers['Authorization'] = null;
     return response;
 };
 

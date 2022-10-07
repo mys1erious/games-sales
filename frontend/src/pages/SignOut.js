@@ -3,13 +3,23 @@ import {useNavigate} from "react-router-dom";
 import axiosInstance from "../lib/axiosInstance";
 import {removeTokensFromLocalStorage} from "../features/auth/utils";
 import {signOut} from "../features/auth/services";
+import {AxiosError} from "axios";
 
 
 const SignOut = () => {
     const navigate = useNavigate();
 
     const handleSignOut = async() => {
-        await signOut();
+        let response;
+        try {
+            response = await signOut();
+        }
+        catch (e) {
+            if (!(e instanceof AxiosError && e.response.status === 401)) {
+                throw response;
+            }
+        }
+
         removeTokensFromLocalStorage();
 
         navigate('/signin/');

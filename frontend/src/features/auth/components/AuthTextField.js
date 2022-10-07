@@ -7,8 +7,7 @@ const AuthTextField = ({formData, updateFormData, type, name, label}) => {
         <TextField type={type} variant="outlined" required fullWidth
                    id={name} name={name} label={label}
                    autoComplete={name} onChange={
-            (e) => handleFormStateChange(e, formData, updateFormData)
-        }
+            (e) => handleFormStateChange(e, formData, updateFormData)}
         />
     )
 
