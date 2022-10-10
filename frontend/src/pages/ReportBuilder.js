@@ -16,6 +16,7 @@ import {
 import axiosInstance from "../lib/axiosInstance";
 import {handleFormStateChange} from "../features/core/utils";
 import BarChart from "../features/reports/components/BarChart";
+import PieChart from "../features/reports/components/PieChart";
 
 
 const ReportBuilder = () => {
@@ -25,8 +26,10 @@ const ReportBuilder = () => {
     };
     const initAnalysisData = {
         description: '',
-        top_publishers: '',
-        top_platforms: ''
+        top_platforms: [],
+        top_genres: [],
+        top_publishers: [],
+        top_developers: []
     };
 
     const [searchParams, setSearchParams] = useSearchParams({});
@@ -129,7 +132,8 @@ const ReportBuilder = () => {
         <div style={{width: "90vw", margin: "auto"}}>
             <CssBaseline />
 
-            <div style={{textAlign: "center", marginBottom: "15px", border: "1px solid gray"}}>
+            <div style={{textAlign: "center", border: "1px solid gray",
+                marginBottom: "15px", paddingTop: "10px"}}>
                 <TextField variant="outlined" label="Name" name="name"
                            fullWidth sx={{marginBottom: "15px"}}
                            onChange={(e) => handleFormStateChange(e, reportData, setReportData)}
@@ -141,7 +145,7 @@ const ReportBuilder = () => {
                 />
             </div>
 
-            <div id="reportBody" >
+            <div id="reportBody">
             <Grid container rowSpacing={2} justifyContent="center"
                   border="1px solid gray">
                 <Grid item xs={12}>
@@ -176,21 +180,50 @@ const ReportBuilder = () => {
                     </Table>
                 </TableContainer>
                 </Grid>
-                <Grid item xs={6}>
-                    {analysisData?
+                <Grid item xs={6}> {/* Top Platforms */}
+                    {analysisData?.top_platforms?
+                        <BarChart data={analysisData.top_platforms} title="Top 10 Platforms"
+                                  xTitle="platform" yTitle="count"
+                        />
+                        : null
+                    }
+                </Grid>
+                <Grid item xs={6}> {/* Top Genres */}
+                    {analysisData?.top_genres?
+                        <BarChart data={analysisData.top_genres} title="Top 10 Genres"
+                                  xTitle="genre" yTitle="count"
+                        />
+                        : null
+                    }
+                </Grid>
+                <Grid item xs={6}> {/* Top Publishers */}
+                    {analysisData?.top_publishers?
                         <BarChart data={analysisData.top_publishers} title="Top 10 Publishers"
                                   xTitle="publisher" yTitle="count"
                         />
                         : null
                     }
                 </Grid>
+                <Grid item xs={6}> {/* Top Developers */}
+                    {analysisData?.top_developers?
+                        <BarChart data={analysisData.top_developers} title="Top 10 Developers"
+                                  xTitle="developer" yTitle="count"
+                        />
+                        : null
+                    }
+                </Grid>
+
+                 {/*For testing*/}
                 <Grid item xs={6}>
-                    {analysisData?
-                        <BarChart data={analysisData.top_platforms} title="Top 10 Platforms"
+                    {analysisData?.top_platforms?
+                        <PieChart data={analysisData.top_platforms} title="Top 10 Platforms"
                                   xTitle="platform" yTitle="count"
                         />
                         : null
                     }
+                </Grid>
+                <Grid item xs={6}> {/* TEST */}
+                    Developers will be here.
                 </Grid>
             </Grid>
             </div>

@@ -21,7 +21,7 @@ from .serializers import SaleSerializer
 
 
 class SaleBaseAPIView(APIView, LimitOffsetPagination):
-    permission_classes = (AllowAny, ) # Change
+    permission_classes = (AllowAny,)  # Change
     authentication_classes = []
 
     query_search_param = 'text'
@@ -42,8 +42,8 @@ class SaleBaseAPIView(APIView, LimitOffsetPagination):
     def search(self, sales, query_params):
         if self.query_search_param in query_params:
             return Sale.search_by_text(sales,
-                query_params.get(self.query_search_param)
-            )
+                                       query_params.get(self.query_search_param)
+                                       )
         return sales
 
     def filter(self, sales, query_params):
@@ -101,14 +101,14 @@ class SaleListAPIView(SaleBaseAPIView):
 
 
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAdminOrReadOnly, )
+    permission_classes = (IsAdminOrReadOnly,)
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
     lookup_field = 'slug'
 
 
 class SaleFilterFieldsListAPIView(APIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
     authentication_classes = []
 
     def get(self, request, *args, **kwargs):
@@ -128,7 +128,7 @@ class SaleFilterFieldsListAPIView(APIView):
 
 
 class SaleAnalysisAPIView(SaleBaseAPIView):
-    permission_classes = (AllowAny, )
+    permission_classes = (AllowAny,)
     authentication_classes = []
 
     def get(self, request, *args, **kwargs):
@@ -141,46 +141,65 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
         print('SALES ------->: ', len(sales))
 
         df = pd.DataFrame.from_records(sales.values(
-            'game__year_of_release', 'na_sales', 'eu_sales', 'jp_sales', 'other_sales', 'global_sales',
+            'na_sales', 'eu_sales', 'jp_sales', 'other_sales', 'global_sales',
             'game__rating__critic_score', 'game__rating__critic_count',
-            'game__rating__user_score', 'game__rating__user_count'
+            'game__rating__user_score', 'game__rating__user_count',
+            'game__year_of_release', 'game__platform', 'game__genre',
+            'game__publisher', 'game__developer'
         ))
 
-        data_describe = df.describe().to_json()
-
-        top_publishers_series = pd.DataFrame.from_records(sales.values(
-            'global_sales', 'game__publisher'
-        )).groupby('game__publisher')['global_sales']\
-            .sum()\
-            .sort_values(ascending=False)
-
-        top_publishers = [
-            {'publisher': publisher, 'count': count}
-            for publisher, count in zip(
-                list(top_publishers_series.index[:10]),
-                list(top_publishers_series[:10])
-            )
-        ]
-
-
-        top_platforms_series = pd.DataFrame.from_records(sales.values(
-            'global_sales', 'game__platform'
-        )).groupby('game__platform')['global_sales']\
-            .sum()\
-            .sort_values(ascending=False)
-
-        top_platforms = [
-            {'platform': platform, 'count': count}
-            for platform, count in zip(
-                list(top_platforms_series.index[:10]),
-                list(top_platforms_series[:10])
-            )
-        ]
+        # Rework to use dynamic data from 'settings' query arg
+        data_describe = df.describe().round(2).to_json()
+        top_platforms = self.get_top_n_fields_for_sale_type(
+            df,
+            field='platform',
+            sale_type='global_sales',
+            n=10
+        )
+        top_genres = self.get_top_n_fields_for_sale_type(
+            df,
+            field='genre',
+            sale_type='global_sales',
+            n=10
+        )
+        top_publishers = self.get_top_n_fields_for_sale_type(
+            df,
+            field='publisher',
+            sale_type='global_sales',
+            n=10
+        )
+        top_developers = self.get_top_n_fields_for_sale_type(
+            df,
+            field='developer',
+            sale_type='global_sales',
+            n=10
+        )
 
         data = {
             'description': json.loads(data_describe),
+            'top_platforms': top_platforms,
+            'top_genres': top_genres,
             'top_publishers': top_publishers,
-            'top_platforms': top_platforms
+            'top_developers': top_developers
         }
 
         return Response(data, status=status.HTTP_200_OK)
+
+    def get_top_n_fields_for_sale_type(self, df, field, sale_type, n):
+        # Rework field name logic creating
+        db_field = f'game__{field}'
+
+        top_fields_series = df.groupby(db_field) \
+            [sale_type].sum() \
+            .sort_values(ascending=False) \
+            .round(2)
+
+        top_fields = [
+            {field: cur_field, 'count': count}
+            for cur_field, count in zip(
+                list(top_fields_series.index[:n]),
+                list(top_fields_series[:n])
+            )
+        ]
+
+        return top_fields
