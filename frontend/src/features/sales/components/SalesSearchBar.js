@@ -1,16 +1,18 @@
 import React from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {Search} from '@mui/icons-material';
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 
 const SalesSearchBar = ({searchText, setSearchText}) => {
+    const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams({});
 
     const search = () => {
         if (searchText) {
             searchParams.set('text', searchText);
-            setSearchParams(searchParams, {state: {newSearch: true}});
+            setSearchParams(searchParams);
+            navigate(`/sales/?${searchParams.toString()}`, {state: {newSearch: true}});
         }
         else {
             searchParams.delete('text');
