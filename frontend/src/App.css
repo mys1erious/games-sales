@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap');
 
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,17 +11,12 @@
   scroll-behavior: smooth;
 }
 
-body{
+body {
   line-height: 1.8em;
   font-weight: 400;
   font-size: 16px;
-}
-.body-container {
-  min-height: 92vh;
-  padding: 10px 20px 10px 20px;
 }
 
 a {
   text-decoration: none;
 }
-

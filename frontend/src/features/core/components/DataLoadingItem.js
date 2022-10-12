@@ -1,11 +1,6 @@
-import React from 'react';
-
-
-const DataLoadingItem = () => {
-    return(
-        <div>Data is still loading</div>
-    )
-}
+const DataLoadingItem = () => (
+    <div>Data is still loading...</div>
+);
 
 
 export default DataLoadingItem;

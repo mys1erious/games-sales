@@ -1,9 +1,36 @@
-export const setTokensToLocalStorage = (response) => {
-    localStorage.setItem('access_token', response.data.access_token);
-    localStorage.setItem('refresh_token', response.data.refresh_token);
+export const localStorageUserFields = [
+    'access_token', 'refresh_token',
+    'email', 'username'
+];
+
+export const User = ({
+    email='',
+    username='',
+    isLoggedIn=false
+}) => {
+    return {email, username, isLoggedIn}
 };
 
-export const removeTokensFromLocalStorage = () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
+const userIsLoggedIn = () => localStorage.getItem('access_token') !== null;
+
+export const handleUser = (setUser) => {
+    if (userIsLoggedIn()){
+        setUser(User({
+            email: localStorage.getItem('username'),
+            username: localStorage.getItem('email'),
+            isLoggedIn: true
+        }));
+    }
+    else
+        setUser(User({isLoggedIn: false}));
+};
+
+export const setUserDataToLocalStorage = (props) => {
+    for (const field of localStorageUserFields)
+        localStorage.setItem(field, props[field]);
+};
+
+export const removeUserDataFromLocalStorage = () => {
+    for (const field of localStorageUserFields)
+        localStorage.removeItem(field);
 };

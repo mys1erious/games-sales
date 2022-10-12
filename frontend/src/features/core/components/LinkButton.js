@@ -1,19 +1,21 @@
 import React from "react";
-import { Button } from "@mui/material";
 import {NavLink} from "react-router-dom";
+import {Button as BaseButton} from "@mui/material";
 
 
-const LinkButton = (props) => {
-    return(
-        <Button
-            component={NavLink} to={props.to} color={"inherit"} variant={"text"}
-            startIcon={props.startIcon}
-            style={props.style}
-        >
-            {props.text}
-        </Button>
-    )
-};
+const LinkButton = ({
+    to,
+    startIcon,
+    color="inherit",
+    variant="text",
+    children
+}) => (
+    <BaseButton component={NavLink} to={to}
+                color={color} variant={variant}
+                startIcon={startIcon}>
+            {children}
+        </BaseButton>
+);
 
 
-export {LinkButton};
+export default LinkButton;

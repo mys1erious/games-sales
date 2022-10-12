@@ -1,13 +1,8 @@
 import React from 'react';
 import {Alert} from "@mui/material";
-import {handleObjectStateChange} from "../../core/utils";
 
-
-const statusAlertTypeMap = {
-        201: 'success',
-        400: 'error',
-        'other': 'info'
-    };
+import {setObjState} from "features/core/utils";
+import {statusAlertTypeMap} from "../constants";
 
 const getAlertType = (r) => {
     let status;
@@ -22,20 +17,17 @@ const parseResponseData = (data) => {
     for (let msgs of Object.values(data)){
         let msg = '';
         if (Array.isArray(msgs)){
-            for (let subMsg of msgs){
+            for (let subMsg of msgs)
                 msg +=`${subMsg}<br/>`;
-            }
         }
-        else{
-            msg = msgs;
-        }
+        else msg = msgs;
         text += msg;
     }
 
     let textArray = text.split('<br/>');
-    for (let i=1; i < textArray.length; i+=2){
+    for (let i=1; i < textArray.length; i+=2)
         textArray.splice(i, 0, <br key={i}/>);
-    }
+
     return textArray;
 };
 
@@ -45,28 +37,20 @@ const setAlertData = (r, tempAlertData) => {
 };
 
 
-export const initialAlertData = Object.freeze({
-    isAlert: false,
-    type: '',
-    text: ''
-});
-
-export const triggerAlert = (r, alert, updateAlert) => {
+export const triggerAlert = (r, alert, setAlert) => {
     const alertData = {
         isAlert: true,
         type: '',
         text: ''
     };
     setAlertData(r, alertData);
-    handleObjectStateChange(alertData, alert, updateAlert);
+    setObjState(alertData, alert, setAlert);
 };
 
 
-const AuthAlert = ({alert}) => {
-    return(
-        <Alert severity={alert.type}>{alert.text}</Alert>
-    )
-};
+const AuthAlert = ({alert}) => (
+    <Alert severity={alert.type}>{alert.text}</Alert>
+);
 
 
 export default AuthAlert;
