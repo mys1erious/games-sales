@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import {Box, ThemeProvider} from "@mui/material";
+import {Box, CssBaseline, ThemeProvider} from "@mui/material";
 
 import Home from "pages/Home";
 import Sales from "pages/Sales";
@@ -36,8 +36,9 @@ function App() {
 
     return (
         <Router>
-            <UserContext.Provider value={userProvider}>
             <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
+            <UserContext.Provider value={userProvider}>
+                <CssBaseline />
                 <Header isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}/>
                 <Box sx={{minHeight: "92vh", padding: "10px 20px 10px 20px"}}>
                     <Routes>
@@ -56,8 +57,8 @@ function App() {
                     </Routes>
                 </Box>
                 <Footer />
-            </ThemeProvider>
             </UserContext.Provider>
+            </ThemeProvider>
         </Router>
     );
 }
