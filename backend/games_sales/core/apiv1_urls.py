@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.urls import path, include
 
 from sales.api import views as sale_views
@@ -40,7 +39,10 @@ urlpatterns = [
     ),
 
     # -- Auth --
-    path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
+    path(
+        route='auth/',
+        view=include('drf_social_oauth2.urls', namespace='drf'),
+    ),
     path(
         route='auth/signup/',
         view=account_views.UserSignUpAPIView.as_view(),
