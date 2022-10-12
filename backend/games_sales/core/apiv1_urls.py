@@ -25,6 +25,7 @@ urlpatterns = [
         view=sale_views.SaleFilterFieldsListAPIView.as_view(),
         name='sale_filters'
     ),
+    # {% url 'api:sale_analysis' %}
     path(
         route='sale-analysis/',
         view=sale_views.SaleAnalysisAPIView.as_view(),

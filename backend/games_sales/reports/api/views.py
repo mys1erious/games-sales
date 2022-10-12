@@ -18,8 +18,10 @@ class ReportsListAPIView(APIView):
         request.data._mutable = True
         request.data['user'] = request.user.id
         request.data._mutable = False
+
         serializer = ReportSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

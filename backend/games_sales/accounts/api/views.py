@@ -33,10 +33,8 @@ class UserSignUpAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def send_verification_email(self, request, user, token):
-        current_site = get_current_site(request).domain
-        relative_link = reverse('confirm_email')
-        abs_url = f'http://{current_site + relative_link}?token={token}&email={user.email}'
-        email_body = f'Hi {user.email}. Use the link below to verify your email \n{abs_url}'
+        confirm_url = self.get_confirm_url(request, token, user)
+        email_body = f'Hi {user.email}. Use the link below to verify your email \n{confirm_url}'
 
         email_data = {
             'email_body': email_body,
@@ -47,29 +45,24 @@ class UserSignUpAPIView(APIView):
         send_email(email_data)
         return 'Verification link has been sent to your email.'
 
+    def get_confirm_url(self, request, token, user):
+        # Remove 'email' param ?
+        current_site = get_current_site(request).domain
+        relative_link = reverse('confirm_email')
+        return f'http://{current_site + relative_link}?token={token}&email={user.email}'
+
 
 class UserConfirmEmailAPIView(APIView):
     permission_classes = (AllowAny, )
 
     def get(self, request):
         data = {'message': ''}
-
         token = request.GET.get('token')
         email = request.GET.get('email')
 
         user = get_object_or_404(Account, email=email)
 
-        if default_token_generator.check_token(user, token):
-            if not user.is_verified:
-                user.is_active = True
-                user.is_verified = True
-                user.save()
-
-                data['message'] = 'Email has successfully been verified.'
-                return Response(data, status=status.HTTP_200_OK)
-
-            data['message'] = 'Email has already been verified.'
+        verified, data['message'] = user.verify(token)
+        if verified:
             return Response(data, status=status.HTTP_200_OK)
-
-        data['message'] = 'Token has expired.'
         return Response(data, status=status.HTTP_400_BAD_REQUEST)

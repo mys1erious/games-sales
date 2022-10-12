@@ -2,9 +2,7 @@ import json
 
 import pandas as pd
 
-import requests
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q
 from django.http import QueryDict
 
 from rest_framework import status
@@ -48,7 +46,6 @@ class SaleBaseAPIView(APIView, LimitOffsetPagination):
 
     def filter(self, sales, query_params):
         if any([key in self.filter_params for key in query_params]):
-            # Try default set intersection
             return Sale.filter_by_params(
                 sales, intersected_params(query_params, self.filter_params)
             )
@@ -149,26 +146,26 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
         ))
 
         # Rework to use dynamic data from 'settings' query arg
-        data_describe = df.describe().round(2).to_json()
-        top_platforms = self.get_top_n_fields_for_sale_type(
+        data_describe = Sale.sales_df_description(df)
+        top_platforms = Sale.get_top_n_fields_for_sale_type(
             df,
             field='platform',
             sale_type='global_sales',
             n=10
         )
-        top_genres = self.get_top_n_fields_for_sale_type(
+        top_genres = Sale.get_top_n_fields_for_sale_type(
             df,
             field='genre',
             sale_type='global_sales',
             n=10
         )
-        top_publishers = self.get_top_n_fields_for_sale_type(
+        top_publishers = Sale.get_top_n_fields_for_sale_type(
             df,
             field='publisher',
             sale_type='global_sales',
             n=10
         )
-        top_developers = self.get_top_n_fields_for_sale_type(
+        top_developers = Sale.get_top_n_fields_for_sale_type(
             df,
             field='developer',
             sale_type='global_sales',
@@ -184,30 +181,3 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-
-    def get_top_n_fields_for_sale_type(self, df, field, sale_type, n):
-        db_field = self.map_field_to_db_field(field)
-        top_fields_series = self.get_top_fields_series(df, db_field, sale_type)
-        top_fields = self.get_top_fields_list(top_fields_series, n, field)
-
-        return top_fields
-
-    def get_top_fields_list(self, series, n, field):
-        return [
-            {field: cur_field, 'count': count}
-            for cur_field, count in zip(
-                list(series.index[:n]),
-                list(series[:n])
-            )
-        ]
-
-    def get_top_fields_series(self, df, db_field, sale_type, round=2, sort_ascending=False):
-        return df.groupby(db_field) \
-            [sale_type].sum() \
-            .sort_values(ascending=sort_ascending) \
-            .round(round)
-
-    def map_field_to_db_field(self, field):
-        # Rework field name logic creating
-        db_field = f'game__{field}'
-        return db_field

@@ -18,8 +18,7 @@ class ReportSerializer(serializers.ModelSerializer):
         user = data.get('user')
         name = data.get('name')
 
-        record = Report.objects.filter(name=name, user=user).first()
-        if record:
+        if Report.objects.filter(name=name, user=user).first():
             raise serializers.ValidationError(f'Report with this name for {user} already exists.')
 
         return super().validate(data)
