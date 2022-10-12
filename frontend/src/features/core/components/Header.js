@@ -38,19 +38,19 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
             <Typography variant="h6" color="inherit">
                 <FormControlLabel
                     control={ <Switch checked={isDarkTheme} onChange={changeTheme} /> }
-                    label={"Dark Mode"} labelPlacement={"start"}/>
+                    label="Dark Mode" labelPlacement="start"/>
                 { useMemo(() => {
                     return(
                         user.isLoggedIn
                             ?
                             <>
-                                <LinkButton to={"/profile/"}>Profile</LinkButton>
-                                <LinkButton to={"/sign-out/"}>Sign Out</LinkButton>
+                                <LinkButton to="/profile/">Profile</LinkButton>
+                                <LinkButton to="/sign-out/">Sign Out</LinkButton>
                             </>
                             :
                             <>
-                                <LinkButton to={"/signin/"}>Sign In</LinkButton>
-                                <LinkButton to={"/signup/"}>Sign Up</LinkButton>
+                                <LinkButton to="/signin/">Sign In</LinkButton>
+                                <LinkButton to="/signup/">Sign Up</LinkButton>
                             </>
                     )}, [user])
                 }
