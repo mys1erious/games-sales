@@ -8,19 +8,14 @@ import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import {setObjState, slugify} from "features/core/utils";
 import {Button} from "features/core/components/Button";
 
-import {yearParamInitState} from "../constants";
+import {initialFieldChoices, yearParamInitState} from "../constants";
 import {getFilterFieldsData} from "../services";
 
 
 // Remove all hardcoded values by making them the constants
 const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) => {
      const [searchParams, setSearchParams] = useSearchParams({});
-     const [fieldChoices, setFieldChoices] = useState({
-         'order_by': [],
-         'genre': [],
-         'esrb_rating': [],
-         'year_of_release': []
-     });
+     const [fieldChoices, setFieldChoices] = useState(initialFieldChoices);
      const [yearParam, setYearParam] = useState(yearParamInitState);
 
      const initFieldsData = async() => {
@@ -42,6 +37,9 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      }, []);
 
      const highlight = (text) => {
+         if (field === 'Year of Release')
+             text = `${text[0]}-${text[1]}`
+
          setHighlighted({...highlighted, [slugify(field)]: text});
      };
 
@@ -128,7 +126,6 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      };
 
      return(
-         <React.Fragment>
          <Box role="presentation" minWidth="216px" width="25vw">
              <Box padding="8px" sx={{display: "flex", justifyContent: "space-between"}}>
                  <Button sx={{width: "100px"}} onClick={toggleSub(false, field)}>
@@ -145,8 +142,7 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
                  {field ? getListItems() : null}
              </List>
          </Box>
-         </React.Fragment>
-     )
+     );
 };
 
 

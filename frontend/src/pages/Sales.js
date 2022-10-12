@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate, useSearchParams} from "react-router-dom";
 
-import {Box, Button, Grid, Pagination, Typography} from "@mui/material";
-
-import DataLoadingItem from "../features/core/components/DataLoadingItem";
-import SalesList from "../features/sales/components/SalesList";
-import {getSales} from "../features/sales/services";
-import SalesFilterSidebar from "../features/sales/components/SalesFilterSidebar";
+import {Box, Grid, Pagination, Typography} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
+import DataLoadingItem from "features/core/components/DataLoadingItem";
+import SalesList from "features/sales/components/SalesList";
+import {getSales} from "features/sales/services";
+import SalesFilterSidebar from "features/sales/components/SalesFilterSidebar";
+import {Button} from "features/core/components/Button";
 
 
 const Sales = () => {
@@ -48,27 +49,25 @@ const Sales = () => {
         return(<DataLoadingItem />)
 
     return(
-        <Grid container spacing={0} direction="column"
-              alignItems="center">
-            <Grid item marginY={"3%"}>
+        <Grid container spacing={0} direction="column" alignItems="center">
+            <Grid item marginY="3%">
                 <Typography variant="h4">Sales List</Typography>
             </Grid>
-            <Grid item minWidth="300px" width="40%">
+            <Grid item minWidth="320px" width="40vw">
                 <Box sx={{display: "flex", justifyContent: "space-between"}}>
                     <SalesFilterSidebar setCurrPage={setCurrPage} />
-                    <Button sx={{border: "2px solid gray"}} color="success" size="small"
-                            onClick={() => createReport()}
-                    >
+                    <Button color="success" onClick={createReport}>
                         Create Report <ArrowForwardIcon />
                     </Button>
                 </Box>
                 <SalesList sales={sales} currPage={currPage} />
             </Grid>
-            <Grid item marginTop={"5%"}>
+            <Grid item marginTop="5%">
                 <Typography>Page: {currPage}</Typography>
-                <Pagination boundaryCount={0} siblingCount={1} count={numPages}
-                    showFirstButton showLastButton onChange={changePage} page={currPage}
-                    color="primary"
+                <Pagination boundaryCount={1} siblingCount={1} count={numPages}
+                            onChange={changePage} page={currPage}
+                            hidePrevButton hideNextButton
+                            color="primary" variant="outlined"
                 />
             </Grid>
         </Grid>

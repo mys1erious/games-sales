@@ -17,9 +17,15 @@ const SaleDetail = () => {
     const {saleSlug} = useParams();
     const [sale, setSale] = useState({});
 
-    useEffect(() => {
-        handleGetSale();
-    }, [saleSlug]);
+    function getSaleFromState() {
+        try {
+            setSale(location.state.sale);
+        } catch (e) {
+            if (e.name === 'TypeError')
+                throw new TypeError('Sale hasn\'t been passed through the state.');
+        }
+        return sale;
+    }
 
     async function handleGetSale() {
         try {getSaleFromState();}
@@ -28,22 +34,19 @@ const SaleDetail = () => {
         }
     }
 
-    function getSaleFromState() {
-        try {setSale(location.state.sale);}
-        catch (e) {
-            if (e.name === 'TypeError')
-                throw new TypeError('Sale hasn\'t been passed through the state.');
-        }
-        return sale;
-    }
+    useEffect(() => {
+        handleGetSale();
+    }, [saleSlug]);
 
     async function handleEditSale () {
+        // Implement alert
         await editSale();
     }
 
     async function handleDeleteSale () {
+        // Implement alert
         await deleteSale(saleSlug);
-        navigate(-1);
+        navigate('/sales/');
     }
 
     // Rework to look normally (like a table or sth)

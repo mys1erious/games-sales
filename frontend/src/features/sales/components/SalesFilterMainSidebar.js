@@ -6,7 +6,11 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import {Button} from "features/core/components/Button";
-import {highlightedInitState} from "../constants";
+import {slugify} from "features/core/utils";
+import {initialHighlightedState} from "../constants";
+
+
+const handleButtonsWidth = "100px";
 
 
 const SalesFilterMainSidebar = (
@@ -16,29 +20,35 @@ const SalesFilterMainSidebar = (
     const [searchParams, setSearchParams] = useSearchParams();
 
     const resetFilters = () => {
-        setHighlighted(highlightedInitState);
-
+        setHighlighted(initialHighlightedState);
         setCurrPage(1);
         setSearchParams({page: '1'});
     };
 
     return(
-        <Box role="presentation" minWidth="216px" width="25vw">
+         <Box role="presentation" minWidth="216px" width="25vw">
             <Box padding="8px" height="48px"
                  sx={{display: "flex", justifyContent: "space-between"}}>
-                <Button sx={{width: "100px"}} onClick={toggleMain(false)}>
+                <Button sx={{width: handleButtonsWidth}} onClick={toggleMain(false)}>
                     <NavigateBeforeIcon/> Filter
                 </Button>
-                <Button sx={{width: "100px"}} onClick={resetFilters}
+                <Button sx={{width: handleButtonsWidth}} onClick={resetFilters}
                         color="error">
                     Reset all
                 </Button>
             </Box>
-            <List disablePadding sx={{borderTop: "1px solid gray", borderBottom: "1px solid gray"}}>
-                {filterFields.map((text) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton onClick={toggleSub(true, text)}>
-                            <ListItemText primary={text} secondary="current"/>
+            <List disablePadding sx={{
+                borderTop: "1px solid gray",
+                borderBottom: "1px solid gray"
+            }}>
+                {filterFields.map((field) => (
+                    <ListItem key={field} disablePadding>
+                        <ListItemButton onClick={toggleSub(true, field)}>
+                            <ListItemText primary={field} secondary={
+                                highlighted[slugify(field)]
+                                    ? highlighted[slugify(field)]
+                                    : 'None'
+                            }/>
                             <ListItemText align="right">All</ListItemText>
                             <NavigateNextIcon />
                         </ListItemButton>
