@@ -45,12 +45,13 @@ const SignInForm = () => {
     return(
         <>
         {alert.isAlert ? <AuthAlert alert={alert}/> : null}
-        <AuthBaseForm
+        <AuthBaseForm onKeyDown={
+            (e) => e.key === 'Enter' ? handleEmailSignIn(e) : null}
             textFields={[
                 <AuthTextField formData={formData} setFormData={setFormData}
                                name="email" label="Email Address" />,
                 <AuthTextField formData={formData} setFormData={setFormData}
-                               name="password" label="Password" type="password" />]}
+                               name="password" label="Password" type="password"/>]}
             buttons={[
                 <AuthButton onClick={handleEmailSignIn}>Sign In With Email</AuthButton>,
                 <AuthGoogleButton>Sign In With Google</AuthGoogleButton>]}

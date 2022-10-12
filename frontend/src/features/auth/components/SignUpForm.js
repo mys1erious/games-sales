@@ -33,7 +33,9 @@ const SignUpForm = () => {
     return(
         <>
         {alert.isAlert ? <AuthAlert alert={alert} /> : null}
-        <AuthBaseForm textFields={[
+        <AuthBaseForm onKeyDown={
+            (e) => e.key === 'Enter' ? handleEmailSignUp(e) : null}
+            textFields={[
             <AuthTextField formData={formData} setFormData={setFormData}
                            name="email" label="Email Address" />,
             <AuthTextField formData={formData} setFormData={setFormData}

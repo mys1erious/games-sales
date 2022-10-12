@@ -1,10 +1,10 @@
 import {Grid} from "@mui/material";
 
 
-const AuthBaseForm = ({textFields, buttons}) => {
+const AuthBaseForm = ({textFields, buttons, onKeyDown}) => {
     return(
-        <form noValidate>
-            <Grid container rowGap={2} minWidth="320px" width="33vw">
+        <form noValidate onKeyDown={onKeyDown}>
+            <Grid container rowGap={2} minWidth="320px" width="50vw" maxWidth="500px">
                 <Grid item xs={12} container spacing={1}>
                     {textFields.map((textField, index) => (
                         <Grid key={index} item xs={12}>{textField}</Grid>
