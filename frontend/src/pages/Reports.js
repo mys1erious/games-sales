@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 const Reports = () => {
     return (
         <div>Reports history will be here</div>
