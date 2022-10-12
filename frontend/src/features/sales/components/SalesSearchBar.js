@@ -1,12 +1,14 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {IconButton, TextField} from "@mui/material";
 import {Search} from '@mui/icons-material';
 import {useNavigate, useSearchParams} from "react-router-dom";
 
 
-const SalesSearchBar = ({searchText, setSearchText}) => {
+const SalesSearchBar = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams({});
+
+    const [searchText, setSearchText] = useState('');
 
     const search = () => {
         if (searchText) {
