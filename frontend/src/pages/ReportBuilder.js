@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 
 import axiosInstance from "../lib/axiosInstance";
-import {handleFormStateChange} from "../features/core/utils";
+import {setFormState} from "../features/core/utils";
 import BarChart from "../features/reports/components/BarChart";
 import PieChart from "../features/reports/components/PieChart";
 
@@ -136,12 +136,12 @@ const ReportBuilder = () => {
                 marginBottom: "15px", paddingTop: "10px"}}>
                 <TextField variant="outlined" label="Name" name="name"
                            fullWidth sx={{marginBottom: "15px"}}
-                           onChange={(e) => handleFormStateChange(e, reportData, setReportData)}
+                           onChange={(e) => setFormState(e, reportData, setReportData)}
                 />
                 <TextField variant="outlined" label="Remarks" name="remarks"
                            fullWidth sx={{marginBottom: "15px"}}
                            multiline minRows={8}
-                           onChange={(e) => handleFormStateChange(e, reportData, setReportData)}
+                           onChange={(e) => setFormState(e, reportData, setReportData)}
                 />
             </div>
 
@@ -180,7 +180,7 @@ const ReportBuilder = () => {
                     </Table>
                 </TableContainer>
                 </Grid>
-                <Grid item xs={6}> {/* Top Platforms */}
+                <Grid item xs={12} md={6} xl={4}> {/* Top Platforms */}
                     {analysisData?.top_platforms?
                         <BarChart data={analysisData.top_platforms} title="Top 10 Platforms"
                                   xTitle="platform" yTitle="count"
@@ -188,7 +188,7 @@ const ReportBuilder = () => {
                         : null
                     }
                 </Grid>
-                <Grid item xs={6}> {/* Top Genres */}
+                <Grid item xs={12} md={6} xl={4}> {/* Top Genres */}
                     {analysisData?.top_genres?
                         <BarChart data={analysisData.top_genres} title="Top 10 Genres"
                                   xTitle="genre" yTitle="count"
@@ -196,7 +196,7 @@ const ReportBuilder = () => {
                         : null
                     }
                 </Grid>
-                <Grid item xs={6}> {/* Top Publishers */}
+                <Grid item xs={12} md={6} xl={4}> {/* Top Publishers */}
                     {analysisData?.top_publishers?
                         <BarChart data={analysisData.top_publishers} title="Top 10 Publishers"
                                   xTitle="publisher" yTitle="count"
@@ -204,7 +204,7 @@ const ReportBuilder = () => {
                         : null
                     }
                 </Grid>
-                <Grid item xs={6}> {/* Top Developers */}
+                <Grid item xs={12} md={6} xl={4}> {/* Top Developers */}
                     {analysisData?.top_developers?
                         <BarChart data={analysisData.top_developers} title="Top 10 Developers"
                                   xTitle="developer" yTitle="count"
@@ -213,8 +213,8 @@ const ReportBuilder = () => {
                     }
                 </Grid>
 
-                 {/*For testing*/}
-                <Grid item xs={6}>
+                {/*For testing*/}
+                <Grid item xs={12} md={6} xl={4}>
                     {analysisData?.top_platforms?
                         <PieChart data={analysisData.top_platforms} title="Top 10 Platforms"
                                   xTitle="platform" yTitle="count"
@@ -222,7 +222,7 @@ const ReportBuilder = () => {
                         : null
                     }
                 </Grid>
-                <Grid item xs={6}> {/* TEST */}
+                <Grid item xs={12} md={6} xl={4}> {/* TEST */}
                     Developers will be here.
                 </Grid>
             </Grid>
