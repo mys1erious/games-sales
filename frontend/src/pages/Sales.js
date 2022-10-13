@@ -5,10 +5,10 @@ import {Box, Grid, Pagination, Typography} from "@mui/material";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 import DataLoadingItem from "features/core/components/DataLoadingItem";
+import {Button} from "features/core/components/Button";
 import SalesList from "features/sales/components/SalesList";
 import {getSales} from "features/sales/services";
 import SalesFilterSidebar from "features/sales/components/SalesFilterSidebar";
-import {Button} from "features/core/components/Button";
 
 
 const Sales = () => {
@@ -23,7 +23,9 @@ const Sales = () => {
     useEffect(() => {
         if (location.state?.newSearch)
             setCurrPage(1);
+    }, [location.state?.newSearch]);
 
+    useEffect(() => {
         getSales(`?${searchParams.toString()}`)
             .then((response) => {
                 setSales(response.data.sales);
