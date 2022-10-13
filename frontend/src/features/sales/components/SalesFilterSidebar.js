@@ -47,7 +47,8 @@ const SalesFilterSidebar = ({setCurrPage}) => {
                 onClose={toggleMainSidebar(false)}>
             {SalesFilterMainSidebar(
                 filterFields, toggleMainSidebar, toggleSubSidebar,
-                setCurrPage, highlighted, setHighlighted)}
+                setCurrPage, highlighted, setHighlighted)
+            }
         </Drawer>
         <Drawer anchor={anchor} open={isOpenSub[curSubField]}
                 ModalProps={{keepMounted: true}}

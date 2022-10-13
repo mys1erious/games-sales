@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useMemo} from "react";
 import {useSearchParams} from "react-router-dom";
 
 import {Box, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
@@ -41,19 +41,20 @@ const SalesFilterMainSidebar = (
                 borderTop: "1px solid gray",
                 borderBottom: "1px solid gray"
             }}>
-                {filterFields.map((field) => (
-                    <ListItem key={field} disablePadding>
-                        <ListItemButton onClick={toggleSub(true, field)}>
-                            <ListItemText primary={field} secondary={
-                                highlighted[slugify(field)]
-                                    ? highlighted[slugify(field)]
-                                    : 'None'
-                            }/>
-                            <ListItemText align="right">All</ListItemText>
-                            <NavigateNextIcon />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
+                {useMemo(() => (
+                    filterFields.map((field) => (
+                        <ListItem key={field} disablePadding>
+                            <ListItemButton onClick={toggleSub(true, field)}>
+                                <ListItemText primary={field} secondary={
+                                    highlighted[slugify(field)]
+                                        ? highlighted[slugify(field)]
+                                        : 'None'
+                                }/>
+                                <ListItemText align="right">All</ListItemText>
+                                <NavigateNextIcon />
+                            </ListItemButton>
+                        </ListItem>
+                    ))), [searchParams]) }
             </List>
         </Box>
     );

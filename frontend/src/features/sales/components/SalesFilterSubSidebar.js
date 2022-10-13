@@ -12,7 +12,6 @@ import {initialFieldChoices, yearParamInitState} from "../constants";
 import {getFilterFieldsData} from "../services";
 
 
-// Remove all hardcoded values by making them the constants
 const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) => {
      const [searchParams, setSearchParams] = useSearchParams({});
      const [fieldChoices, setFieldChoices] = useState(initialFieldChoices);
@@ -53,9 +52,8 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          setYearParam([min, max]);
      };
 
-     // Remove hard coded field checks (map?)
      const setFilterParam = (text) => {
-         highlight(text);
+          highlight(text);
 
          if (field === 'Year of Release'){
              searchParams.set('yor_gt', yearParam[0].toString());
@@ -139,7 +137,10 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
                  {field}
              </Typography>
              <List sx={{borderTop: "1px solid gray", borderBottom: "1px solid gray"}}>
-                 {field ? getListItems() : null}
+                 {field ?
+                     getListItems()
+                     : null
+                 }
              </List>
          </Box>
      );
