@@ -263,7 +263,7 @@ class Sale(models.Model):
 
     @staticmethod
     def map_field_to_db_field(field):
-        # Rework field name logic creating
+        # Rework
         db_field = f'game__{field}'
         return db_field
 
