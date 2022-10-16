@@ -4,6 +4,8 @@ export const initialHighlightedState = {
     'esrb_rating': ''
 };
 
+export const filterFields = ['Order By', 'Genre', 'Esrb Rating', 'Year of Release'];
+
 export const initialFieldChoices = {
     'order_by': [],
     'genre': [],
@@ -12,5 +14,3 @@ export const initialFieldChoices = {
 };
 
 export const yearParamInitState = [0, new Date().getFullYear()];
-
-export const filterFields = ['Order By', 'Genre', 'ESRB Rating', 'Year of Release'];

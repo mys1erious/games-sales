@@ -27,3 +27,9 @@ export const slugify = (str) => {
         .replace(/[\s_-]+/g, '_')
         .replace(/^-+|-+$/g, '');
 };
+
+export const unslugify = (slug) => {
+    return slug
+        .replace(/game__|rating__/gi, '')
+        .split('_').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+}

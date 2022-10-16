@@ -1,137 +1,95 @@
-import React, {useEffect, useState} from 'react';
-import {useSearchParams} from "react-router-dom";
+import React, {useState} from 'react';
 
-import {
-    Button,
-    CssBaseline, Grid,
-    Paper,
-    Table,
-    TableBody, TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    TextField
-} from "@mui/material";
+import {TextField} from "@mui/material";
 
-import axiosInstance from "../lib/axiosInstance";
-import {setFormState} from "../features/core/utils";
-import BarChart from "../features/reports/components/BarChart";
-import PieChart from "../features/reports/components/PieChart";
+import {setFormState} from "features/core/utils";
+import {Button} from "features/core/components/Button";
+import ReportBody from "features/reports/components/ReportBody";
+import {initialReportData} from "features/reports/constants";
+import {postReport} from "features/reports/services";
+
+
+const createReportFile = (reportData) => {
+    const doc = document.implementation.createHTMLDocument('Report');
+    copyMuiStyles(doc);
+    setHtmlReportData(doc, reportData);
+    return doc;
+};
+
+const copyMuiStyles = (doc) => {
+    const styles = document.getElementsByTagName('style');
+    for (const initStyle of styles) {
+        const style = initStyle.cloneNode(true);
+        doc.head.appendChild(style);
+    }
+};
+
+const setHtmlReportData = (doc, reportData) => {
+    const reportContainer = doc.createElement('div');
+
+    reportContainer.appendChild(buildReportHeader(
+        doc, reportData, 'name', 'Name')
+    );
+    reportContainer.appendChild(buildReportHeader(
+        doc, reportData, 'remarks', 'Remarks')
+    );
+    reportContainer.appendChild(getReportBody());
+
+    doc.body.appendChild(reportContainer);
+};
+
+const buildReportHeader = (doc, reportData, field, fieldRepr) => {
+    const reportField = doc.createElement('div');
+    reportField.textContent = `${fieldRepr}: ${reportData[field]}`;
+    return reportField;
+};
+
+const getReportBody = () => {
+    const reportBody = document.createElement('div');
+    reportBody.innerHTML = document.getElementById('reportBody').innerHTML;
+    reportBody.style.marginTop = "40px";
+    return reportBody;
+};
+
+const previewReport = (reportData) => {
+    const doc = createReportFile(reportData);
+
+    const win = window.open("", "Report",
+        "toolbar=no,location=no,directories=no,status=no," +
+        "menubar=no,scrollbars=yes,resizable=yes,width=1280," +
+        "height=720,top="+(150)+",left="+(150));
+    win.document.head.innerHTML = doc.head.innerHTML;
+    win.document.body = doc.body;
+};
+
+const HTMLDocumentToBlob = (doc) => {
+    return new Blob([doc.documentElement.innerHTML], {type: "text/plain"});
+};
+
+const saveReport = async(reportData) => {
+    let doc = createReportFile(reportData);
+    doc = HTMLDocumentToBlob(doc);
+
+    const data = new FormData();
+    data.set('name', reportData.name);
+    data.set('report_body', doc)
+
+    // implement alert
+    try {
+        await postReport(data);
+        console.log('created');
+    } catch (e) {
+        if (e.response.status === 400)
+            console.log(e.response.data)
+    }
+};
 
 
 const ReportBuilder = () => {
-    const initReportData = {
-        name: '',
-        remarks: ''
-    };
-    const initAnalysisData = {
-        description: '',
-        top_platforms: [],
-        top_genres: [],
-        top_publishers: [],
-        top_developers: []
-    };
-
-    const [searchParams, setSearchParams] = useSearchParams({});
-
-    const [reportData, setReportData] = useState(initReportData);
-    const [analysisData, setAnalysisData] = useState(initAnalysisData);
-    const [tableHeaders, setTableHeaders] = useState([]);
-
-    const getAnalysisData = async() => {
-        return await axiosInstance.get(`/sale-analysis/?${searchParams}`);
-    };
-
-    useEffect(() => {
-        getAnalysisData().then(r => {
-            setAnalysisData(r.data);
-        });
-    }, []);
-
-    const getTableHeaders = () => {
-        if (analysisData?.description){
-            const row = Object.values(analysisData.description)[0];
-            const headers = Object.keys(row);
-            setTableHeaders(headers);
-        }
-    };
-
-    useEffect(() => {
-        setTableHeaders(getTableHeaders);
-    }, [analysisData]);
-
-
-    const createReportFile = () => {
-        const doc = document.implementation.createHTMLDocument('Report');
-
-        // Copying MUI styles
-        const styles = document.getElementsByTagName('style');
-        for (const initStyle of styles) {
-            const style = initStyle.cloneNode(true);
-            doc.head.appendChild(style);
-        }
-
-        const reportContainer = doc.createElement('div');
-        reportContainer.id = 'mainContainer';
-
-        const reportName = doc.createElement('div');
-        reportName.textContent = `Name: ${reportData.name}`;
-        const reportRemarks = doc.createElement('div');
-        reportRemarks.textContent = `Remarks: ${reportData.remarks}`;
-        const reportViz = document.createElement('div');
-        reportViz.innerHTML = document.getElementById('reportBody').innerHTML;
-        reportViz.style.marginTop = "40px";
-
-        reportContainer.appendChild(reportName);
-        reportContainer.appendChild(reportRemarks);
-        reportContainer.appendChild(reportViz);
-
-        doc.body.appendChild(reportContainer);
-
-        return doc;
-    };
-
-    const previewReport = () => {
-        const doc = createReportFile();
-
-        const win = window.open("", "Report",
-            "toolbar=no,location=no,directories=no,status=no," +
-            "menubar=no,scrollbars=yes,resizable=yes,width=1280," +
-            "height=720,top="+(150)+",left="+(150));
-        win.document.head.innerHTML = doc.head.innerHTML;
-        win.document.body = doc.body;
-    };
-
-    const HTMLDocumentToBlob = (doc) => {
-        return new Blob([doc.documentElement.innerHTML], {type: "text/plain"});
-    };
-
-    const postReport = async(data) => {
-        const reportData = new FormData();
-        for (const [key, val] of Object.entries(data))
-            reportData.append(key, val);
-
-        return await axiosInstance.post('/reports/', reportData,
-            {headers: {'Content-Type': 'multipart/form-analysisData'}}
-        );
-    };
-
-    const saveReport = async() => {
-        let doc = createReportFile();
-        doc = HTMLDocumentToBlob(doc);
-
-        const data = {
-            name: reportData.name,
-            report_body: doc
-        };
-
-        await postReport(data);
-    };
+    const [reportData, setReportData] = useState(initialReportData);
 
     return (
         <div style={{width: "90vw", margin: "auto"}}>
-            <CssBaseline />
-
             <div style={{textAlign: "center", border: "1px solid gray",
                 marginBottom: "15px", paddingTop: "10px"}}>
                 <TextField variant="outlined" label="Name" name="name"
@@ -145,98 +103,13 @@ const ReportBuilder = () => {
                 />
             </div>
 
-            <div id="reportBody">
-            <Grid container rowSpacing={2} justifyContent="center"
-                  border="1px solid gray">
-                <Grid item xs={12}>
-                <TableContainer component={Paper}>
-                    <Table sx={{minWidth: 650}} aria-label="report table">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell />
-                                {tableHeaders ?
-                                    tableHeaders.map((header) => (
-                                        <TableCell key={header}>{header}</TableCell>
-                                    ))
-                                    : null
-                                }
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {analysisData?.description?
-                                Object.entries(analysisData.description).map(([name, row]) => (
-                                    <TableRow key={name}>
-                                        <TableCell>{name}</TableCell>
-                                        {Object.values(row).map((val, count) => (
-                                            <TableCell key={count}>
-                                                {Math.round((val + Number.EPSILON) * 100) / 100}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                ))
-                                : null
-                            }
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Platforms */}
-                    {analysisData?.top_platforms?
-                        <BarChart data={analysisData.top_platforms} title="Top 10 Platforms"
-                                  xTitle="platform" yTitle="count"
-                        />
-                        : null
-                    }
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Genres */}
-                    {analysisData?.top_genres?
-                        <BarChart data={analysisData.top_genres} title="Top 10 Genres"
-                                  xTitle="genre" yTitle="count"
-                        />
-                        : null
-                    }
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Publishers */}
-                    {analysisData?.top_publishers?
-                        <BarChart data={analysisData.top_publishers} title="Top 10 Publishers"
-                                  xTitle="publisher" yTitle="count"
-                        />
-                        : null
-                    }
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Developers */}
-                    {analysisData?.top_developers?
-                        <BarChart data={analysisData.top_developers} title="Top 10 Developers"
-                                  xTitle="developer" yTitle="count"
-                        />
-                        : null
-                    }
-                </Grid>
-
-                {/*For testing*/}
-                <Grid item xs={12} md={6} xl={4}>
-                    {analysisData?.top_platforms?
-                        <PieChart data={analysisData.top_platforms} title="Top 10 Platforms"
-                                  xTitle="platform" yTitle="count"
-                        />
-                        : null
-                    }
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* TEST */}
-                    Developers will be here.
-                </Grid>
-            </Grid>
-            </div>
+            <ReportBody />
 
             <div style={{marginTop: "10px", float: "right"}}>
-                <Button sx={{border: "2px solid gray"}} color="primary" size="small"
-                        onClick={() => previewReport()}
-                >
+                <Button onClick={() => previewReport(reportData)}>
                     Preview
                 </Button>
-                <Button sx={{border: "2px solid gray"}} color="success" size="small"
-                        onClick={() => saveReport()}
-                >
+                <Button color="success" onClick={() => saveReport(reportData)}>
                     Save
                 </Button>
             </div>

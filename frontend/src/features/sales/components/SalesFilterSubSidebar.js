@@ -64,7 +64,6 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          else if (field === 'Order By')
              text = slugify(text);
 
-
          searchParams.set(slugify(field), text);
          setSearchParams(searchParams);
      };

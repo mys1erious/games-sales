@@ -3,15 +3,16 @@ import {arc} from "d3";
 import {Typography} from "@mui/material";
 
 
+const width = 640;
+const height = 400;
+const centerX = width/2;
+const centerY = height/2;
+const arcWidth = 10;
+const arcRadius = 190;
+
+
 const PieChart = ({data}) => {
     const [pieChart, setPieChart] = useState(<svg/>);
-
-    const width = 640;
-    const height = 400;
-    const centerX = width/2;
-    const centerY = height/2;
-    const arcWidth = 10;
-    const arcRadius = 190;
 
     const arcObj = arc()
         .innerRadius(arcRadius)
