@@ -1,22 +1,42 @@
 Current todo:
+- Refactor for better readability (whole pj)
+
+- Refactor: change <React.Fragment> to <>
+- Refactor: props.children allows to nest inside component (dont need to make 'content' prop)
+
+- Refactor: if outside of component, its not updated on each re-render, move as much as possible
+- Refactor: any computations that are not needed on each component re-render move outside of the component
+- Refactor: useMemo for stuff like scale functions or any calc. functions from d3
+    JSX can also be memoized
+
+- add axis names
+- unslugify fields in the Table
+- fix buggy hover on BarText
+- add email and creation date to the report
+
 - Reports:
     Viz:
-        (for each Chart choose between Bar/Pie Charts)
-        t10 Platforms, t10 Genres (can choose for which Region)
-        t10 Publishers, t10 Developers (can choose for which Region)
-        Number of Video games Released in each year
-        User/Critic Score for each genre games
-        Video games Sales - Yearly
-        esrb_rating sales
-        t5 games by genres
-        t5 games by platform
-        t10 Developers by score
+        for each Chart choose between Bar/Pie
+        ability to choose for which region to show the data(globally, not for individual chart)
+        ability to turn on/off each chart
+        finish grid marking(without actual implementation)
 
+        - Needed graphs:
+            (all should be interactive)
+            1 LineChart (idk)
+            1 ScatterPlot (idk)
+            1 Map (sales by region)
+            1 ColorLegend (idk)
 
-    ability to download as .html and .pdf
+        Number of Video games Released in each year (idk)
+        User/Critic Score for each game genre (idk)
+        Video games Sales - Yearly (idk)
+        t5 games by genres (idk)
+        t5 games by platform (idk)
+        t10 Developers by score (idk)
 
-- Refactor for better readability after done with Reports
-
+        ability to download as .html and convert->.pdf
+    - Only see 'Reports' if signed in
 
 - Sales filter
     - Filter by
@@ -30,32 +50,27 @@ Current todo:
     - Only see Sale Delete/Edit if admin
 
 - Users
+    - if creating through social-auth, dont need passwords
     - Add password Validation
 
 
 Backend:
 - Reports
     List/Detail endpoints
-    save pdf file in db/storage for history of user reports
 - Profiles
     Model
-    Profile endpoint
+    Endpoint
 
 
 Frontend:
-- Reports
-    Visualization for currently selected Sales
 - Users
-    userContext
     My profile View
     Reports history in Profile
     Add 'Remember me' on signin
 
 
 Bugs/Fixes:
-- Fix hardcoded css
-- Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
-- Rework Header to look better on smaller screen
-- Check: if creating through social-auth, dont need passwords
+- SignIn on EnterClick -> perform sign in
+- Rework Header to look better on smaller screen (as navbar)
 - Fix alert messages(better parsing)
 - Error handling with alerts for all errors (possibly make Alert global?)
