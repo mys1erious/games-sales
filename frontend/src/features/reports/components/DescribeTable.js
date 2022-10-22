@@ -1,21 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
-import {slugify, unslugify} from "features/core/utils";
+import {unslugify} from "features/core/utils";
+
+
+const getTableHeaders = (data) => {
+    const row = Object.values(data)[0];
+    return Object.keys(row);
+}
 
 
 const DescribeTable = ({data}) => {
-    const [tableHeaders, setTableHeaders] = useState([]);
-
-    const getTableHeaders = () => {
-        const row = Object.values(data)[0];
-        const headers = Object.keys(row);
-        setTableHeaders(headers);
-    };
-
-    useEffect(() => {
-        setTableHeaders(getTableHeaders);
-    }, []);
+    console.log('RENDERED: describe table')
+    const tableHeaders = getTableHeaders(data);
 
     return(
         <TableContainer component={Paper}>
@@ -23,12 +20,9 @@ const DescribeTable = ({data}) => {
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        {tableHeaders ?
-                            tableHeaders.map((header) => (
-                                <TableCell key={header}>{header}</TableCell>
-                            ))
-                            : null
-                        }
+                        {tableHeaders.map((header) => (
+                            <TableCell key={header}>{header}</TableCell>
+                        ))}
                     </TableRow>
                 </TableHead>
                 <TableBody>
