@@ -7,7 +7,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import {Button} from "features/core/components/Button";
 import {slugify} from "features/core/utils";
-import {initialHighlightedState} from "../constants";
+import {initialHighlighted} from "../constants";
 
 
 const handleButtonsWidth = "100px";
@@ -20,7 +20,7 @@ const SalesFilterMainSidebar = (
     const [searchParams, setSearchParams] = useSearchParams();
 
     const resetFilters = () => {
-        setHighlighted(initialHighlightedState);
+        setHighlighted(initialHighlighted);
         setCurrPage(1);
         setSearchParams({page: '1'});
     };

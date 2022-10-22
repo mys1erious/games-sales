@@ -55,8 +55,8 @@ const Sales = () => {
             <Grid item marginY="3%">
                 <Typography variant="h4">Sales List</Typography>
             </Grid>
-            <Grid item minWidth="320px" width="40vw">
-                <Box sx={{display: "flex", justifyContent: "space-between"}}>
+            <Grid item minWidth="300px" width="40%">
+                <Box display="flex" justifyContent="space-between">
                     <SalesFilterSidebar setCurrPage={setCurrPage} />
                     <Button color="success" onClick={createReport}>
                         Create Report <ArrowForwardIcon />

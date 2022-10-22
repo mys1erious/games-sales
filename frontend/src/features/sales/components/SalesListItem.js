@@ -47,7 +47,7 @@ const SalesListItem = ({sale, currPage}) => {
                 </ListItemIcon>
                 <ListItemText primary={sale.game.name} sx={listItemTextSx}/>
             </ListItemButton>
-            <ListItemButton onClick={handleExpandClick}>
+            <ListItemButton onClick={handleExpandClick} sx={{paddingRight: 0}}>
                 {isExpanded ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
         </ListItem>

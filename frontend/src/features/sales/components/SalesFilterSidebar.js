@@ -6,7 +6,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import {arrToObj} from "features/core/utils";
 import {Button} from "features/core/components/Button";
 
-import {filterFields, initialHighlightedState} from "../constants";
+import {filterFields, initialHighlighted} from "../constants";
 import SalesFilterMainSidebar from "./SalesFilterMainSidebar";
 import SalesFilterSubSidebar from "./SalesFilterSubSidebar";
 
@@ -17,7 +17,7 @@ const SalesFilterSidebar = ({setCurrPage}) => {
     const [isOpenMain, setIsOpenMain] = useState(false);
     const [isOpenSub, setIsOpenSub] = useState(arrToObj(filterFields, false));
     const [curSubField, setCurSubField] = useState('');
-    const [highlighted, setHighlighted] = useState(initialHighlightedState);
+    const [highlighted, setHighlighted] = useState(initialHighlighted);
 
     const skipSidebarToggle = (e) => {
         return (e.type === 'keydown' && (e.key === 'Tab' || e.key === 'Shift'));

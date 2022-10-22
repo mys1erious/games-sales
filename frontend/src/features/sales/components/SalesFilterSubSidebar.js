@@ -8,14 +8,14 @@ import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
 import {setObjState, slugify} from "features/core/utils";
 import {Button} from "features/core/components/Button";
 
-import {initialFieldChoices, yearParamInitState} from "../constants";
+import {initialFieldChoices, initialYearParam} from "../constants";
 import {getFilterFieldsData} from "../services";
 
 
 const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) => {
      const [searchParams, setSearchParams] = useSearchParams({});
      const [fieldChoices, setFieldChoices] = useState(initialFieldChoices);
-     const [yearParam, setYearParam] = useState(yearParamInitState);
+     const [yearParam, setYearParam] = useState(initialYearParam);
 
      const initFieldsData = async() => {
          let fields = await getFilterFieldsData();
@@ -55,17 +55,17 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      const setFilterParam = (text) => {
           highlight(text);
 
-         if (field === 'Year of Release'){
-             searchParams.set('yor_gt', yearParam[0].toString());
-             searchParams.set('yor_lt', yearParam[1].toString());
-             setSearchParams(searchParams);
-             return;
-         }
-         else if (field === 'Order By')
-             text = slugify(text);
+          if (field === 'Year of Release'){
+              searchParams.set('yor_gt', yearParam[0].toString());
+              searchParams.set('yor_lt', yearParam[1].toString());
+              setSearchParams(searchParams);
+              return;
+          }
+          else if (field === 'Order By')
+              text = slugify(text);
 
-         searchParams.set(slugify(field), text);
-         setSearchParams(searchParams);
+          searchParams.set(slugify(field), text);
+          setSearchParams(searchParams);
      };
 
      const resetFilterParam = () => {
@@ -74,7 +74,7 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          if (field === 'Year of Release'){
              searchParams.delete('yor_lt');
              searchParams.delete('yor_gt');
-             setYearParam(yearParamInitState);
+             setYearParam(initialYearParam);
          }
 
          searchParams.delete(slugify(field));
