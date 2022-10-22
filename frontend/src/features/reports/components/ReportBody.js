@@ -1,74 +1,67 @@
-import {Grid} from "@mui/material";
+import React, {useEffect, useState} from "react";
+import {useSearchParams} from "react-router-dom";
+
+import {Box, Grid} from "@mui/material";
 
 import DataLoadingItem from "features/core/components/DataLoadingItem";
 
-import DescribeTable from "./DescribeTable";
-import BarChart from "./BarChart";
-import PieChart from "./PieChart";
-import React, {useEffect, useState} from "react";
-import {initialAnalysisData} from "../constants";
 import {getAnalysisData} from "../services";
-import {useSearchParams} from "react-router-dom";
+import {initChartsVal, initialAnalysisData} from "../constants";
+import ShowChartButtons from "./ShowChartButtons";
+import DescribeTable from "./DescribeTable";
 
 
 const ReportBody = () => {
-    const [searchParams, setSearchParams] = useSearchParams({});
+    console.log('--RENDERED: report body')
+    const [searchParams] = useSearchParams({});
     const [analysisData, setAnalysisData] = useState(initialAnalysisData);
+    const [charts, setCharts] = useState(initChartsVal);
 
     useEffect(() => {
         getAnalysisData(searchParams).then(r => {
             setAnalysisData(r.data);
         });
-    }, []);
+    }, [searchParams]);
+
+    const getBarPieChart = (data, title, xTitle, yTitle, Chart) =>
+            <Chart data={data} title={title}
+                   xTitle={xTitle} yTitle={yTitle}/>;
 
     if (!analysisData)
         return(<DataLoadingItem />);
 
     return(
+        <Box border="1px solid gray">
+        <ShowChartButtons charts={charts} setCharts={setCharts}/>
+
         <div id="reportBody">
-            <Grid container rowSpacing={2} justifyContent="center"
-                  border="1px solid gray">
-                <Grid item xs={12}>
-                    {analysisData?.description
-                        ? <DescribeTable data={analysisData.description} />
-                        : <DataLoadingItem />
-                    }
-                </Grid>
-
-                <Grid item xs={12} md={6} xl={4}> {/* Top Platforms */}
-                    <BarChart data={analysisData.top_platforms} title="Top 10 Platforms"
-                              xTitle="platform" yTitle="count"
-                    />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Genres */}
-                    <BarChart data={analysisData.top_genres} title="Top 10 Genres"
-                              xTitle="genre" yTitle="count"
-                    />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Publishers */}
-                    <BarChart data={analysisData.top_publishers} title="Top 10 Publishers"
-                              xTitle="publisher" yTitle="count"
-                    />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* Top Developers */}
-                    <BarChart data={analysisData.top_developers} title="Top 10 Developers"
-                              xTitle="developer" yTitle="count"
-                    />
-                </Grid>
-
-                {/*For testing*/}
-                <Grid item xs={12} md={6} xl={4}>
-                    <PieChart data={analysisData.top_platforms} title="Top 10 Platforms"
-                              xTitle="platform" yTitle="count"
-                    />
-                </Grid>
-                <Grid item xs={12} md={6} xl={4}> {/* TEST */}
-                    Developers will be here.
-                </Grid>
+        <Grid container rowGap={2} justifyContent="center">
+            <Grid item xs={12}>
+                {analysisData.description
+                    ? <DescribeTable data={analysisData.description} />
+                    : <DataLoadingItem />
+                }
             </Grid>
+
+            {Object.entries(charts).map(
+                ([name, chart]) => (
+                    chart.isVisible &&
+                    <Grid key={name} item xs={12} md={6} xl={4}>
+                        {getBarPieChart(
+                            analysisData[chart.dataProp],
+                            chart.title,
+                            chart.xTitle,
+                            chart.yTitle,
+                            chart.component
+                        )}
+                    </Grid>
+                )
+            )}
+        </Grid>
         </div>
+        </Box>
     );
 };
 
 
-export default ReportBody;
+export default React.memo(ReportBody);
