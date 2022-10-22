@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 
 import {signUp} from "../services";
-import {initialSignUpFormData, initialAlertData} from "../constants";
+import {initialSignUpFormData} from "../constants";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
 import AuthAlert, {triggerAlert} from "./AuthAlert";
+import {initialAlertData} from "features/core/constants";
 
 
 const SignUpForm = () => {

@@ -4,12 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {setUserDataToLocalStorage, User} from "../utils";
 import {emailSignIn} from "../services";
 import {UserContext} from "../UserContext";
-import {initialSignInFormData, initialAlertData} from "../constants";
+import {initialSignInFormData} from "../constants";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
 import AuthAlert, {triggerAlert} from "./AuthAlert";
+import {initialAlertData} from "features/core/constants";
 
 
 const SignInForm = () => {

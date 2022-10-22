@@ -10,12 +10,6 @@ export const initialSignUpFormData = Object.freeze({
     passwordConfirmation: ''
 });
 
-export const initialAlertData = Object.freeze({
-    isAlert: false,
-    type: '',
-    text: ''
-});
-
 export const statusAlertTypeMap = {
     201: 'success',
     400: 'error',
