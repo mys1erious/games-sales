@@ -9,7 +9,6 @@ import SaleDetail from "pages/SaleDetail";
 import SignIn from "pages/SignIn";
 import SignOut from "pages/SignOut";
 import SignUp from "pages/SignUp";
-import Profile from "pages/Profile";
 import Reports from "pages/Reports";
 import ReportBuilder from "pages/ReportBuilder";
 
@@ -53,7 +52,6 @@ function App() {
                         <Route path="/signin/" element={<SignIn />}/>
                         <Route path="/sign-out/" element={<SignOut />}/>
                         <Route path="/signup/" element={<SignUp />}/>
-                        <Route path="/profile/" element={<Profile />} />
                     </Routes>
                 </Box>
                 <Footer />
