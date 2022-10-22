@@ -1,11 +1,14 @@
 import React, {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
-import {Collapse, ListItem, ListItemButton, ListItemIcon, ListItemText, styled} from "@mui/material";
+import {
+    Collapse, styled, ListItemButton,
+    ListItem, ListItemIcon, ListItemText
+} from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
-import {ReactComponent as GameIcon} from "../../../assets/game_icon.svg";
-import '../SalesListItem.css';
-import {useNavigate} from "react-router-dom";
+import Image from "features/core/components/Image";
+import gameIconSrc from "assets/game_icon.svg";
 
 
 const ListItemSubText = styled(ListItemText)({
@@ -35,26 +38,27 @@ const SalesListItem = ({sale, currPage}) => {
         : {};
 
     return(
-        <React.Fragment>
-            <ListItem component="nav" divider={true} disablePadding>
-                <ListItemButton sx={{width: '90%'}}
-                                onClick={handleItemClick}>
-                    <ListItemIcon><GameIcon className="icon" /></ListItemIcon>
-                    <ListItemText primary={sale.game.name} sx={listItemTextSx}
-                    />
-                </ListItemButton>
-                <ListItemButton onClick={handleExpandClick}>
-                    {isExpanded ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-            </ListItem>
-            <Collapse in={isExpanded} timeout={'auto'} unmountOnExit>
-                <ListItemSubText secondary={`Developer: ${sale.game.developer}`}/>
-                <ListItemSubText secondary={`Genre: ${sale.game.genre}`}/>
-                <ListItemSubText secondary={`Platform: ${sale.game.platform}`}/>
-                <ListItemSubText secondary={`Year of Release: ${sale.game.year_of_release}`}/>
-                <ListItemSubText secondary={`Global Sales: ${sale.global_sales}`}/>
-            </Collapse>
-        </React.Fragment>
+        <>
+        <ListItem component="nav" divider={true} disablePadding>
+            <ListItemButton sx={{width: '90%'}} onClick={handleItemClick}>
+                <ListItemIcon>
+                    <Image src={gameIconSrc} alt="Game Icon"
+                           maxHeight={24} maxWidth={32}/>
+                </ListItemIcon>
+                <ListItemText primary={sale.game.name} sx={listItemTextSx}/>
+            </ListItemButton>
+            <ListItemButton onClick={handleExpandClick} sx={{paddingRight: 0}}>
+                {isExpanded ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+        </ListItem>
+        <Collapse in={isExpanded} timeout={'auto'} unmountOnExit>
+            <ListItemSubText secondary={`Developer: ${sale.game.developer}`}/>
+            <ListItemSubText secondary={`Genre: ${sale.game.genre}`}/>
+            <ListItemSubText secondary={`Platform: ${sale.game.platform}`}/>
+            <ListItemSubText secondary={`Year of Release: ${sale.game.year_of_release}`}/>
+            <ListItemSubText secondary={`Global Sales: ${sale.global_sales}`}/>
+        </Collapse>
+        </>
     )
 };
 

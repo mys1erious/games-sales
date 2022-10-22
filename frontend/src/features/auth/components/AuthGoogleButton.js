@@ -1,24 +1,35 @@
-import React from "react";
-import {GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
-import AuthBaseButton from "./AuthBaseButton";
+import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
-import {setTokensToLocalStorage} from "../utils";
+
+import {GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
+
+import {setUserDataToLocalStorage, User} from "../utils";
 import {googleSignIn} from "../services";
+import {UserContext} from "../UserContext";
+import AuthButton from "./AuthButton";
 
 
-const AuthGoogleButtonLogic = ({text}) => {
+const AuthGoogleButtonLogic = ({children}) => {
     const navigate = useNavigate();
+    const {setUser} = useContext(UserContext);
 
     const onSuccess = async(googleResponse) => {
         const response = await googleSignIn(googleResponse);
-        setTokensToLocalStorage(response);
+
+            setUserDataToLocalStorage({
+                access_token: response.data.access_token,
+                refresh_token: response.data.refresh_token
+            });
+            setUser(User({
+                email: '',
+                isLoggedIn: true
+            }));
 
         navigate('/');
-        // For now, until not implemented user handling
-        window.location.reload();
     };
 
     const onError = (googleResponse) => {
+        // Implement alert
         console.log(googleResponse);
     };
 
@@ -29,15 +40,14 @@ const AuthGoogleButtonLogic = ({text}) => {
     });
 
     return(
-        <AuthBaseButton text={text} onClick={() => login()}/>
+        <AuthButton onClick={login}>{children}</AuthButton>
     )
 };
 
-
-const AuthGoogleButton = ({text}) => {
+const AuthGoogleButton = ({children}) => {
     return(
         <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
-            <AuthGoogleButtonLogic text={text} />
+            <AuthGoogleButtonLogic>{children}</AuthGoogleButtonLogic>
         </GoogleOAuthProvider>
     )
 }

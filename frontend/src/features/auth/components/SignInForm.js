@@ -1,47 +1,63 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import AuthBaseButton from "./AuthBaseButton";
-import AuthTextField from "./AuthTextField";
-import {setTokensToLocalStorage} from "../utils";
-import AuthGoogleButton from "./AuthGoogleButton";
+
+import {setUserDataToLocalStorage, User} from "../utils";
 import {emailSignIn} from "../services";
+import {UserContext} from "../UserContext";
+import {initialSignInFormData} from "../constants";
+import AuthButton from "./AuthButton";
+import AuthTextField from "./AuthTextField";
+import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
-import AuthAlert, {initialAlertData, triggerAlert} from "./AuthAlert";
+import AuthAlert, {triggerAlert} from "./AuthAlert";
+import {initialAlertData} from "features/core/constants";
 
-const SignInForm = ({formData, updateFormData}) => {
+
+const SignInForm = () => {
     const navigate = useNavigate();
+    const [alert, setAlert] = useState(initialAlertData);
+    const {setUser} = useContext(UserContext);
 
-    const [alert, updateAlert] = useState(initialAlertData);
+    const [formData, setFormData] = useState(initialSignInFormData);
 
     const handleEmailSignIn = async(e) => {
         e.preventDefault();
 
         try {
             const response = await emailSignIn(formData.email, formData.password);
-            setTokensToLocalStorage(response);
+
+            // Should make a request to profile endpoint and get username, email
+            setUserDataToLocalStorage({
+                access_token: response.data.access_token,
+                refresh_token: response.data.refresh_token
+            });
+            setUser(User({
+                email: '',
+                isLoggedIn: true
+            }));
 
             navigate('/');
-            // For now, until not implemented user handling
-            window.location.reload();
         }
         catch (e) {
-            triggerAlert(e.response, alert, updateAlert);
+            triggerAlert(e.response, alert, setAlert);
         }
     };
 
     return(
-        <React.Fragment>
-            {alert.isAlert ? <AuthAlert alert={alert}/> : null}
-            <AuthBaseForm textFields={[
-                 <AuthTextField formData={formData} updateFormData={updateFormData}
-                                name={"email"} label={"Email Address"} />,
-                <AuthTextField formData={formData} updateFormData={updateFormData}
-                               name={"password"} label={"Password"} type={"password"} />,
-            ]} buttons={[
-                <AuthBaseButton text={"Sign In With Email"} onClick={handleEmailSignIn} />,
-                <AuthGoogleButton text={"Sign In With Google"} />
-            ]} />
-        </React.Fragment>
+        <>
+        {alert.isAlert ? <AuthAlert alert={alert}/> : null}
+        <AuthBaseForm onKeyDown={
+            (e) => e.key === 'Enter' ? handleEmailSignIn(e) : null}
+            textFields={[
+                <AuthTextField formData={formData} setFormData={setFormData}
+                               name="email" label="Email Address" />,
+                <AuthTextField formData={formData} setFormData={setFormData}
+                               name="password" label="Password" type="password"/>]}
+            buttons={[
+                <AuthButton onClick={handleEmailSignIn}>Sign In With Email</AuthButton>,
+                <AuthGoogleButton>Sign In With Google</AuthGoogleButton>]}
+        />
+        </>
     );
 };
 

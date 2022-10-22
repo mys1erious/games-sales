@@ -232,6 +232,41 @@ class Sale(models.Model):
             Q(game__genre__icontains=text)
         )
 
+    @staticmethod
+    def sales_df_description(df):
+        return df.describe().round(2).to_json()
+
+    @staticmethod
+    def get_top_n_fields_for_sale_type(df, field, sale_type, n):
+        db_field = Sale.map_field_to_db_field(field)
+        top_fields_series = Sale.get_top_fields_series(df, db_field, sale_type)
+        top_fields = Sale.get_top_fields_list(top_fields_series, n, field)
+
+        return top_fields
+
+    @staticmethod
+    def get_top_fields_list(series, n, field):
+        return [
+            {field: cur_field, 'count': count}
+            for cur_field, count in zip(
+                list(series.index[:n]),
+                list(series[:n])
+            )
+        ]
+
+    @staticmethod
+    def get_top_fields_series(df, db_field, sale_type, round=2, sort_ascending=False):
+        return df.groupby(db_field) \
+            [sale_type].sum() \
+            .sort_values(ascending=sort_ascending) \
+            .round(round)
+
+    @staticmethod
+    def map_field_to_db_field(field):
+        # Rework
+        db_field = f'game__{field}'
+        return db_field
+
     def save(self, *args, **kwargs):
         self.slug = f'{self.game.slug}-sales'
         super().save(*args, **kwargs)

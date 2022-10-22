@@ -1,30 +1,27 @@
 import React, {useEffect, useState} from "react";
+import {useSearchParams} from "react-router-dom";
+
 import {Box, List, ListItem, ListItemButton, ListItemText, TextField, Typography} from "@mui/material";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import HorizontalRuleIcon from '@mui/icons-material/HorizontalRule';
-import {useSearchParams} from "react-router-dom";
-import {handleObjectStateChange, slugify, yearParamInitState} from "../../core/utils";
 
-import {BaseButton as Button} from "../../core/components/BaseButton";
+import {setObjState, slugify} from "features/core/utils";
+import {Button} from "features/core/components/Button";
+
+import {initialFieldChoices, initialYearParam} from "../constants";
 import {getFilterFieldsData} from "../services";
 
 
-// Remove all hardcoded values by making them the constants
 const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) => {
      const [searchParams, setSearchParams] = useSearchParams({});
-     const [fieldChoices, setFieldChoices] = useState({
-         'order_by': [],
-         'genre': [],
-         'esrb_rating': [],
-         'year_of_release': []
-     });
-     const [yearParam, setYearParam] = useState(yearParamInitState);
+     const [fieldChoices, setFieldChoices] = useState(initialFieldChoices);
+     const [yearParam, setYearParam] = useState(initialYearParam);
 
      const initFieldsData = async() => {
          let fields = await getFilterFieldsData();
          fields = await fields.data;
 
-         handleObjectStateChange({
+         setObjState({
                  'genre': fields['genres'],
                  'order_by': fields['order_by'],
                 'esrb_rating': fields['esrb_ratings']
@@ -39,6 +36,9 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      }, []);
 
      const highlight = (text) => {
+         if (field === 'Year of Release')
+             text = `${text[0]}-${text[1]}`
+
          setHighlighted({...highlighted, [slugify(field)]: text});
      };
 
@@ -52,22 +52,20 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          setYearParam([min, max]);
      };
 
-     // Remove hard coded field checks (map?)
      const setFilterParam = (text) => {
-         highlight(text);
+          highlight(text);
 
-         if (field === 'Year of Release'){
-             searchParams.set('yor_gt', yearParam[0].toString());
-             searchParams.set('yor_lt', yearParam[1].toString());
-             setSearchParams(searchParams);
-             return;
-         }
-         else if (field === 'Order By')
-             text = slugify(text);
+          if (field === 'Year of Release'){
+              searchParams.set('yor_gt', yearParam[0].toString());
+              searchParams.set('yor_lt', yearParam[1].toString());
+              setSearchParams(searchParams);
+              return;
+          }
+          else if (field === 'Order By')
+              text = slugify(text);
 
-
-         searchParams.set(slugify(field), text);
-         setSearchParams(searchParams);
+          searchParams.set(slugify(field), text);
+          setSearchParams(searchParams);
      };
 
      const resetFilterParam = () => {
@@ -76,7 +74,7 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
          if (field === 'Year of Release'){
              searchParams.delete('yor_lt');
              searchParams.delete('yor_gt');
-             setYearParam(yearParamInitState);
+             setYearParam(initialYearParam);
          }
 
          searchParams.delete(slugify(field));
@@ -110,8 +108,10 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
                                 onInput={(e) =>
                                     handleYearParam(yearParam[0], e.target.value)}
                      />
-                     <Button content={"OK"} sx={{marginLeft: "20px"}}
-                             onClick={() => setFilterParam(yearParam)}/>
+                     <Button sx={{marginLeft: "20px"}}
+                             onClick={() => setFilterParam(yearParam)}>
+                         OK
+                     </Button>
                  </ListItem>
          };
 
@@ -123,23 +123,26 @@ const SalesFilterSubSidebar = (field, toggleSub, highlighted, setHighlighted) =>
      };
 
      return(
-         <React.Fragment>
          <Box role="presentation" minWidth="216px" width="25vw">
              <Box padding="8px" sx={{display: "flex", justifyContent: "space-between"}}>
-                 <Button content={<><NavigateBeforeIcon />Back</>} sx={{width: "100px"}}
-                         onClick={toggleSub(false, field)} />
-                 <Button content="Reset" color="error" sx={{width: "100px"}}
-                         onClick={() => resetFilterParam()} />
+                 <Button sx={{width: "100px"}} onClick={toggleSub(false, field)}>
+                     <NavigateBeforeIcon />Back
+                 </Button>
+                 <Button color="error" sx={{width: "100px"}} onClick={resetFilterParam}>
+                     Reset
+                 </Button>
              </Box>
              <Typography padding="8px" textAlign="center" borderTop="1px solid gray">
                  {field}
              </Typography>
              <List sx={{borderTop: "1px solid gray", borderBottom: "1px solid gray"}}>
-                 {field ? getListItems() : null}
+                 {field ?
+                     getListItems()
+                     : null
+                 }
              </List>
          </Box>
-         </React.Fragment>
-     )
+     );
 };
 
 

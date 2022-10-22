@@ -1,7 +1,7 @@
-from django.contrib import admin
 from django.urls import path, include
 
 from sales.api import views as sale_views
+from reports.api import views as report_views
 from accounts.api import views as account_views
 
 
@@ -25,9 +25,25 @@ urlpatterns = [
         view=sale_views.SaleFilterFieldsListAPIView.as_view(),
         name='sale_filters'
     ),
+    # {% url 'api:sale_analysis' %}
+    path(
+        route='sale-analysis/',
+        view=sale_views.SaleAnalysisAPIView.as_view(),
+        name='sale_analysis'
+    ),
+
+    # -- Reports --
+    path(
+        route='reports/',
+        view=report_views.ReportsListAPIView.as_view(),
+        name='reports'
+    ),
 
     # -- Auth --
-    path('auth/', include('drf_social_oauth2.urls', namespace='drf')),
+    path(
+        route='auth/',
+        view=include('drf_social_oauth2.urls', namespace='drf'),
+    ),
     path(
         route='auth/signup/',
         view=account_views.UserSignUpAPIView.as_view(),

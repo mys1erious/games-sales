@@ -3,6 +3,11 @@ from .base import *
 
 DEBUG = True
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
+MEDIA_URL = '/media/'
+
+
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',

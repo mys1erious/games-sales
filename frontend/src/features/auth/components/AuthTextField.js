@@ -1,19 +1,19 @@
 import {TextField} from "@mui/material";
-import {handleFormStateChange} from "../../core/utils";
+import {setFormState} from "features/core/utils";
 
 
-const AuthTextField = ({formData, updateFormData, type, name, label}) => {
-    return(
-        <TextField type={type} variant="outlined" required fullWidth
-                   id={name} name={name} label={label}
-                   autoComplete={name} onChange={
-            (e) => handleFormStateChange(e, formData, updateFormData)
-        }
-        />
-    )
-
-
-};
+const AuthTextField = ({
+    formData, setFormData,
+    type, name, label,
+    onKeyDown
+}) => (
+    <TextField type={type} variant="outlined" required sx={{width: "100%"}}
+               id={name} name={name} label={label}
+               autoComplete={name} onChange={
+        (e) => setFormState(e, formData, setFormData)}
+               onKeyDown={onKeyDown}
+    />
+);
 
 
 export default AuthTextField;

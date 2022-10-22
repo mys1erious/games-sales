@@ -1,3 +1,4 @@
+from django.contrib.auth.tokens import default_token_generator
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -67,6 +68,22 @@ class Account(AbstractBaseUser):
     REQUIRED_FIELDS = []
 
     objects = AccountManager()
+
+    def verify(self, token):
+        msg = ''
+
+        if default_token_generator.check_token(self, token):
+            if not self.is_verified:
+                self.is_active = True
+                self.is_verified = True
+                self.save()
+                msg = 'Email has successfully been verified.'
+            else:
+                msg = 'Email has already been verified.'
+        else:
+            msg = 'Token has expired.'
+
+        return self.is_verified, msg
 
     def has_perm(self, perm, obj=None):
         return self.is_admin

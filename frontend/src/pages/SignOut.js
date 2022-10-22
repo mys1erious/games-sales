@@ -1,20 +1,22 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import axiosInstance from "../lib/axiosInstance";
-import {removeTokensFromLocalStorage} from "../features/auth/utils";
-import {signOut} from "../features/auth/services";
+
+import {removeUserDataFromLocalStorage, User} from "features/auth/utils";
+import {signOut} from "features/auth/services";
+import {UserContext} from "features/auth/UserContext";
 
 
 const SignOut = () => {
     const navigate = useNavigate();
+    const {setUser} = useContext(UserContext);
 
     const handleSignOut = async() => {
         await signOut();
-        removeTokensFromLocalStorage();
+
+        removeUserDataFromLocalStorage();
+        setUser(User({}));
 
         navigate('/signin/');
-        // Until user handling is not implemented
-        window.location.reload();
     };
 
     useEffect(() => {

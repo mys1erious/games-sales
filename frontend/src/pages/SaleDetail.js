@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+
 import {Container} from "@mui/material";
-import { BaseButton as Button } from "../features/core/components/BaseButton";
-import {deleteSale, editSale, getSale} from "../features/sales/services";
+
+import {Button} from "features/core/components/Button";
+import {deleteSale, editSale, getSale} from "features/sales/services";
+
+
+const buttonWidth = "70px";
 
 
 const SaleDetail = () => {
@@ -12,9 +17,15 @@ const SaleDetail = () => {
     const {saleSlug} = useParams();
     const [sale, setSale] = useState({});
 
-    useEffect(() => {
-        handleGetSale();
-    }, [saleSlug]);
+    function getSaleFromState() {
+        try {
+            setSale(location.state.sale);
+        } catch (e) {
+            if (e.name === 'TypeError')
+                throw new TypeError('Sale hasn\'t been passed through the state.');
+        }
+        return sale;
+    }
 
     async function handleGetSale() {
         try {getSaleFromState();}
@@ -23,37 +34,34 @@ const SaleDetail = () => {
         }
     }
 
-    function getSaleFromState() {
-        try {setSale(location.state.sale);}
-        catch (e) {
-            if (e.name === 'TypeError')
-                throw new TypeError('Sale hasn\'t been passed through the state.');
-        }
-        return sale;
-    }
+    useEffect(() => {
+        handleGetSale();
+    }, [saleSlug]);
 
     async function handleEditSale () {
+        // Implement alert
         await editSale();
     }
 
     async function handleDeleteSale () {
+        // Implement alert
         await deleteSale(saleSlug);
-        navigate(-1);
+        navigate('/sales/');
     }
 
     // Rework to look normally (like a table or sth)
-    // Better way of having same width?
     return(
-        <Container component="main" maxWidth="xl" >
-            <Button content="Back" color="primary" sx={{width: "70px"}}
-                    onClick={() => navigate(-1)}
-            />
-            <Button content="Edit" color="primary" sx={{width: "70px"}}
-                    onClick={handleEditSale}
-            />
-            <Button content="Delete" color="error" sx={{width: "70px"}}
-                    onClick={handleDeleteSale}
-            />
+        <Container component="main" maxWidth="xl">
+            <Button sx={{width: buttonWidth}} onClick={() => navigate(-1)}>
+                Back
+            </Button>
+            <Button sx={{width: buttonWidth}} onClick={handleEditSale}>
+                Edit
+            </Button>
+            <Button sx={{width: buttonWidth}} onClick={handleDeleteSale}
+                    color="error">
+                Delete
+            </Button>
             <h3>Sale info:</h3>
             <pre>
                 {JSON.stringify(sale, {}, 4)}

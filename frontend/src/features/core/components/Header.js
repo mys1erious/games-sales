@@ -1,62 +1,57 @@
-import React, {useEffect, useState} from "react";
-
-import "../css/Header.css";
-import { ReactComponent as Logo } from "../../../assets/logo.svg";
-
+import React, {useContext} from "react";
 
 import {
-    AppBar,
-    CssBaseline, FormControlLabel, Switch,
-    Toolbar,
-    Typography
+    AppBar, Toolbar, Typography,
+    FormControlLabel, Switch
 } from "@mui/material";
 
-import {LinkButton} from "./LinkButton";
-import SalesSearchBar from "../../sales/components/SalesSearchBar";
+import SalesSearchBar from "features/sales/components/SalesSearchBar";
+import {UserContext} from "features/auth/UserContext";
 
+import LinkButton from "./LinkButton";
+import Image from "./Image";
+
+import logoSrc from "assets/logo.svg";
 
 
 const Header = ({isDarkTheme, setIsDarkTheme}) => {
-    const [searchText, setSearchText] = useState('');
-
     const changeTheme = () => {
         setIsDarkTheme(currTheme => !currTheme);
     };
+    const {user} = useContext(UserContext);
 
     return (
-        <React.Fragment>
-            <CssBaseline />
-            <AppBar position={"sticky"} color={"default"} elevation={0}>
-                <Toolbar sx={{justifyContent: "space-between"}}>
-                    <Typography variant={"h6"} color={"inherit"}>
-                        <LinkButton to={"/"} text={"Home"}
-                                startIcon={<Logo className="logo" />}
-                        />
-                        <LinkButton to={"/sales/"} text={"Sales"} />
-                        <LinkButton to={"/reports/"} text={"Reports"} />
-                        <SalesSearchBar searchText={searchText} setSearchText={setSearchText} />
-                    </Typography>
-                    <Typography variant={"h6"} color={"inherit"}>
-                        <FormControlLabel
-                            control={ <Switch checked={isDarkTheme} onChange={changeTheme} /> }
-                            label={"Dark Mode"} labelPlacement={"start"}/>
-                        {
-                            localStorage.getItem('access_token') !== null
-                                ?
-                                <React.Fragment>
-                                    <LinkButton to={"/profile/"} text={"Profile"} />
-                                    <LinkButton to={"/sign-out/"} text={"Sign Out"} />
-                                </React.Fragment>
-                                :
-                                <React.Fragment>
-                                    <LinkButton to={"/signin/"} text={"Sign In"} />
-                                    <LinkButton to={"/signup/"} text={"Sign Up"} />
-                                </React.Fragment>
-                        }
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-        </React.Fragment>
+        <header>
+        <AppBar position="sticky" color="default" elevation={0}>
+        <Toolbar sx={{justifyContent: "space-between"}}>
+            <Typography variant="h6" color="inherit">
+                <LinkButton to="/" startIcon={
+                    <Image src={logoSrc} alt="Logo" maxHeight={24} maxWidth={32}/>
+                }>
+                    Home
+                </LinkButton>
+                <LinkButton to="/sales/">Sales</LinkButton>
+                <LinkButton to="/reports/">Reports</LinkButton>
+                <SalesSearchBar />
+            </Typography>
+
+            <Typography variant="h6" color="inherit">
+                <FormControlLabel
+                    control={ <Switch checked={isDarkTheme} onChange={changeTheme} /> }
+                    label="Dark Mode" labelPlacement="start"/>
+                {user.isLoggedIn
+                    ?
+                    <LinkButton to="/sign-out/">Sign Out</LinkButton>
+                    :
+                    <>
+                        <LinkButton to="/signin/">Sign In</LinkButton>
+                        <LinkButton to="/signup/">Sign Up</LinkButton>
+                    </>
+                }
+            </Typography>
+        </Toolbar>
+        </AppBar>
+        </header>
     )
 };
 

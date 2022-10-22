@@ -1,47 +1,32 @@
 Current todo:
--
-- Refactor for better readability after done with Sales Filtering and basic Reports repr.
-- Filter by:
-	min/max Rating
-	min/max region sales
-- Support for multiple filters of the same type eg.: genre=action,racing
-- Add password Validation
-- Sale Editing
-- Only see Sale Delete/Edit if admin
+- Reports:
+    - Finish PieChart
+    - Finish BarPieChart
+    - Video games Released Yearly(LineChart) (interactive)
+    - Sales by Region(MapColored) (interactive)
+    - CriticScore and UserScore correlation(ScatterPlot) (interactive)
+    - t5 games by genres
+    - t5 games by platform
+
+    - Add creation date to the report
+    - 'Reports' Page with all available reports(only if signed in)
+    - /reports/{user}/ endpoint to get list of all reports for 'Reports' page
+    - Ability to choose download format(html/pdf)
 
 
-High-level tasks:
--. profiles
--. reports
--. charts
--. report objects
--. report list, detail
--. pdf reports
--. export of reports as pdf
+- Sales:
+    - Refactor/Optimize Sales
+    - Ability to choose Sales Region
+    - normal(table?) repr for SaleDetail
+    - Sale Editing
+    - Only see Sale Delete/Edit if admin
 
 
-Backend:
-- Reports
-- Get ideas (possibly from the kaggle) for data visualization
-- Profiles
-- Save Reports to user
-- History of Reports
-
-
-Frontend:
-- Implement visualization for data
-- Report list
-- When open a report(pdf), make it so its opened in new browser tab
-- PDFs
-- userContext
-- My profile
-- Add 'Remember me'
+Users:
+    - Password Validation for normal signup
+    - if signing up via social-auth, dont need a password
 
 
 Bugs/Fixes:
-- Fix hardcoded css
-- Improve performance where possible by removing Box or other MUI elements and replace it with normal elements+css
-- Rework Header to look better on smaller screen
-- Check: if creating through social-auth, dont need passwords
-- Fix alert messages(better parsing)
-- Error handling with alerts for all errors (possibly make Alert global?)
+- Rework Header to look better on smaller screen (as navbar)
+- MUI Alerts in /core/, better message parsing, for all errors add Alerts

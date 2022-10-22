@@ -25,7 +25,7 @@ def get_access_token():
     }
 
     req = requests.post(
-        url=URL + '/auth/token/',
+        url=URL+'/auth/token/',
         data=json.dumps(data),
         headers={'Content-Type': 'application/json'}
     )
@@ -71,5 +71,4 @@ def get_sales():
 
 if __name__ == '__main__':
     samples = get_samples()
-
     post_sales(samples)
