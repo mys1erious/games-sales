@@ -1,76 +1,32 @@
 Current todo:
-- Refactor for better readability (whole pj)
-
-- Refactor: change <React.Fragment> to <>
-- Refactor: props.children allows to nest inside component (dont need to make 'content' prop)
-
-- Refactor: if outside of component, its not updated on each re-render, move as much as possible
-- Refactor: any computations that are not needed on each component re-render move outside of the component
-- Refactor: useMemo for stuff like scale functions or any calc. functions from d3
-    JSX can also be memoized
-
-- add axis names
-- unslugify fields in the Table
-- fix buggy hover on BarText
-- add email and creation date to the report
-
 - Reports:
-    Viz:
-        for each Chart choose between Bar/Pie
-        ability to choose for which region to show the data(globally, not for individual chart)
-        ability to turn on/off each chart
-        finish grid marking(without actual implementation)
+    - Finish PieChart
+    - Finish BarPieChart
+    - Video games Released Yearly(LineChart) (interactive)
+    - Sales by Region(MapColored) (interactive)
+    - CriticScore and UserScore correlation(ScatterPlot) (interactive)
+    - t5 games by genres
+    - t5 games by platform
 
-        - Needed graphs:
-            (all should be interactive)
-            1 LineChart (idk)
-            1 ScatterPlot (idk)
-            1 Map (sales by region)
-            1 ColorLegend (idk)
+    - Add creation date to the report
+    - 'Reports' Page with all available reports(only if signed in)
+    - /reports/{user}/ endpoint to get list of all reports for 'Reports' page
+    - Ability to choose download format(html/pdf)
 
-        Number of Video games Released in each year (idk)
-        User/Critic Score for each game genre (idk)
-        Video games Sales - Yearly (idk)
-        t5 games by genres (idk)
-        t5 games by platform (idk)
-        t10 Developers by score (idk)
 
-        ability to download as .html and convert->.pdf
-    - Only see 'Reports' if signed in
-
-- Sales filter
-    - Filter by
-        min/max Rating
-	    min/max region sales
-	- Support for multiple filters of the same type eg.: genre=action,racing
-
-- Sales
-    - normal repr for SaleDetail
+- Sales:
+    - Refactor/Optimize Sales
+    - Ability to choose Sales Region
+    - normal(table?) repr for SaleDetail
     - Sale Editing
     - Only see Sale Delete/Edit if admin
 
-- Users
-    - if creating through social-auth, dont need passwords
-    - Add password Validation
 
-
-Backend:
-- Reports
-    List/Detail endpoints
-- Profiles
-    Model
-    Endpoint
-
-
-Frontend:
-- Users
-    My profile View
-    Reports history in Profile
-    Add 'Remember me' on signin
+Users:
+    - Password Validation for normal signup
+    - if signing up via social-auth, dont need a password
 
 
 Bugs/Fixes:
-- SignIn on EnterClick -> perform sign in
 - Rework Header to look better on smaller screen (as navbar)
-- Fix alert messages(better parsing)
-- Error handling with alerts for all errors (possibly make Alert global?)
+- MUI Alerts in /core/, better message parsing, for all errors add Alerts
