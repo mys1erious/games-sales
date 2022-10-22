@@ -5,7 +5,6 @@ export const getAnalysisData = async(searchParams) => {
 };
 
 export const postReport = async(data) => {
-    return await axiosInstance.post('/reports/', data,
-        {headers: {'Content-Type': 'multipart/form-analysisData'}}
-    );
+    axiosInstance.defaults.headers['Content-Type'] = 'multipart/form-analysisData';
+    return await axiosInstance.post('/reports/', data);
 };
