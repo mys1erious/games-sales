@@ -1,4 +1,4 @@
-import React, {useContext, useMemo} from "react";
+import React, {useContext} from "react";
 
 import {
     AppBar, Toolbar, Typography,
@@ -41,10 +41,7 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                     label="Dark Mode" labelPlacement="start"/>
                 {user.isLoggedIn
                     ?
-                    <>
-                        <LinkButton to="/profile/">Profile</LinkButton>
-                        <LinkButton to="/sign-out/">Sign Out</LinkButton>
-                    </>
+                    <LinkButton to="/sign-out/">Sign Out</LinkButton>
                     :
                     <>
                         <LinkButton to="/signin/">Sign In</LinkButton>
