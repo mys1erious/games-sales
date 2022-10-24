@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 
 import {TextField} from "@mui/material";
 
-import {setFormState} from "features/core/utils";
 import {Button} from "features/core/components/Button";
 import ReportBody from "features/reports/components/ReportBody";
 import {initReportHeaders} from "features/reports/constants";
 import {postReport} from "features/reports/services";
+import {setFormState} from "../features/core/utils";
 
 
 const createReportFile = (reportHeaders) => {
@@ -24,6 +24,12 @@ const copyMuiStyles = (doc) => {
     }
 };
 
+const createReportHeader = (doc, reportHeaders, field, fieldRepr) => {
+    const reportField = doc.createElement('div');
+    reportField.textContent = `${fieldRepr}: ${reportHeaders[field]}`;
+    return reportField;
+};
+
 const getReportBody = () => {
     const reportBody = document.createElement('div');
     reportBody.innerHTML = document.getElementById('reportBody').innerHTML;
@@ -31,19 +37,13 @@ const getReportBody = () => {
     return reportBody;
 };
 
-const buildReportHeader = (doc, reportHeaders, field, fieldRepr) => {
-    const reportField = doc.createElement('div');
-    reportField.textContent = `${fieldRepr}: ${reportHeaders[field]}`;
-    return reportField;
-};
-
 const setHtmlReportData = (doc, reportHeaders) => {
     const reportContainer = doc.createElement('div');
 
-    reportContainer.appendChild(buildReportHeader(
+    reportContainer.appendChild(createReportHeader(
         doc, reportHeaders, 'name', 'Name')
     );
-    reportContainer.appendChild(buildReportHeader(
+    reportContainer.appendChild(createReportHeader(
         doc, reportHeaders, 'remarks', 'Remarks')
     );
     reportContainer.appendChild(getReportBody());
@@ -62,9 +62,11 @@ const previewReport = (reportHeaders) => {
     win.document.body = doc.body;
 };
 
-const HTMLDocumentToBlob = (doc) => {
-    return new Blob([doc.documentElement.innerHTML], {type: "text/plain"});
-};
+const HTMLDocumentToBlob = (doc) => (
+    new Blob(
+        [doc.documentElement.innerHTML],
+        {type: "text/plain"})
+);
 
 const saveReport = async(reportHeaders) => {
     let doc = createReportFile(reportHeaders);
@@ -74,6 +76,7 @@ const saveReport = async(reportHeaders) => {
     data.set('name', reportHeaders.name);
     data.set('report_body', doc)
 
+    // Make an Alert
     try {
         await postReport(data);
         console.log('created');
@@ -88,8 +91,10 @@ const ReportBuilder = () => {
 
     return (
         <>
-        <div style={{textAlign: "center",
-            marginBottom: "15px", paddingTop: "10px"
+        <div style={{
+            textAlign: "center",
+            marginBottom: "15px",
+            paddingTop: "10px"
         }}>
             <TextField variant="outlined" label="Name" name="name"
                        fullWidth sx={{marginBottom: "15px"}}
