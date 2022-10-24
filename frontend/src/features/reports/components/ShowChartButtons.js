@@ -3,7 +3,6 @@ import {Grid} from "@mui/material";
 import ShowChartButton from "./ShowChartButton";
 
 
-// TODO: dont re-render ALL buttons when press 1
 const ShowChartButtons = ({charts, setCharts}) => {
     const onChange = (name) => {
         setCharts({
