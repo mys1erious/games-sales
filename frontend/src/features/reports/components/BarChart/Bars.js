@@ -1,37 +1,36 @@
 import React from "react";
+import * as d3 from "d3";
+
 import {innerHeight} from "./BarChart";
+import {BAR_PIE_DATA_COLORS} from "../../constants";
+import {barMaxWidth} from "./BarChart";
 
 
-const DEFAULT_BAR_COLOR = '#46abdb';
-const SELECTED_BAR_COLOR = '#1696d2';
-const STROKE_BAR_COLOR = '#12719e';
-
-
-const Bar = ({nameScale, valScale, xVal, yVal, width}) => {
+const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
     const x = nameScale(xVal);
     const y = valScale(yVal);
     const height = innerHeight - valScale(yVal);
 
     const onMouseOver = (e) => {
-        e.target.style.fill = {SELECTED_BAR_COLOR};
+        e.target.style.strokeWidth = "3px";
         e.target.nextElementSibling.style.display = 'inline';
     };
 
     const onMouseOut = (e) => {
-        e.target.style.fill = DEFAULT_BAR_COLOR;
-        e.target.nextElementSibling.style.display = 'none'
+        e.target.style.strokeWidth = "1px";
+        e.target.nextElementSibling.style.display = 'none';
     };
 
     return (
         <g>
-            <rect x={x} y={y} width={width} height={height}
-                fill={DEFAULT_BAR_COLOR} stroke={STROKE_BAR_COLOR}
-                onMouseOver={onMouseOver}
-                onMouseOut={onMouseOut}
+            <rect x={x} y={y} height={height} width={width}
+                  fill={color} stroke="black"
+                  onMouseOver={onMouseOver}
+                  onMouseOut={onMouseOut}
             />
-            <text x={x} y={y+(height/2)} fontSize={11}
+            <text x={x+3} y={y+(height/2)} fontSize={11}
                   cursor="default" pointerEvents="none"
-                  stroke="#000000" display="none">
+                  fill="#000000" display="none">
                 {yVal}
             </text>
         </g>
@@ -39,10 +38,16 @@ const Bar = ({nameScale, valScale, xVal, yVal, width}) => {
 }
 
 const Bars = ({data, xTitle, yTitle, nameScale, valScale}) => {
-    const width = nameScale.bandwidth();
+    const width = Math.min(nameScale.bandwidth(), barMaxWidth);
+    const colors = d3.shuffle(BAR_PIE_DATA_COLORS);
+    const color = d3.scaleOrdinal()
+        .domain(data.map(d => d[xTitle]))
+        .range(colors);
+
+
     return (data.map((d) =>
             <Bar key={d[xTitle]} width={width} xVal={d[xTitle]} yVal={d[yTitle]}
-                 nameScale={nameScale} valScale={valScale}/>
+                 nameScale={nameScale} valScale={valScale} color={color(d[xTitle])}/>
         )
     );
 };

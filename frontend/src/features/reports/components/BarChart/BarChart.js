@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import {Typography} from "@mui/material";
 import {max, scaleBand, scaleLinear} from "d3";
 
 import XAxis from "./XAxis";
 import Bars from "./Bars";
 import YAxis from "./YAxis";
+import ChartContainer from "../ChartContainer";
 
 
 export const margin = {top: 20, right: 20, bottom: 20, left: 40};
@@ -12,11 +12,11 @@ export const width = 640;
 export const height = 400;
 export const innerWidth = width - margin.left - margin.right;
 export const innerHeight = height - margin.top - margin.bottom;
+export const barMaxWidth = 55;
 
 
 const BarChart = ({data, title, xTitle, yTitle}) => {
-    console.log('RENDERED: bar chart: '+title)
-    const [barChart, setBarChart] = useState(<svg/>);
+    const [barChart, setBarChart] = useState(<svg viewBox={`0 0 ${width} ${height}`}/>);
 
     const nameScale = scaleBand()
         .domain(data.map(d => d[xTitle]))
@@ -42,16 +42,14 @@ const BarChart = ({data, title, xTitle, yTitle}) => {
 
     useEffect(() => {
         setBarChart(generateBarChart());
+        // eslint-disable-next-line
     }, [data]);
 
     return (
-        <div style={{fontSize: 11, border: "1px solid gray"}}>
-            <Typography align="center" variant="h6">{title}</Typography>
-            <div>
-                {barChart}
-            </div>
-        </div>
-    )
+        <ChartContainer title={title}>
+            {barChart}
+        </ChartContainer>
+    );
 };
 
 

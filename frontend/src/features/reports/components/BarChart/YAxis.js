@@ -1,18 +1,15 @@
 import React from "react";
+
 import {innerHeight} from "./BarChart";
+import {barMaxWidth} from "./BarChart";
+import {nameShortener} from "../../utils";
 
-
-const nameShortener = (name) => (
-    name.length > 9
-        ? name.substring(0, 7) + ('..')
-        : name
-);
 
 const BarName = ({nameScale, tickValue}) => (
     <text style={{textAnchor: "middle", fill: "#635f5d"}}
-          x={nameScale(tickValue) + (nameScale.bandwidth()/2)}
+          x={nameScale(tickValue) + (Math.min(nameScale.bandwidth(), barMaxWidth) / 2)}
           y={innerHeight} dy="1em">
-        {nameShortener(tickValue)}
+        {nameShortener(tickValue, 9)}
     </text>
 );
 
