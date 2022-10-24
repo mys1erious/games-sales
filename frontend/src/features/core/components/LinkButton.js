@@ -13,8 +13,8 @@ const LinkButton = ({
     <BaseButton component={NavLink} to={to}
                 color={color} variant={variant}
                 startIcon={startIcon}>
-            {children}
-        </BaseButton>
+        {children}
+    </BaseButton>
 );
 
 
