@@ -54,3 +54,9 @@ export const initChartsVal = {
         component: BarPieChart
     },
 };
+
+export const BAR_PIE_DATA_COLORS = [
+    '#1278a8', '#45abdb', '#1696d2',
+    '#5cb6e0', '#0d5a7e', '#0f6993',
+    '#1487bd', '#73c0e4', '#2da1d7'
+];
