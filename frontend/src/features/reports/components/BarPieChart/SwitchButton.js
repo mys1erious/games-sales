@@ -61,7 +61,7 @@ const MaterialUISwitch = styled(Switch)(({theme}) => ({
 
 
 const SwitchButton = ({sx, onChange}) => (
-    <MaterialUISwitch sx={sx} defaultChecked onChange={onChange}/>
+    <MaterialUISwitch sx={sx} defaultChecked onChange={onChange} />
 );
 
 

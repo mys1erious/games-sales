@@ -11,11 +11,12 @@ const PIE = 'pie';
 const BarPieChart = ({data, title, xTitle, yTitle}) => {
     const [type, setType] = useState(BAR);
 
-    let chart = {
+    const charts = {
         [BAR]: <BarChart data={data} title={title}
-                       xTitle={xTitle} yTitle={yTitle}/>,
-        [PIE]: <PieChart data={data}/>
-    };
+                         xTitle={xTitle} yTitle={yTitle}/>,
+        [PIE]: <PieChart data={data} title={title}
+                         xTitle={xTitle} yTitle={yTitle}/>
+    }
 
     const switchOnChange = () => {
         if (type === BAR)
@@ -28,10 +29,10 @@ const BarPieChart = ({data, title, xTitle, yTitle}) => {
         <>
         <SwitchButton sx={{float: 'right', top: 5, right: 10}}
             onChange={switchOnChange}/>
-        {chart[type]}
+        {charts[type]}
         </>
     )
 };
 
 
-export default BarPieChart;
+export default React.memo(BarPieChart);
