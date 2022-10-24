@@ -1,25 +1,22 @@
 Current todo:
 - Reports:
-    - Finish PieChart
-    - Finish BarPieChart
     - Video games Released Yearly(LineChart) (interactive)
-    - Sales by Region(MapColored) (interactive)
     - CriticScore and UserScore correlation(ScatterPlot) (interactive)
+    - Sales by Region(MapColored) (interactive)
     - t5 games by genres
     - t5 games by platform
 
-    - Add creation date to the report
-    - 'Reports' Page with all available reports(only if signed in)
+    - Add 'CreationDate' to the report
     - /reports/{user}/ endpoint to get list of all reports for 'Reports' page
+    - 'Reports' page with all available user reports(only if signed in)
     - Ability to choose download format(html/pdf)
 
 
 - Sales:
     - Refactor/Optimize Sales
     - Ability to choose Sales Region
+    - Remove Delete/Edit functionality
     - normal(table?) repr for SaleDetail
-    - Sale Editing
-    - Only see Sale Delete/Edit if admin
 
 
 Users:
@@ -29,4 +26,4 @@ Users:
 
 Bugs/Fixes:
 - Rework Header to look better on smaller screen (as navbar)
-- MUI Alerts in /core/, better message parsing, for all errors add Alerts
+- MUI Alerts in /core/, better message parsing for all data
