@@ -20,7 +20,6 @@ const outerArc = d3.arc()
 
 
 const PieChart = ({data, title, xTitle, yTitle}) => {
-    console.log(`RENDERED: pie chart: ${title}`)
     const [pieChart, setPieChart] = useState(
         <svg viewBox={`0 0 ${width} ${height}`} />
     );

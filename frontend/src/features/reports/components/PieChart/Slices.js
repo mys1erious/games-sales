@@ -22,9 +22,11 @@ const Slice = ({d, fill, text}) => (
               onMouseOver={onMouseOver}
               onMouseOut={onMouseOut}
         />
-        <text x={-315} y={195} fontSize={11}
-              cursor="default" pointerEvents="none"
-              fill="#635f5d" display="none">
+        <text x="-49%" y="49%"
+              cursor="default"
+              pointerEvents="none"
+              fill="#635f5d"
+              display="none">
             {text}
         </text>
     </g>
