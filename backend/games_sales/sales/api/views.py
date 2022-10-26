@@ -133,23 +133,36 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
     authentication_classes = []
 
     default_sales_type = 'global_sales'
+    list_len = 300
 
     def get(self, request, *args, **kwargs):
         query_params = QueryDict.copy(request.query_params)
         query_params['page_size'] = '-1'
 
-        sales_type = query_params.pop('sales_type', self.default_sales_type)
+        sales_type = query_params.pop(
+            'sales_type',
+            [self.default_sales_type]
+        )[0]
         if sales_type not in get_sales_field_names():
             sales_type = self.default_sales_type
+
+        list_len = query_params.pop('list_len', [self.list_len])[0]
+        if isinstance(list_len, str) and list_len.isdigit():
+            self.list_len = int(list_len)
 
         sales = self.get_sales(query_params)
 
         top_fields_data = self.get_top_fields_data(sales, sales_type)
         describe_data = sales.describe()
-        score_correlation = [
-            self.get_values_list(sales, 'user_score'),
-            self.get_values_list(sales, 'critic_score'),
-        ]
+
+        user_score_field = 'user_score'
+        critic_score_field = 'critic_score'
+        score_correlation = {
+            db_field_to_field(user_score_field):
+                self.get_values_list(sales, user_score_field),
+            db_field_to_field(critic_score_field):
+                self.get_values_list(sales, critic_score_field),
+        }
 
         data = {
             'description': describe_data,
@@ -158,14 +171,13 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
         }
         return Response(data, status=status.HTTP_200_OK)
 
-    @staticmethod
-    def get_values_list(sales, field, exclude_null=True):
+    def get_values_list(self, sales, field, exclude_null=True):
         db_field = field_to_db_field(field)
 
         if exclude_null:
             sales = sales.exclude(**{f'{db_field}__isnull': True})
 
-        return list(sales.values_list(db_field, flat=True))
+        return sales[:self.list_len].values_list(db_field, flat=True)
 
     def get_top_fields_data(self, sales, sales_type):
         top_fields_data = {}
