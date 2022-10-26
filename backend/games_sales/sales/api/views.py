@@ -1,7 +1,3 @@
-import json
-
-import pandas as pd
-
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import QueryDict
 
@@ -14,8 +10,10 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 from core.permissions import IsAdminOrReadOnly
 from core.utils import intersected_params
-from ..models import Sale, Game, SALE_ORDER_BY_FIELDS
-from .serializers import SaleSerializer
+from ..constants import TOP_FIELDS
+from ..models import Sale, Game, Rating
+from .serializers import SaleSerializer, TopFieldsSerializer
+from ..utils import db_field_to_field, field_to_db_field, get_all_field_names, get_sales_field_names
 
 
 class SaleBaseAPIView(APIView, LimitOffsetPagination):
@@ -23,10 +21,10 @@ class SaleBaseAPIView(APIView, LimitOffsetPagination):
     authentication_classes = []
 
     query_search_param = 'text'
-    filter_params = ['genre', 'esrb_rating', 'yor_lt', 'yor_gt', 'year_of_release']
+    filter_params = ['genre', 'esrb_rating', 'yor_lt', 'yor_gt', 'year_of_release', 'sales']
     default_order_by = 'id'
 
-    default_page_size = 8
+    page_size = 8
     default_page = 1
 
     def get_sales(self, query_params):
@@ -34,25 +32,24 @@ class SaleBaseAPIView(APIView, LimitOffsetPagination):
         sales = self.search(sales, query_params)
         sales = self.filter(sales, query_params)
         sales = self.order_by(sales, query_params)
-
         return sales
 
     def search(self, sales, query_params):
         if self.query_search_param in query_params:
-            return Sale.search_by_text(sales,
+            return sales.search_by_text(
                 query_params.get(self.query_search_param)
             )
         return sales
 
     def filter(self, sales, query_params):
         if any([key in self.filter_params for key in query_params]):
-            return Sale.filter_by_params(
-                sales, intersected_params(query_params, self.filter_params)
+            return sales.filter_by_params(
+                intersected_params(query_params, self.filter_params)
             )
         return sales
 
     def order_by(self, sales, query_params):
-        return sales.order_by(Sale.order_by_mapping(
+        return sales.order_by(field_to_db_field(
             query_params.get('order_by', self.default_order_by)
         ))
 
@@ -76,7 +73,7 @@ class SaleListAPIView(SaleBaseAPIView):
         query_params = request.query_params
         sales = self.get_sales(query_params)
 
-        self.page_size = query_params.get('page_size', self.default_page_size)
+        self.page_size = query_params.get('page_size', self.page_size)
 
         serializer, num_pages = self.pagination(
             request,
@@ -110,10 +107,16 @@ class SaleFilterFieldsListAPIView(APIView):
     authentication_classes = []
 
     def get(self, request, *args, **kwargs):
-        genres = Sale.get_all_genres().order_by('game__genre')
-        order_by = SALE_ORDER_BY_FIELDS
+        order_by = [
+            db_field_to_field(db_field)
+            for db_field in get_all_field_names(
+                models_list=[Sale, Game, Rating],
+                exclude=('slug', 'game', 'rating', 'sale')
+            )
+        ]
 
-        # Add readable form ->
+        genres = Sale.objects.all().genres()\
+            .order_by('game__genre')
         esrb_ratings = Game.ESRBRatings.names
 
         data = {
@@ -129,55 +132,58 @@ class SaleAnalysisAPIView(SaleBaseAPIView):
     permission_classes = (AllowAny,)
     authentication_classes = []
 
+    default_sales_type = 'global_sales'
+
     def get(self, request, *args, **kwargs):
-        # name, settings(for report)
         query_params = QueryDict.copy(request.query_params)
         query_params['page_size'] = '-1'
 
+        sales_type = query_params.pop('sales_type', self.default_sales_type)
+        if sales_type not in get_sales_field_names():
+            sales_type = self.default_sales_type
+
         sales = self.get_sales(query_params)
 
-        # Rework to use dynamic data from 'settings' query arg
-        df = pd.DataFrame.from_records(sales.values(
-            'na_sales', 'eu_sales', 'jp_sales', 'other_sales', 'global_sales',
-            'game__rating__critic_score', 'game__rating__critic_count',
-            'game__rating__user_score', 'game__rating__user_count',
-            'game__year_of_release', 'game__platform', 'game__genre',
-            'game__publisher', 'game__developer'
-        ))
-
-        # Rework to use dynamic data from 'settings' query arg
-        data_describe = Sale.sales_df_description(df)
-        top_platforms = Sale.get_top_n_fields_for_sale_type(
-            df,
-            field='platform',
-            sale_type='global_sales',
-            n=10
-        )
-        top_genres = Sale.get_top_n_fields_for_sale_type(
-            df,
-            field='genre',
-            sale_type='global_sales',
-            n=10
-        )
-        top_publishers = Sale.get_top_n_fields_for_sale_type(
-            df,
-            field='publisher',
-            sale_type='global_sales',
-            n=10
-        )
-        top_developers = Sale.get_top_n_fields_for_sale_type(
-            df,
-            field='developer',
-            sale_type='global_sales',
-            n=10
-        )
+        top_fields_data = self.get_top_fields_data(sales, sales_type)
+        describe_data = sales.describe()
+        score_correlation = [
+            self.get_values_list(sales, 'user_score'),
+            self.get_values_list(sales, 'critic_score'),
+        ]
 
         data = {
-            'description': json.loads(data_describe),
-            'top_platforms': top_platforms,
-            'top_genres': top_genres,
-            'top_publishers': top_publishers,
-            'top_developers': top_developers
+            'description': describe_data,
+            'score_correlation': score_correlation,
+            **top_fields_data
         }
-
         return Response(data, status=status.HTTP_200_OK)
+
+    @staticmethod
+    def get_values_list(sales, field, exclude_null=True):
+        db_field = field_to_db_field(field)
+
+        if exclude_null:
+            sales = sales.exclude(**{f'{db_field}__isnull': True})
+
+        return list(sales.values_list(db_field, flat=True))
+
+    def get_top_fields_data(self, sales, sales_type):
+        top_fields_data = {}
+        for field in TOP_FIELDS:
+            top_fields_data[f'top_{field}s'] = self.get_top_field_data(
+                sales, field, sales_type
+            )
+        return top_fields_data
+
+    @staticmethod
+    def get_top_field_data(sales, field, sales_type):
+        top_fields = sales.top_n_fields(
+            field=field,
+            sales_type=sales_type,
+            n=10
+        )
+        return TopFieldsSerializer(
+            top_fields,
+            field=field,
+            many=True
+        ).data

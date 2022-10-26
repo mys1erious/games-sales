@@ -1,8 +1,9 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, QuerySet, F, Sum, Count, Max, Avg, StdDev, Min, Aggregate
 from django.utils.text import slugify
 
 from core.utils import is_int
+from .utils import field_to_db_field, db_field_to_field, get_numeric_field_names
 
 
 class Rating(models.Model):
@@ -109,7 +110,86 @@ class Game(models.Model):
         return f'{self.name}'
 
 
+class SaleQuerySet(QuerySet):
+    def search_by_text(self, text):
+        if is_int(text):
+            return self.filter(game__year_of_release__exact=int(text))
+
+        return self.filter(
+            Q(game__name__icontains=text) |
+            Q(game__platform__icontains=text) |
+            Q(game__publisher__icontains=text) |
+            Q(game__developer__icontains=text) |
+            Q(game__genre__icontains=text)
+        )
+
+    def filter_by_params(self, params):
+        filters_map = {
+            'genre': lambda: self.filter(
+                Q(game__genre__contains=params['genre'])),
+            'esrb_rating': lambda: self.filter(
+                Q(game__esrb_rating__contains=params['esrb_rating'])),
+            'yor_lt': lambda: self.filter(
+                Q(game__year_of_release__lt=int(params['yor_lt']))),
+            'yor_gt': lambda: self.filter(
+                Q(game__year_of_release__gt=int(params['yor_gt']))),
+            'year_of_release': lambda: self.filter(
+                Q(game__year_of_release__exact=int(params['year_of_release'])))
+        }
+        qs = self
+        for param in params:
+            qs = filters_map[param]()
+        return qs
+
+    def genres(self):
+        return self.order_by()\
+            .values_list('game__genre', flat=True)\
+            .distinct()
+
+    def top_n_fields(
+            self,
+            field,
+            n=10,
+            sales_type='global_sales'):
+        db_field = field_to_db_field(field)
+
+        if n == -1:
+            n = self.values(db_field).distinct().count()
+
+        return self.values(**{field: F(db_field)})\
+                   .exclude(**{f'{field}__isnull': True})\
+                   .annotate(count=Sum(sales_type))\
+                   .order_by('-count')[:n]
+
+    def describe(self):
+        # Generate descriptive statistics
+        # Similar to pandas df.describe()
+
+        fields = get_numeric_field_names([Sale, Game, Rating])
+        db_fields = [field_to_db_field(field) for field in fields]
+
+        data = {}
+        for db_field in db_fields:
+            data[db_field_to_field(db_field)] = self.describe_field(db_field)
+
+        return data
+
+    def describe_field(self, db_field):
+        return self.aggregate(
+            count=Count(db_field),
+            mean=Avg(db_field),
+            std=StdDev(db_field),
+            min=Min(db_field),
+            p25=Percentile(db_field, percentile=0.25),
+            p50=Percentile(db_field, percentile=0.5),
+            p75=Percentile(db_field, percentile=0.75),
+            max=Max(db_field)
+        )
+
+
 class SaleManager(models.Manager):
+    _queryset_class = SaleQuerySet
+
     def create(self, **kwargs):
         sales_data = {
             'na_sales': kwargs.pop('na_sales', None),
@@ -128,14 +208,6 @@ class SaleManager(models.Manager):
 
     def all(self):
         return super().all().select_related('game', 'game__rating')
-
-
-# Better way of handling?
-SALE_ORDER_BY_FIELDS = [
-    'Name', 'Platform', 'Publisher', 'Developer', 'Genre', 'ESRB Rating', 'Year of Release',
-    'Critic Score', 'Critic Count', 'User Score', 'User Count',
-    'EU Sales', 'JP Sales', 'NA Sales', 'Global Sales', 'Other Sales'
-]
 
 
 class Sale(models.Model):
@@ -172,104 +244,20 @@ class Sale(models.Model):
 
     objects = SaleManager()
 
-    @staticmethod
-    def get_all_genres():
-        return Sale.objects.order_by().values_list('game__genre', flat=True).distinct()
-
-    @staticmethod
-    def order_by_mapping(value, default='id'):
-        if not value:
-            value = default
-
-        in_reverse = False
-        if value[0] == '-':
-            value = value[1:]
-            in_reverse = True
-
-        game_fields = ['name', 'platform', 'publisher', 'developer', 'genre', 'esrb_rating', 'year_of_release']
-        rating_fields = ['critic_score', 'critic_count', 'user_score', 'user_count']
-
-        if value in game_fields:
-            value = f'game__{value}'
-        elif value in rating_fields:
-            value = f'game__rating__{value}'
-
-        if in_reverse:
-            value = f'-{value}'
-
-        return value
-
-    @staticmethod
-    def filter_by_params(sales, params):
-        filters_map = {
-            'genre': lambda: sales.filter(
-                Q(game__genre__contains=params['genre'])),
-            'esrb_rating': lambda: sales.filter(
-                Q(game__esrb_rating__contains=params['esrb_rating'])),
-            'yor_lt': lambda: sales.filter(
-                Q(game__year_of_release__lt=int(params['yor_lt']))),
-            'yor_gt': lambda: sales.filter(
-                Q(game__year_of_release__gt=int(params['yor_gt']))),
-            'year_of_release': lambda: sales.filter(
-                Q(game__year_of_release__exact=int(params['year_of_release'])))
-        }
-        for param in params:
-            sales = filters_map[param]()
-
-        return sales
-
-    @staticmethod
-    def search_by_text(sales, text):
-        # Add ability to search with whitespace (split by ' ' or sth)
-        if is_int(text):
-            return sales.filter(game__year_of_release__exact=int(text))
-
-        return sales.filter(
-            Q(game__name__icontains=text) |
-            Q(game__platform__icontains=text) |
-            Q(game__publisher__icontains=text) |
-            Q(game__developer__icontains=text) |
-            Q(game__genre__icontains=text)
-        )
-
-    @staticmethod
-    def sales_df_description(df):
-        return df.describe().round(2).to_json()
-
-    @staticmethod
-    def get_top_n_fields_for_sale_type(df, field, sale_type, n):
-        db_field = Sale.map_field_to_db_field(field)
-        top_fields_series = Sale.get_top_fields_series(df, db_field, sale_type)
-        top_fields = Sale.get_top_fields_list(top_fields_series, n, field)
-
-        return top_fields
-
-    @staticmethod
-    def get_top_fields_list(series, n, field):
-        return [
-            {field: cur_field, 'count': count}
-            for cur_field, count in zip(
-                list(series.index[:n]),
-                list(series[:n])
-            )
-        ]
-
-    @staticmethod
-    def get_top_fields_series(df, db_field, sale_type, round=2, sort_ascending=False):
-        return df.groupby(db_field) \
-            [sale_type].sum() \
-            .sort_values(ascending=sort_ascending) \
-            .round(round)
-
-    @staticmethod
-    def map_field_to_db_field(field):
-        # Rework
-        db_field = f'game__{field}'
-        return db_field
-
     def save(self, *args, **kwargs):
         self.slug = f'{self.game.slug}-sales'
         super().save(*args, **kwargs)
 
     def __str__(self):
         return f'sale: {self.game.name}'
+
+
+class Percentile(Aggregate):
+    def __init__(self, *args, **kwargs):
+        percentile = kwargs.pop("percentile", 0.5)
+        self.template = f'%(function)s({percentile}) WITHIN GROUP (ORDER BY %(expressions)s)'
+        super().__init__(*args, **kwargs)
+
+    function = 'PERCENTILE_CONT'
+    name = 'median'
+    output_field = models.FloatField()
