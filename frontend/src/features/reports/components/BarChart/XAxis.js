@@ -13,9 +13,9 @@ const XAxisValue = ({tickValue}) => (
     </text>
 );
 
-const XAxis = ({valScale}) => {
-    return(valScale.ticks().map(tickValue =>
-        <g key={tickValue} transform={`translate(${0}, ${valScale(tickValue)})`}>
+const XAxis = ({xScale}) => {
+    return(xScale.ticks().map(tickValue =>
+        <g key={tickValue} transform={`translate(${0}, ${xScale(tickValue)})`}>
             <BackgroundLine />
             <XAxisValue tickValue={tickValue}/>
         </g>

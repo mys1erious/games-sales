@@ -1,5 +1,6 @@
-import {FormControlLabel, Switch} from "@mui/material";
 import React from "react";
+import {FormControlLabel, Switch} from "@mui/material";
+
 
 const ShowChartButton = ({isVisible, label, name, onChange}) => {
     return(

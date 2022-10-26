@@ -3,12 +3,13 @@ import {useSearchParams} from "react-router-dom";
 
 import {Box, Grid} from "@mui/material";
 
+import DataLoadingItem from "features/core/components/DataLoadingItem";
+
 import {getAnalysisData} from "../services";
 import {initChartsVal, initialAnalysisData} from "../constants";
 import ShowChartButtons from "./ShowChartButtons";
 import DescribeTable from "./DescribeTable";
-import DataLoadingItem from "features/core/components/DataLoadingItem";
-import {BarPieChartGridItems} from "./BarPieChart";
+import PlotGridItems from "./PlotGridItems";
 
 
 const ReportBody = () => {
@@ -32,7 +33,7 @@ const ReportBody = () => {
                             ? <DescribeTable data={analysisData.description} />
                             : <DataLoadingItem />}
                     </Grid>
-                    <BarPieChartGridItems charts={reportItems} analysisData={analysisData} />
+                    <PlotGridItems charts={reportItems} analysisData={analysisData} />
                 </Grid>
             </div>
         </Box>

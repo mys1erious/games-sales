@@ -1,8 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
-import {BAR_PIE_DATA_COLORS} from "../../constants";
-import {radius} from "./PieChart";
+
+import {PLOT_DATA_COLORS} from "../../constants";
 import {roundVal} from "../../utils";
+import {radius} from "./PieChart";
 
 
 const onMouseOver = e => {
@@ -27,7 +28,7 @@ const Slice = ({d, fill, text}) => (
               cursor="default"
               pointerEvents="none"
               fill="#635f5d"
-              display="none">
+              style={{display: "none"}}>
             {text}
         </text>
     </g>
@@ -37,7 +38,7 @@ const Slice = ({d, fill, text}) => (
 const Slices = ({data, pieData, yTitle, xTitle}) => {
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d[xTitle]))
-        .range(BAR_PIE_DATA_COLORS);
+        .range(PLOT_DATA_COLORS);
 
     const arc = (startAngle, endAngle) => d3.arc()
         .innerRadius(0)

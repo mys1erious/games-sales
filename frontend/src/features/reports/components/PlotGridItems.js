@@ -1,13 +1,13 @@
 import React from "react";
-import BarPieChartGridItem from "./BarPieChartGridItem";
+import PlotGridItem from "./PlotGridItem";
 
 
-const BarPieChartGridItems = ({charts, analysisData}) => (
+const PlotGridItems = ({charts, analysisData}) => (
     Object.entries(charts).map(([name, chart]) => (
         analysisData[chart.dataProp] && chart.isVisible
-            ? <BarPieChartGridItem
+            ? <PlotGridItem
                 key={name}
-                Chart={chart.component}
+                Plot={chart.component}
                 data={analysisData[chart.dataProp]}
                 title={chart.title}
                 xTitle={chart.xTitle}
@@ -18,4 +18,4 @@ const BarPieChartGridItems = ({charts, analysisData}) => (
 );
 
 
-export default BarPieChartGridItems;
+export default PlotGridItems;

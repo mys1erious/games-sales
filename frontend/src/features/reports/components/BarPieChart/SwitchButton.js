@@ -1,5 +1,5 @@
-import {styled, Switch} from "@mui/material";
 import React from "react";
+import {styled, Switch} from "@mui/material";
 
 
 const barImg = `url('data:image/svg+xml;utf8,` +

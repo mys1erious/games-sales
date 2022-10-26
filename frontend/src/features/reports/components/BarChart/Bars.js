@@ -1,16 +1,15 @@
 import React from "react";
 import * as d3 from "d3";
 
-import {innerHeight} from "./BarChart";
-import {BAR_PIE_DATA_COLORS} from "../../constants";
-import {barMaxWidth} from "./BarChart";
 import {roundVal} from "../../utils";
+import {PLOT_DATA_COLORS} from "../../constants";
+import {innerHeight, barMaxWidth} from "./BarChart";
 
 
-const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
-    const x = nameScale(xVal);
-    const y = valScale(yVal);
-    const height = innerHeight - valScale(yVal);
+const Bar = ({yScale, xScale, xVal, yVal, width, color}) => {
+    const x = yScale(xVal);
+    const y = xScale(yVal);
+    const height = innerHeight - xScale(yVal);
 
     const onMouseOver = (e) => {
         e.target.style.strokeWidth = "3px";
@@ -38,9 +37,9 @@ const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
     );
 }
 
-const Bars = ({data, xTitle, yTitle, nameScale, valScale}) => {
-    const width = Math.min(nameScale.bandwidth(), barMaxWidth);
-    const colors = d3.shuffle(BAR_PIE_DATA_COLORS);
+const Bars = ({data, xTitle, yTitle, yScale, xScale}) => {
+    const width = Math.min(yScale.bandwidth(), barMaxWidth);
+    const colors = d3.shuffle(PLOT_DATA_COLORS);
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d[xTitle]))
         .range(colors);
@@ -48,7 +47,7 @@ const Bars = ({data, xTitle, yTitle, nameScale, valScale}) => {
 
     return (data.map((d) =>
             <Bar key={d[xTitle]} width={width} xVal={d[xTitle]} yVal={d[yTitle]}
-                 nameScale={nameScale} valScale={valScale} color={color(d[xTitle])}/>
+                 yScale={yScale} xScale={xScale} color={color(d[xTitle])}/>
         )
     );
 };
