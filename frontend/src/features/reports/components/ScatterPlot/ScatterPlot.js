@@ -7,8 +7,8 @@ import XAxis from "./XAxis";
 import YAxis from "./YAxis";
 
 
-const width = 640;
-const height = 400;
+const width = 640*1.5;
+const height = 400*1.5;
 const margin = {top: 20, right: 20, bottom: 20, left: 40};
 export const innerWidth = width - margin.left - margin.right;
 export const innerHeight = height - margin.top - margin.bottom;

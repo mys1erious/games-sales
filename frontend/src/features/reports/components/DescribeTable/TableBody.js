@@ -1,6 +1,7 @@
 import {TableCell, TableRow, TableBody as BaseTableBody} from "@mui/material";
 import React from "react";
 import {roundVal} from "../../utils";
+import {unslugify} from "../../../core/utils";
 
 
 const RowCells = ({row}) => (
@@ -14,7 +15,7 @@ const RowCells = ({row}) => (
 
 const Row = ({name, data}) => (
     <TableRow>
-        <TableCell>{name}</TableCell>
+        <TableCell>{unslugify(name)}</TableCell>
         <RowCells row={data}/>
     </TableRow>
 );

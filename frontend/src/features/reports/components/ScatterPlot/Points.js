@@ -2,9 +2,15 @@ import React from "react";
 
 import {DEFAULT_COLOR, SVG_NAMESPACE} from "../../constants";
 import {zip} from "../../utils";
+import {unslugify} from "../../../core/utils";
 
 
-const onHoverCircle = (cx, cy, radius, color, stroke) => {
+const radius = 10;
+const stroke = 'black';
+const strokeWidth = 2;
+
+
+const onHoverCircle = (cx, cy) => {
     const circle = document.createElementNS(
         SVG_NAMESPACE,
         'circle'
@@ -12,9 +18,9 @@ const onHoverCircle = (cx, cy, radius, color, stroke) => {
     circle.setAttribute('cx', cx);
     circle.setAttribute('cy', cy);
     circle.setAttribute('r', radius);
-    circle.setAttribute('fill', color);
+    circle.setAttribute('fill', DEFAULT_COLOR);
     circle.setAttribute('stroke', stroke);
-    circle.setAttribute('stroke-width', 2);
+    circle.setAttribute('stroke-width', strokeWidth);
     circle.setAttribute('pointer-events', 'none');
 
     return circle;
@@ -29,8 +35,6 @@ const Point = ({
 }) => {
     const cx = xScale(xVal);
     const cy = yScale(yVal);
-    const radius = 6;
-    const stroke = 'black';
 
     const onMouseOver = (e) => {
         const circle = onHoverCircle(cx, cy, radius, color, stroke);
@@ -56,7 +60,8 @@ const Point = ({
                   pointerEvents="none"
                   fill="#635f5d"
                   style={{display: "none"}}>
-                {`${xTitle}: ${xVal}, ${yTitle}: ${yVal}`}
+                {`${unslugify(xTitle)}: ${xVal}, ` +
+                 `${unslugify(yTitle)}: ${yVal}`}
             </text>
         </g>
     );

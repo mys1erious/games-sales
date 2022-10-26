@@ -62,8 +62,8 @@ export const initChartsVal = {
     [PLOTS.SCORE_CORRELATION]: {
         isVisible: true,
         title: 'Score Correlation',
-        xTitle: 'Critic Score',
-        yTitle: 'User Score',
+        xTitle: 'critic_score',
+        yTitle: 'user_score',
         dataProp: 'score_correlation',
         component: ScatterPlot
     }
