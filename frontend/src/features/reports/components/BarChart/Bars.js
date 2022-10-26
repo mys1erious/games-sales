@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import {innerHeight} from "./BarChart";
 import {BAR_PIE_DATA_COLORS} from "../../constants";
 import {barMaxWidth} from "./BarChart";
+import {roundVal} from "../../utils";
 
 
 const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
@@ -31,7 +32,7 @@ const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
             <text x={x+3} y={y+(height/2)} fontSize={11}
                   cursor="default" pointerEvents="none"
                   fill="#000000" display="none">
-                {yVal}
+                {roundVal(yVal)}
             </text>
         </g>
     );

@@ -5,6 +5,7 @@ import XAxis from "./XAxis";
 import Bars from "./Bars";
 import YAxis from "./YAxis";
 import ChartContainer from "../ChartContainer";
+import {roundVal} from "../../utils";
 
 
 export const margin = {top: 20, right: 20, bottom: 20, left: 40};
