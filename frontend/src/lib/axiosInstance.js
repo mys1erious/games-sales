@@ -62,12 +62,10 @@ axiosInstance.interceptors.response.use(
 								return axiosInstance(originalRequest);
 							}).catch(err => console.log(err)); // Alert
 				} catch (e) {
-					// Alert
 					console.log('Refresh token is expired or invalid.');
 					window.location.href = '/signin/';
 				}
 			} else {
-				// Alert
 				console.log('Refresh token not available.');
 				window.location.href = '/signin/';
 			}
