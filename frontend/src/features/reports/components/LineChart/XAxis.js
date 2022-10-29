@@ -1,5 +1,5 @@
 import React from "react";
-import {innerWidth, innerHeight} from "./ScatterPlot";
+import {innerWidth, innerHeight} from "./LineChart";
 
 
 const XAxisValue = ({value, x}) => (

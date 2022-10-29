@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 
-import ChartContainer from "../ChartContainer";
+import PlotContainer from "../PlotContainer";
 import Slices from "./Slices";
 import Labels from "./Labels";
 import Lines from "./Lines";
@@ -59,9 +59,9 @@ const PieChart = ({data, title, xTitle, yTitle}) => {
     }, [data]);
 
     return(
-        <ChartContainer title={title}>
+        <PlotContainer title={title}>
             {pieChart}
-        </ChartContainer>
+        </PlotContainer>
     );
 };
 

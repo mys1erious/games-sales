@@ -3,13 +3,17 @@ import * as d3 from "d3";
 
 import {roundVal} from "../../utils";
 import {PLOT_DATA_COLORS} from "../../constants";
-import {innerHeight, barMaxWidth} from "./BarChart";
 
 
-const Bar = ({yScale, xScale, xVal, yVal, width, color}) => {
-    const x = yScale(xVal);
-    const y = xScale(yVal);
-    const height = innerHeight - xScale(yVal);
+const Bar = ({
+    yScale, xScale,
+    xVal, yVal,
+    width, height,
+    color
+}) => {
+    const x = xScale(xVal);
+    const y = yScale(yVal);
+    height -= yScale(yVal);
 
     const onMouseOver = (e) => {
         e.target.style.strokeWidth = "3px";
@@ -37,17 +41,24 @@ const Bar = ({yScale, xScale, xVal, yVal, width, color}) => {
     );
 }
 
-const Bars = ({data, xTitle, yTitle, yScale, xScale}) => {
-    const width = Math.min(yScale.bandwidth(), barMaxWidth);
+const Bars = ({
+    data, maxWidth,
+    xTitle, yTitle,
+    xScale, yScale,
+    height,
+}) => {
+    const width = Math.min(xScale.bandwidth(), maxWidth);
     const colors = d3.shuffle(PLOT_DATA_COLORS);
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d[xTitle]))
         .range(colors);
 
-
     return (data.map((d) =>
-            <Bar key={d[xTitle]} width={width} xVal={d[xTitle]} yVal={d[yTitle]}
-                 yScale={yScale} xScale={xScale} color={color(d[xTitle])}/>
+            <Bar key={d[xTitle]} color={color(d[xTitle])}
+                 width={width} height={height}
+                 xVal={d[xTitle]} yVal={d[yTitle]}
+                 yScale={yScale} xScale={xScale}
+                 />
         )
     );
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import {innerHeight} from "./ScatterPlot";
+import {innerHeight} from "./LineChart";
 
 
 const YAxisValue = ({value, y}) => (

@@ -2,7 +2,7 @@ import React from "react";
 import {Typography} from "@mui/material";
 
 
-const ChartContainer = ({title, children}) => (
+const PlotContainer = ({title, children}) => (
     <div style={{fontSize: 11, border: "1px solid gray"}}>
         <Typography align="center" variant="h6">{title}</Typography>
         <div>
@@ -12,4 +12,4 @@ const ChartContainer = ({title, children}) => (
 )
 
 
-export default ChartContainer;
+export default PlotContainer;

@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 
-import ChartContainer from "../ChartContainer";
-import XAxis from "./XAxis";
+import PlotContainer from "../PlotContainer";
 import Bars from "./Bars";
+import XAxis from "./XAxis";
 import YAxis from "./YAxis";
 
 
@@ -19,23 +19,25 @@ export const barMaxWidth = 55;
 const BarChart = ({data, title, xTitle, yTitle}) => {
     const [barChart, setBarChart] = useState(<svg viewBox={viewBox}/>);
 
-    const yScale = d3.scaleBand()
+    const xScale = d3.scaleBand()
         .domain(data.map(d => d[xTitle]))
         .range([0, innerWidth])
         .paddingInner(0.05)
-        .paddingOuter(0.1);
+        .paddingOuter(0.05);
 
-    const xScale = d3.scaleLinear()
-        .domain([d3.max(data, d => d[yTitle]), 0])
-        .range([0, innerHeight]);
+    const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d[yTitle])])
+        .range([innerHeight, 0]);
 
     const generateBarChart = () => (
         <svg viewBox={viewBox}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-                <XAxis xScale={xScale}/>
-                <YAxis yScale={yScale}/>
-                <Bars data={data} xTitle={xTitle} yTitle={yTitle}
+                <XAxis scale={xScale} height={innerHeight}/>
+                <YAxis scale={yScale} height={innerHeight} width={innerWidth}/>
+                <Bars data={data} maxWidth={barMaxWidth}
+                      xTitle={xTitle} yTitle={yTitle}
                       yScale={yScale} xScale={xScale}
+                      height={innerHeight}
                 />
             </g>
         </svg>
@@ -47,9 +49,9 @@ const BarChart = ({data, title, xTitle, yTitle}) => {
     }, [data]);
 
     return (
-        <ChartContainer title={title}>
+        <PlotContainer title={title}>
             {barChart}
-        </ChartContainer>
+        </PlotContainer>
     );
 };
 
