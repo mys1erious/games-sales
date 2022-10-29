@@ -4,9 +4,9 @@ import {TextField} from "@mui/material";
 
 import {Button} from "features/core/components/Button";
 import ReportBody from "features/reports/components/ReportBody";
+import {setFormState} from "features/core/utils";
 import {initReportHeaders} from "features/reports/constants";
 import {postReport} from "features/reports/services";
-import {setFormState} from "../features/core/utils";
 
 
 const createReportFile = (reportHeaders) => {
