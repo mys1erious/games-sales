@@ -5,6 +5,7 @@ from reports.api import views as report_views
 from accounts.api import views as account_views
 
 
+# Move paths to its own urls in apps ?
 urlpatterns = [
     # -- Sales --
     # {% url 'api:sales' %}
@@ -30,6 +31,36 @@ urlpatterns = [
         route='sale-analysis/',
         view=sale_views.SaleAnalysisAPIView.as_view(),
         name='sale_analysis'
+    ),
+    # {% url 'api:analysis_top_field' %}
+    path(
+        route='sale-analysis/top-field/',
+        view=sale_views.SaleAnalysisTopFieldAPIView.as_view(),
+        name='analysis_top_field',
+    ),
+    # {% url 'api:analysis_describe' %}
+    path(
+        route='sale-analysis/describe/',
+        view=sale_views.SaleAnalysisDescribeAPIView.as_view(),
+        name='analysis_describe',
+    ),
+    # {% url 'api:analysis_score' %}
+    path(
+        route='sale-analysis/score/',
+        view=sale_views.SaleAnalysisScoreAPIView.as_view(),
+        name='analysis_score',
+    ),
+    # {% url 'api:analysis_games_annually' %}
+    path(
+        route='sale-analysis/games-annually/',
+        view=sale_views.SaleAnalysisGamesAnnuallyAPIView.as_view(),
+        name='analysis_games_annually',
+    ),
+    # {% url 'api:analysis_games_by_field' %}
+    path(
+        route='sale-analysis/games-by-field/',
+        view=sale_views.SaleAnalysisGamesByFieldAPIView.as_view(),
+        name='analysis_games_by_field',
     ),
 
     # -- Reports --

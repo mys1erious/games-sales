@@ -9,6 +9,10 @@ def db_field_to_field(db_field):
         .title()
 
 
+def cut_db_field(db_field):
+    return db_field.split('__')[-1]
+
+
 def field_to_db_field(field):
     Game = apps.get_model('sales.Game')
     Rating = apps.get_model('sales.Rating')
@@ -16,7 +20,7 @@ def field_to_db_field(field):
     rating_fields = get_all_field_names(Rating)
 
     in_reverse = False
-    if field[0] == '-':
+    if field and field[0] == '-':
         field = field[1:]
         in_reverse = True
 
@@ -56,13 +60,3 @@ def get_numeric_field_names(models_list, exclude=()):
                     field.name not in exclude:
                 fields.append(field.name)
     return fields
-
-
-def get_sales_field_names():
-    Sale = apps.get_model('sales.Sale')
-
-    return [
-        field.name
-        for field in Sale._meta.get_fields()
-        if 'sales' in field.name
-    ]

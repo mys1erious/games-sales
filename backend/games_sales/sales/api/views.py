@@ -10,14 +10,13 @@ from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
 from core.permissions import IsAdminOrReadOnly
 from core.utils import intersected_params
-from ..constants import TOP_FIELDS
+from ..utils import db_field_to_field, field_to_db_field, get_all_field_names
 from ..models import Sale, Game, Rating
-from .serializers import SaleSerializer, TopFieldsSerializer
-from ..utils import db_field_to_field, field_to_db_field, get_all_field_names, get_sales_field_names
+from .serializers import SaleSerializer, TopFieldSerializer, UserCriticScoreSerializer
 
 
-class SaleBaseAPIView(APIView, LimitOffsetPagination):
-    permission_classes = (AllowAny,)  # Change
+class BaseSaleAPIView(APIView, LimitOffsetPagination):
+    permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = []
 
     query_search_param = 'text'
@@ -68,8 +67,8 @@ class SaleBaseAPIView(APIView, LimitOffsetPagination):
         ), paginator.num_pages
 
 
-class SaleListAPIView(SaleBaseAPIView):
-    def get(self, request, *args, **kwargs):
+class SaleListAPIView(BaseSaleAPIView):
+    def get(self, request, format=None):
         query_params = request.query_params
         sales = self.get_sales(query_params)
 
@@ -87,7 +86,7 @@ class SaleListAPIView(SaleBaseAPIView):
             'num_pages': num_pages
         }, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, format=None):
         serializer = SaleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -97,16 +96,18 @@ class SaleListAPIView(SaleBaseAPIView):
 
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrReadOnly,)
+    authentication_classes = []
+
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
     lookup_field = 'slug'
 
 
 class SaleFilterFieldsListAPIView(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = []
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, format=None):
         order_by = [
             db_field_to_field(db_field)
             for db_field in get_all_field_names(
@@ -115,7 +116,7 @@ class SaleFilterFieldsListAPIView(APIView):
             )
         ]
 
-        genres = Sale.objects.all().genres()\
+        genres = Sale.objects.all().unique_values('genre')\
             .order_by('game__genre')
         esrb_ratings = Game.ESRBRatings.names
 
@@ -128,74 +129,169 @@ class SaleFilterFieldsListAPIView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 
-class SaleAnalysisAPIView(SaleBaseAPIView):
-    permission_classes = (AllowAny,)
+class SaleAnalysisAPIView(APIView):
+    permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = []
 
-    default_sales_type = 'global_sales'
-    list_len = 300
+    def get(self, request, format=None):
+        # Add sub endpoints here
+        return Response({'Base Sale Analysis Endpoint'}, status=status.HTTP_200_OK)
 
-    def get(self, request, *args, **kwargs):
-        query_params = QueryDict.copy(request.query_params)
+
+class BaseSaleAnalysisAPIView(BaseSaleAPIView):
+    n = 10
+    sales_type = 'global_sales'
+    field = ''
+
+    def get_sales(self, query_params):
+        query_params = self.set_page_size_to_max(query_params)
+        return super().get_sales(query_params)
+
+    def set_page_size_to_max(self, query_params):
         query_params['page_size'] = '-1'
+        return query_params
 
+    def get_query_params(self, query_params):
+        self.get_n_param(query_params)
+
+    def get_n_param(self, query_params):
+        n = query_params.pop('n', [self.n])[0]
+        if n == '-1':
+            self.n = -1
+        elif isinstance(n, str) and n.isdigit():
+            self.n = int(n)
+
+    def get_sales_type_param(self, query_params):
         sales_type = query_params.pop(
             'sales_type',
-            [self.default_sales_type]
+            [self.sales_type]
         )[0]
-        if sales_type not in get_sales_field_names():
-            sales_type = self.default_sales_type
+        if sales_type in Sale.get_sales_field_names():
+            self.sales_type = sales_type
 
-        list_len = query_params.pop('list_len', [self.list_len])[0]
-        if isinstance(list_len, str) and list_len.isdigit():
-            self.list_len = int(list_len)
+    def get_field_param(self, query_params):
+        field = query_params.pop('field', [''])[0]
+        if field in Sale.ALLOWED_FIELD_PARAMS:
+            self.field = field
+
+    def field_param_is_valid(self):
+        if self.field in Sale.ALLOWED_FIELD_PARAMS:
+            return True
+        return False
+
+    def field_param_not_valid_response(self):
+        return Response({
+            'message':
+                f'Param field=\'{self.field}\' is not in allowed fields '
+                f'{Sale.ALLOWED_FIELD_PARAMS}'
+        }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SaleAnalysisTopFieldAPIView(BaseSaleAnalysisAPIView):
+    def get(self, request, format=None):
+        query_params = QueryDict.copy(request.query_params)
+        self.get_query_params(query_params)
+        if not self.field_param_is_valid():
+            return self.field_param_not_valid_response()
 
         sales = self.get_sales(query_params)
 
-        top_fields_data = self.get_top_fields_data(sales, sales_type)
-        describe_data = sales.describe()
+        data = sales.top_n_fields(
+            field=self.field,
+            sales_type=self.sales_type,
+            n=self.n
+        )
 
-        user_score_field = 'user_score'
-        critic_score_field = 'critic_score'
-        score_correlation = {
-            db_field_to_field(user_score_field):
-                self.get_values_list(sales, user_score_field),
-            db_field_to_field(critic_score_field):
-                self.get_values_list(sales, critic_score_field),
-        }
+        serializer = TopFieldSerializer(
+            data,
+            field=self.field,
+            many=True
+        )
 
-        data = {
-            'description': describe_data,
-            'score_correlation': score_correlation,
-            **top_fields_data
-        }
+        if serializer.is_valid:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+    def get_query_params(self, query_params):
+        self.get_field_param(query_params)
+        self.get_sales_type_param(query_params)
+        super().get_query_params(query_params)
+
+
+class SaleAnalysisDescribeAPIView(BaseSaleAnalysisAPIView):
+    def get(self, request, format=None):
+        query_params = QueryDict.copy(request.query_params)
+        sales = self.get_sales(query_params)
+
+        data = sales.describe()
+
         return Response(data, status=status.HTTP_200_OK)
 
-    def get_values_list(self, sales, field, exclude_null=True):
-        db_field = field_to_db_field(field)
 
-        if exclude_null:
-            sales = sales.exclude(**{f'{db_field}__isnull': True})
+class SaleAnalysisScoreAPIView(BaseSaleAnalysisAPIView):
+    n = 200
 
-        return sales[:self.list_len].values_list(db_field, flat=True)
+    def get(self, request, format=None):
+        query_params = QueryDict.copy(request.query_params)
+        self.get_query_params(query_params)
+        sales = self.get_sales(query_params)
 
-    def get_top_fields_data(self, sales, sales_type):
-        top_fields_data = {}
-        for field in TOP_FIELDS:
-            top_fields_data[f'top_{field}s'] = self.get_top_field_data(
-                sales, field, sales_type
-            )
-        return top_fields_data
-
-    @staticmethod
-    def get_top_field_data(sales, field, sales_type):
-        top_fields = sales.top_n_fields(
-            field=field,
-            sales_type=sales_type,
-            n=10
+        data = sales.get_fields_correlation_data(
+            'user_score',
+            'critic_score',
+            n=self.n
         )
-        return TopFieldsSerializer(
-            top_fields,
-            field=field,
-            many=True
-        ).data
+
+        serializer = UserCriticScoreSerializer(data, many=True)
+        if serializer.is_valid:
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+
+class SaleAnalysisGamesAnnuallyAPIView(BaseSaleAnalysisAPIView):
+    yor_lt = 2050
+    yor_gt = 0
+
+    def get(self, request, format=None):
+        query_params = QueryDict.copy(request.query_params)
+        self.get_query_params(query_params)
+        sales = self.get_sales(query_params)
+
+        data = sales.games_annually(yor_lt=self.yor_lt, yor_gt=self.yor_gt)
+
+        return Response(data, status=status.HTTP_200_OK)
+
+    def get_query_params(self, query_params):
+        yor_lt = query_params.pop('yor_lt', [self.yor_lt])[0]
+        if isinstance(yor_lt, str) and yor_lt.isdigit():
+            self.yor_lt = int(yor_lt)
+        yor_gt = query_params.pop('yor_gt', [self.yor_gt])[0]
+        if isinstance(yor_gt, str) and yor_gt.isdigit():
+            self.yor_gt = int(yor_gt)
+
+        super().get_query_params(query_params)
+
+
+class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
+    n = 5
+
+    def get(self, request, format=None):
+        query_params = QueryDict.copy(request.query_params)
+        self.get_query_params(query_params)
+        if not self.field_param_is_valid():
+            return self.field_param_not_valid_response()
+
+        sales = self.get_sales(query_params)
+
+        data = sales.top_games_by_field(
+            field=self.field,
+            sales_type=self.sales_type,
+            n=self.n
+        )
+
+        return Response(data, status=status.HTTP_200_OK)
+
+    def get_query_params(self, query_params):
+        self.get_field_param(query_params)
+        self.get_sales_type_param(query_params)
+        return super().get_query_params(query_params)

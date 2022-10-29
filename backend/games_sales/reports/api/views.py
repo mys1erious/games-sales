@@ -9,6 +9,7 @@ from .serializers import ReportSerializer
 
 class ReportsListAPIView(APIView):
     permission_classes = (IsAuthenticated,)
+    authentication_classes = []
 
     def get(self, request, *args, **kwargs):
         serializer = ReportSerializer(Report.objects.all(), many=True)

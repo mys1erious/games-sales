@@ -3,7 +3,7 @@ from django.db.models import Q, QuerySet, F, Sum, Count, Max, Avg, StdDev, Min, 
 from django.utils.text import slugify
 
 from core.utils import is_int
-from .utils import field_to_db_field, db_field_to_field, get_numeric_field_names
+from .utils import field_to_db_field, get_numeric_field_names, cut_db_field
 
 
 class Rating(models.Model):
@@ -141,9 +141,9 @@ class SaleQuerySet(QuerySet):
             qs = filters_map[param]()
         return qs
 
-    def genres(self):
-        return self.order_by()\
-            .values_list('game__genre', flat=True)\
+    def unique_values(self, field):
+        return self.order_by() \
+            .values_list(field_to_db_field(field), flat=True) \
             .distinct()
 
     def top_n_fields(
@@ -156,10 +156,24 @@ class SaleQuerySet(QuerySet):
         if n == -1:
             n = self.values(db_field).distinct().count()
 
-        return self.values(**{field: F(db_field)})\
-                   .exclude(**{f'{field}__isnull': True})\
-                   .annotate(count=Sum(sales_type))\
-                   .order_by('-count')[:n]
+        return self.values(**{field: F(db_field)}) \
+                   .exclude(**{f'{field}__isnull': True}) \
+                   .annotate(sales=Sum(sales_type)) \
+                   .order_by('-sales')[:n]
+
+    def get_fields_correlation_data(self, field1, field2, n=300):
+        user_db_field = field_to_db_field(field1)
+        critic_db_field = field_to_db_field(field2)
+
+        if n == -1:
+            n = self.all().count()
+
+        return self.exclude(
+            Q(**{f'{user_db_field}__isnull': True}) |
+            Q(**{f'{critic_db_field}__isnull': True})) \
+                   .values(**{
+            field1: F(user_db_field),
+            field2: F(critic_db_field)})[:n]
 
     def describe(self):
         # Generate descriptive statistics
@@ -169,8 +183,9 @@ class SaleQuerySet(QuerySet):
         db_fields = [field_to_db_field(field) for field in fields]
 
         data = {}
+
         for db_field in db_fields:
-            data[db_field_to_field(db_field)] = self.describe_field(db_field)
+            data[cut_db_field(db_field)] = self.describe_field(db_field)
 
         return data
 
@@ -185,6 +200,44 @@ class SaleQuerySet(QuerySet):
             p75=Percentile(db_field, percentile=0.75),
             max=Max(db_field)
         )
+
+    def games_annually(self, yor_lt=2050, yor_gt=0):
+        field = 'year_of_release'
+        db_field = field_to_db_field(field)
+
+        data = self.values(**{field: F(db_field)}) \
+            .exclude(**{f'{db_field}__isnull': True}) \
+            .filter(**{
+            f'{db_field}__lt': yor_lt,
+            f'{db_field}__gt': yor_gt})\
+            .annotate(count=Count(db_field)) \
+            .order_by(field)
+
+        return data
+
+    def top_games_by_field(self, field, sales_type='global_sales', n=5):
+        db_field = field_to_db_field(field)
+        values = Sale.objects.all().unique_values(field)
+        data = {value: [] for value in values}
+
+        qs = self.values(
+            **{field: F(db_field)},
+            name=F('game__name'),
+            sales=F(sales_type)
+        )
+
+        res = qs.none()
+        for value in values:
+            res = res.union(
+                qs.filter(**{db_field: value})\
+                .order_by('-sales')[:n]
+            )
+        res = res.order_by(field, '-sales')
+
+        for obj in res:
+            data[obj[field]].append({'name': obj['name'], 'sales': obj['sales']})
+
+        return data
 
 
 class SaleManager(models.Manager):
@@ -211,6 +264,8 @@ class SaleManager(models.Manager):
 
 
 class Sale(models.Model):
+    ALLOWED_FIELD_PARAMS = ['platform', 'genre', 'publisher', 'developer', 'esrb_rating']
+
     slug = models.SlugField(
         unique=True, blank=True,
         max_length=120
@@ -243,6 +298,14 @@ class Sale(models.Model):
     )
 
     objects = SaleManager()
+
+    @staticmethod
+    def get_sales_field_names():
+        return [
+            field.name
+            for field in Sale._meta.get_fields()
+            if 'sales' in field.name
+        ]
 
     def save(self, *args, **kwargs):
         self.slug = f'{self.game.slug}-sales'
