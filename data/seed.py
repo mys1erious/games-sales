@@ -35,7 +35,7 @@ def get_access_token():
 
 URL = get_env_var('BASE_API_URL')
 FILE_PATH = 'samples.json'
-NUM_OF_SAMPLES = 100
+NUM_OF_SAMPLES = 1000
 ACCESS_TOKEN = get_access_token()
 
 
@@ -71,4 +71,5 @@ def get_sales():
 
 if __name__ == '__main__':
     samples = get_samples()
+    # print(samples)
     post_sales(samples)
