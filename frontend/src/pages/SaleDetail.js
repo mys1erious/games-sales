@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
-import {Container} from "@mui/material";
+import {
+    Box,
+    Container,
+    Grid,
+    Typography
+} from "@mui/material";
 
 import {Button} from "features/core/components/Button";
-import {deleteSale, editSale, getSale} from "features/sales/services";
+import {getSale} from "features/sales/services";
+import SaleDetailTable from "../features/sales/components/SaleDetailTable";
 
 
 const buttonWidth = "70px";
@@ -30,7 +36,8 @@ const SaleDetail = () => {
     async function handleGetSale() {
         try {getSaleFromState();}
         catch (e) {
-            await getSale(saleSlug);
+            const res = await getSale(saleSlug);
+            setSale(res.data);
         }
     }
 
@@ -38,34 +45,34 @@ const SaleDetail = () => {
         handleGetSale();
     }, [saleSlug]);
 
-    async function handleEditSale () {
-        // Implement alert
-        await editSale();
-    }
-
-    async function handleDeleteSale () {
-        // Implement alert
-        await deleteSale(saleSlug);
-        navigate('/sales/');
-    }
-
-    // Rework to look normally (like a table or sth)
     return(
         <Container component="main" maxWidth="xl">
             <Button sx={{width: buttonWidth}} onClick={() => navigate(-1)}>
                 Back
             </Button>
-            <Button sx={{width: buttonWidth}} onClick={handleEditSale}>
-                Edit
-            </Button>
-            <Button sx={{width: buttonWidth}} onClick={handleDeleteSale}
-                    color="error">
-                Delete
-            </Button>
-            <h3>Sale info:</h3>
-            <pre>
-                {JSON.stringify(sale, {}, 4)}
-            </pre>
+            <Box textAlign="center">
+                <Typography variant="h4" marginBottom="20px">
+                    Sale info:
+                </Typography>
+                <Grid container textAlign="center">
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h5">Sales</Typography>
+                        <SaleDetailTable obj={sale} exclude={['game', 'slug']}/>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h5">Game</Typography>
+                        {sale.game
+                            ? <SaleDetailTable obj={sale.game} exclude={['rating', 'slug']}/>
+                            : null}
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                        <Typography variant="h5">Ratings</Typography>
+                        {sale.game?.rating
+                            ? <SaleDetailTable obj={sale.game.rating}/>
+                            : null}
+                    </Grid>
+                </Grid>
+            </Box>
         </Container>
     )
 };
