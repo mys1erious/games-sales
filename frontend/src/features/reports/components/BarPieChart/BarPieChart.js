@@ -19,10 +19,11 @@ const BarPieChart = ({data, title, xTitle, yTitle}) => {
     }
 
     const switchOnChange = () => {
-        if (type === BAR)
-            setType(PIE)
-        else if (type === PIE)
-            setType(BAR)
+        const setTypesMap = {
+            [BAR]: () => setType(PIE),
+            [PIE]: () => setType(BAR)
+        };
+        setTypesMap[type]();
     };
 
     return(

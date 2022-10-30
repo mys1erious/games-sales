@@ -1,5 +1,5 @@
-import {styled, Switch} from "@mui/material";
 import React from "react";
+import {styled, Switch} from "@mui/material";
 
 
 const barImg = `url('data:image/svg+xml;utf8,` +
@@ -21,7 +21,7 @@ const MaterialUISwitch = styled(Switch)(({theme}) => ({
     padding: 6,
     '& .MuiSwitch-switchBase': {
         marginTop: 4,
-        marginLeft: 3,
+        marginLeft: 1,
         padding: 0,
         transform: 'translateX(6px)',
         '&.Mui-checked': {

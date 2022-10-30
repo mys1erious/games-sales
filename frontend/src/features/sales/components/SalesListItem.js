@@ -7,8 +7,8 @@ import {
 } from "@mui/material";
 import {ExpandLess, ExpandMore} from "@mui/icons-material";
 
-import Image from "features/core/components/Image";
 import gameIconSrc from "assets/game_icon.svg";
+import Image from "features/core/components/Image";
 
 
 const ListItemSubText = styled(ListItemText)({
@@ -16,14 +16,10 @@ const ListItemSubText = styled(ListItemText)({
 });
 
 
-const SalesListItem = ({sale, currPage}) => {
+const SalesListItem = ({sale}) => {
     const navigate = useNavigate();
 
     const [isExpanded, setIsExpanded] = useState(false);
-
-    useEffect(() => {
-        setIsExpanded(false);
-    }, [currPage]);
 
     const handleItemClick = () => {
         navigate(`/sales/${sale.slug}`, {state: {sale: sale}});

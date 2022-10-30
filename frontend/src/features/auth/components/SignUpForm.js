@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {signUp} from "../services";
 import {initialSignUpFormData} from "../constants";
@@ -6,12 +7,11 @@ import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
-import AuthAlert, {triggerAlert} from "./AuthAlert";
-import {initialAlertData} from "features/core/constants";
+import AuthAlert from "./AuthAlert";
 
 
 const SignUpForm = () => {
-    const [alert, setAlert] = useState(initialAlertData);
+    const navigate = useNavigate();
     const [formData, setFormData] = useState(initialSignUpFormData);
 
     const handleEmailSignUp = async(e) => {
@@ -24,10 +24,10 @@ const SignUpForm = () => {
                 formData.password,
                 formData.passwordConfirmation
             );
-            triggerAlert(response, alert, setAlert);
+            navigate('/signin/');
         }
         catch (e) {
-            triggerAlert(e.response, alert, setAlert);
+            console.log(e.response)
         }
 
     };

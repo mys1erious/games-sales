@@ -8,37 +8,38 @@ import DataLoadingItem from "features/core/components/DataLoadingItem";
 import {Button} from "features/core/components/Button";
 import SalesList from "features/sales/components/SalesList";
 import {getSales} from "features/sales/services";
-import SalesFilterSidebar from "features/sales/components/SalesFilterSidebar";
+import FilterSidebar from "features/sales/components/FilterSidebar";
 
 
 const Sales = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const [sales, setSales] = useState([]);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [currPage, setCurrPage] = useState(parseInt(searchParams.get('page')) || 1);
+    const [loading, setLoading] = useState(false);
     const [numPages, setNumPages] = useState(1);
 
     useEffect(() => {
-        if (location.state?.newSearch)
-            setCurrPage(1);
+        if (location.state?.newSearch) {
+            searchParams.set('page', '1');
+            setSearchParams(searchParams);
+        }
     }, [location.state?.newSearch]);
 
     useEffect(() => {
-        getSales(`?${searchParams.toString()}`)
+        setLoading(true);
+        getSales(`?${searchParams}`)
             .then((response) => {
                 setSales(response.data.sales);
                 setNumPages(response.data.num_pages);
+                setLoading(false);
         });
-
-        searchParams.set('page', currPage.toString());
-        setSearchParams(searchParams);
-
-    }, [currPage, searchParams]);
+    }, [searchParams]);
 
     const changePage = (e, p) => {
-        setCurrPage(p);
+        searchParams.set('page', p);
+        setSearchParams(searchParams);
     };
 
     const createReport = () => {
@@ -47,9 +48,6 @@ const Sales = () => {
         navigate(`/report-builder/?${params}`);
     };
 
-    if (!sales)
-        return(<DataLoadingItem />)
-
     return(
         <Grid container spacing={0} direction="column" alignItems="center">
             <Grid item marginY="3%">
@@ -57,17 +55,20 @@ const Sales = () => {
             </Grid>
             <Grid item minWidth="300px" width="40%">
                 <Box display="flex" justifyContent="space-between">
-                    <SalesFilterSidebar setCurrPage={setCurrPage} />
+                    <FilterSidebar />
                     <Button color="success" onClick={createReport}>
                         Create Report <ArrowForwardIcon />
                     </Button>
                 </Box>
-                <SalesList sales={sales} currPage={currPage} />
+                {loading
+                    ? <DataLoadingItem/>
+                    : <SalesList sales={sales}/>
+                }
             </Grid>
             <Grid item marginTop="5%">
-                <Typography>Page: {currPage}</Typography>
+                <Typography>Page: {searchParams.get('page')}</Typography>
                 <Pagination boundaryCount={1} siblingCount={1} count={numPages}
-                            onChange={changePage} page={currPage}
+                            onChange={changePage} page={+searchParams.get('page')}
                             hidePrevButton hideNextButton
                             color="primary" variant="outlined"
                 />

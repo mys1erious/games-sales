@@ -1,5 +1,5 @@
-import {nameShortener} from "../../utils";
 import React from "react";
+import {nameShortener} from "features/core/utils";
 
 
 const midAngle = (d) => d.startAngle + (d.endAngle - d.startAngle)/2;

@@ -1,17 +1,20 @@
 import React from "react";
-import BarPieChartGridItem from "./BarPieChartGridItem";
+import BarPieChart from "./BarPieChart";
+import {Grid} from "@mui/material";
 
 
-const BarPieChartGridItems = ({charts, analysisData}) => (
-    Object.entries(charts).map(([name, chart]) => (
-        analysisData[chart.dataProp] && chart.isVisible
-            ? <BarPieChartGridItem
-                key={name}
-                Chart={chart.component}
-                data={analysisData[chart.dataProp]}
-                title={chart.title}
-                xTitle={chart.xTitle}
-                yTitle={chart.yTitle}/>
+const BarPieChartGridItems = ({plots, data}) => (
+    Object.entries(plots).map(([name, plot]) => (
+        data[plot.xTitle] &&
+        plot.component === BarPieChart &&
+        plot.isVisible
+            ?
+            <Grid key={name} item xs={12} md={6} xl={4}>
+                <BarPieChart data={data[plot.xTitle]}
+                             title={plot.title}
+                             xTitle={plot.xTitle}
+                             yTitle={plot.yTitle}/>
+            </Grid>
             : null
         )
     )

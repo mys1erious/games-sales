@@ -1,22 +1,15 @@
-export const initialHighlighted = {
-    'order_by': '',
-    'genre': '',
-    'esrb_rating': ''
-};
-
-export const initialFieldChoices = {
-    'order_by': [],
-    'genre': [],
-    'esrb_rating': [],
-    'year_of_release': []
-};
-
-export const initialYearParam = [0, new Date().getFullYear()];
-
-export const filterFields = ['Order By', 'Genre', 'Esrb Rating', 'Year of Release'];
-
 export const FIELDS = {
-    YEAR_OF_RELEASE: 'Year of Release',
+    ORDER_BY: 'order_by',
+    GENRE: 'genre',
+    ESRB_RATING: 'esrb_rating',
+    YEAR_OF_RELEASE: 'year_of_release',
+};
 
-}
+export const initSubFieldsData = {
+    [FIELDS.ORDER_BY]: [],
+    [FIELDS.GENRE]: [],
+    [FIELDS.ESRB_RATING]: [],
+    [FIELDS.YEAR_OF_RELEASE]: []
+};
 
+export const initYearParam = [0, new Date().getFullYear()+1];

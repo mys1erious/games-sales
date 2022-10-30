@@ -1,15 +1,19 @@
 import React from "react";
 import * as d3 from "d3";
 
-import {innerHeight} from "./BarChart";
-import {BAR_PIE_DATA_COLORS} from "../../constants";
-import {barMaxWidth} from "./BarChart";
+import {roundVal} from "features/core/utils";
+import {PLOT_DATA_COLORS} from "../../constants";
 
 
-const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
-    const x = nameScale(xVal);
-    const y = valScale(yVal);
-    const height = innerHeight - valScale(yVal);
+const Bar = ({
+    yScale, xScale,
+    xVal, yVal,
+    width, height,
+    color
+}) => {
+    const x = xScale(xVal);
+    const y = yScale(yVal);
+    height -= yScale(yVal);
 
     const onMouseOver = (e) => {
         e.target.style.strokeWidth = "3px";
@@ -31,23 +35,30 @@ const Bar = ({nameScale, valScale, xVal, yVal, width, color}) => {
             <text x={x+3} y={y+(height/2)} fontSize={11}
                   cursor="default" pointerEvents="none"
                   fill="#000000" display="none">
-                {yVal}
+                {roundVal(yVal)}
             </text>
         </g>
     );
 }
 
-const Bars = ({data, xTitle, yTitle, nameScale, valScale}) => {
-    const width = Math.min(nameScale.bandwidth(), barMaxWidth);
-    const colors = d3.shuffle(BAR_PIE_DATA_COLORS);
+const Bars = ({
+    data, maxWidth,
+    xTitle, yTitle,
+    xScale, yScale,
+    height,
+}) => {
+    const width = Math.min(xScale.bandwidth(), maxWidth);
+    const colors = d3.shuffle(PLOT_DATA_COLORS);
     const color = d3.scaleOrdinal()
         .domain(data.map(d => d[xTitle]))
         .range(colors);
 
-
     return (data.map((d) =>
-            <Bar key={d[xTitle]} width={width} xVal={d[xTitle]} yVal={d[yTitle]}
-                 nameScale={nameScale} valScale={valScale} color={color(d[xTitle])}/>
+            <Bar key={d[xTitle]} color={color(d[xTitle])}
+                 width={width} height={height}
+                 xVal={d[xTitle]} yVal={d[yTitle]}
+                 yScale={yScale} xScale={xScale}
+                 />
         )
     );
 };

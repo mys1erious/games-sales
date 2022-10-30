@@ -1,12 +1,13 @@
 import {TableCell, TableRow, TableBody as BaseTableBody} from "@mui/material";
-import {unslugify} from "features/core/utils";
 import React from "react";
+import {roundVal} from "features/core/utils";
+import {unslugify} from "../../../core/utils";
 
 
 const RowCells = ({row}) => (
     Object.values(row).map((val, count) => (
         <TableCell key={count}>
-            {Math.round((val + Number.EPSILON) * 100) / 100}
+            {roundVal(val)}
         </TableCell>
     ))
 );

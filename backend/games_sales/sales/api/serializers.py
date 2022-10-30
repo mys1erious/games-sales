@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from ..models import Sale, Game, Rating
 
 
@@ -34,3 +35,28 @@ class SaleSerializer(serializers.ModelSerializer):
             **game_data,
             **rating_data
         )
+
+
+class TopFieldSerializer(serializers.ModelSerializer):
+    sales = serializers.FloatField()
+
+    def __init__(self, *args, **kwargs):
+        field = kwargs.pop('field', None)
+
+        super().__init__(*args, **kwargs)
+
+        if field is not None:
+            allowed = {field, 'sales'}
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+
+    class Meta:
+        model = Game
+        fields = ['sales'] + Sale.ALLOWED_FIELD_PARAMS
+
+
+class UserCriticScoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = ['user_score', 'critic_score']

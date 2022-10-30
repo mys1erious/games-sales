@@ -1,6 +1,6 @@
 import React from "react";
-import {radius} from "./PieChart";
 import * as d3 from "d3";
+import {radius} from "./PieChart";
 
 
 const Line = ({points}) => {

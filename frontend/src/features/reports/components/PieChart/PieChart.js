@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from "react";
-
 import * as d3 from "d3";
 
+import PlotContainer from "../PlotContainer";
 import Slices from "./Slices";
 import Labels from "./Labels";
 import Lines from "./Lines";
-import ChartContainer from "../ChartContainer";
 
 
 const width = 640;
 const height = 400;
 const margin = 20;
+const viewBox = `0 0 ${width} ${height}`;
 export const radius = Math.min(width, height) / 2-margin;
 export const labelOffset = 40;
 
@@ -20,9 +20,8 @@ const outerArc = d3.arc()
 
 
 const PieChart = ({data, title, xTitle, yTitle}) => {
-    console.log(`RENDERED: pie chart: ${title}`)
     const [pieChart, setPieChart] = useState(
-        <svg viewBox={`0 0 ${width} ${height}`} />
+        <svg viewBox={viewBox} />
     );
 
     const pie = d3.pie()
@@ -38,7 +37,7 @@ const PieChart = ({data, title, xTitle, yTitle}) => {
     };
 
     const generatePieChart = () => (
-        <svg viewBox={`0 0 ${width} ${height}`}>
+        <svg viewBox={viewBox}>
             <g transform={`translate(${width / 2}, ${height / 2})`}>
                 {
                     <>
@@ -60,9 +59,9 @@ const PieChart = ({data, title, xTitle, yTitle}) => {
     }, [data]);
 
     return(
-        <ChartContainer title={title}>
+        <PlotContainer title={title}>
             {pieChart}
-        </ChartContainer>
+        </PlotContainer>
     );
 };
 

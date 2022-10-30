@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -10,11 +10,11 @@ from .serializers import ReportSerializer
 class ReportsListAPIView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request, format=None):
         serializer = ReportSerializer(Report.objects.all(), many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request, format=None):
         request.data._mutable = True
         request.data['user'] = request.user.id
         request.data._mutable = False
