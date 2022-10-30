@@ -1,7 +1,7 @@
 import React from "react";
 import * as d3 from "d3";
 
-import {roundVal} from "../../utils";
+import {roundVal} from "features/core/utils";
 import {PLOT_DATA_COLORS} from "../../constants";
 
 

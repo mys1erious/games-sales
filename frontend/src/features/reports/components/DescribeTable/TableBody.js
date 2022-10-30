@@ -1,6 +1,6 @@
 import {TableCell, TableRow, TableBody as BaseTableBody} from "@mui/material";
 import React from "react";
-import {roundVal} from "../../utils";
+import {roundVal} from "features/core/utils";
 import {unslugify} from "../../../core/utils";
 
 

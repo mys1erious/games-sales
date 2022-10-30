@@ -19,4 +19,3 @@ export const FIELDS = {
     YEAR_OF_RELEASE: 'Year of Release',
 
 }
-

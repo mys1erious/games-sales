@@ -1,5 +1,5 @@
 import React from "react";
-import {nameShortener} from "../../utils";
+import {nameShortener} from "features/core/utils";
 
 
 const XAxisValue = ({scale, value, barMaxWidth}) => (

@@ -1,6 +1,6 @@
 import axiosInstance from "lib/axiosInstance";
 import {GAMES_BY_FIELDS, TOP_FIELDS} from "./constants";
-import {setMultSearchParams} from "./utils";
+import {setMultSearchParams} from "features/core/utils";
 
 
 export const getGamesByFieldsData = async(searchParams, props={}) => {
@@ -54,5 +54,8 @@ export const getTopFieldData = async(searchParams, props={}) => {
 
 export const postReport = async(data) => {
     axiosInstance.defaults.headers['Content-Type'] = 'multipart/form-analysisData';
-    return await axiosInstance.post('/reports/', data);
+    const res = await axiosInstance.post('/reports/', data);
+    console.log('SERVICE: ', res);
+    axiosInstance.defaults.headers['Content-Type'] = 'application/json';
+    return res;
 };

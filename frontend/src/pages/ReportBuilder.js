@@ -76,7 +76,6 @@ const saveReport = async(reportHeaders) => {
     data.set('name', reportHeaders.name);
     data.set('report_body', doc)
 
-    // Make an Alert
     try {
         await postReport(data);
         console.log('created');

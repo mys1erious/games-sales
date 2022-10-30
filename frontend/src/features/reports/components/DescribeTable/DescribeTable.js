@@ -46,4 +46,4 @@ const DescribeTable = () => {
 };
 
 
-export default React.memo(DescribeTable);
+export default DescribeTable;

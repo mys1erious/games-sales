@@ -2,7 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 
 import {PLOT_DATA_COLORS} from "../../constants";
-import {roundVal} from "../../utils";
+import {roundVal} from "features/core/utils";
 import {radius} from "./PieChart";
 
 
