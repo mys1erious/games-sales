@@ -1,5 +1,8 @@
+import {Box} from "@mui/material";
+
+
 const DataLoadingItem = () => (
-    <div>Data is still loading...</div>
+    <Box textAlign="center">Data is loading...</Box>
 );
 
 
