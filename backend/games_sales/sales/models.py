@@ -124,19 +124,20 @@ class SaleQuerySet(QuerySet):
         )
 
     def filter_by_params(self, params):
+        qs = self
+
         filters_map = {
-            'genre': lambda: self.filter(
-                Q(game__genre__contains=params['genre'])),
-            'esrb_rating': lambda: self.filter(
-                Q(game__esrb_rating__contains=params['esrb_rating'])),
-            'yor_lt': lambda: self.filter(
+            'genre': lambda: qs.filter(
+                Q(game__genre__icontains=params['genre'])),
+            'esrb_rating': lambda: qs.filter(
+                Q(game__esrb_rating__icontains=params['esrb_rating'])),
+            'yor_lt': lambda: qs.filter(
                 Q(game__year_of_release__lt=int(params['yor_lt']))),
-            'yor_gt': lambda: self.filter(
+            'yor_gt': lambda: qs.filter(
                 Q(game__year_of_release__gt=int(params['yor_gt']))),
-            'year_of_release': lambda: self.filter(
+            'year_of_release': lambda: qs.filter(
                 Q(game__year_of_release__exact=int(params['year_of_release'])))
         }
-        qs = self
         for param in params:
             qs = filters_map[param]()
         return qs

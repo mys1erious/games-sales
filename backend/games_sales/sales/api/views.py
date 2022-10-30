@@ -28,6 +28,7 @@ class BaseSaleAPIView(APIView, LimitOffsetPagination):
 
     def get_sales(self, query_params):
         sales = Sale.objects.all()
+
         sales = self.search(sales, query_params)
         sales = self.filter(sales, query_params)
         sales = self.order_by(sales, query_params)
@@ -73,6 +74,8 @@ class SaleListAPIView(BaseSaleAPIView):
         sales = self.get_sales(query_params)
 
         self.page_size = query_params.get('page_size', self.page_size)
+        if self.page_size == '-1':
+            self.page_size = sales.count()
 
         serializer, num_pages = self.pagination(
             request,
@@ -96,6 +99,7 @@ class SaleListAPIView(BaseSaleAPIView):
 
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrReadOnly,)
+    authentication_classes = []
 
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
