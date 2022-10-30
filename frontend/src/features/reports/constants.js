@@ -84,6 +84,8 @@ export const initPlotVals = {
 
 export const TOP_FIELDS = ['platform', 'genre', 'publisher', 'developer'];
 export const GAMES_BY_FIELDS = ['genre', 'platform'];
+export const DEFAULT_SALES_TYPE = 'global_sales';
+export const SALES_TYPES = [DEFAULT_SALES_TYPE, 'na_sales', 'eu_sales', 'jp_sales', 'other_sales'];
 
 export const DEFAULT_COLOR = '#1696d2';
 export const PLOT_DATA_COLORS = [
