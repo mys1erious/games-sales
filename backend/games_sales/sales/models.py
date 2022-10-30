@@ -220,6 +220,9 @@ class SaleQuerySet(QuerySet):
         values = Sale.objects.all().unique_values(field)
         data = {value: [] for value in values}
 
+        if n == -1:
+            n = self.all().count()
+
         qs = self.values(
             **{field: F(db_field)},
             name=F('game__name'),

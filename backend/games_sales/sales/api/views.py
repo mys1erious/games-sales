@@ -96,7 +96,6 @@ class SaleListAPIView(BaseSaleAPIView):
 
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = []
 
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
@@ -131,7 +130,6 @@ class SaleFilterFieldsListAPIView(APIView):
 
 class SaleAnalysisAPIView(APIView):
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = []
 
     def get(self, request, format=None):
         # Add sub endpoints here
