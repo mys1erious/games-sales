@@ -7,10 +7,13 @@ const Button = ({
     variant="outlined",
     sx,
     onClick,
-    children
+    children,
+    id
 }) => (
-    <BaseButton size={size} variant={variant} color={color}
-                onClick={onClick} sx={sx}>
+    <BaseButton id={id} size={size}
+                variant={variant}
+                color={color} sx={sx}
+                onClick={onClick}>
         {children}
     </BaseButton>
 );

@@ -25,7 +25,7 @@ const DescribeTable = () => {
     
     return(
         <Box textAlign="center" marginTop="10px" paddingY="15px" borderTop="1px solid gray" >
-            <Button onClick={handleExpandClick}>
+            <Button id="describeTableExpandBtn" onClick={handleExpandClick}>
                 Describe Table {isExpanded ? <ExpandLess/> : <ExpandMore/>}
             </Button>
 
