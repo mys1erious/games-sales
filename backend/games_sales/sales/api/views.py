@@ -1,18 +1,33 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import QueryDict
 
-from rest_framework import status
+from rest_framework import status, serializers
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveUpdateDestroyAPIView
 
+from drf_spectacular.utils import (
+    extend_schema,
+    OpenApiParameter,
+    OpenApiExample,
+    inline_serializer
+)
+
 from core.permissions import IsAdminOrReadOnly
 from core.utils import intersected_params
-from ..utils import db_field_to_field, field_to_db_field, get_all_field_names
+from ..utils import db_field_to_field, field_to_db_field, get_all_field_names, get_numeric_field_names
 from ..models import Sale, Game, Rating
-from .serializers import SaleSerializer, TopFieldSerializer, UserCriticScoreSerializer
+from .serializers import (
+    SaleSerializer,
+    TopFieldSerializer,
+    UserCriticScoreSerializer,
+    DescribeNumericDataSerializer,
+    GamesAnnuallySerializer,
+    DescribeDynamicFieldsSerializer,
+    GamesByFiedlDynamicFieldsSerializer,
+    GamesByFieldGameSerializer
+)
 
 
 class BaseSaleAPIView(APIView, LimitOffsetPagination):
@@ -69,7 +84,31 @@ class BaseSaleAPIView(APIView, LimitOffsetPagination):
 
 
 class SaleListAPIView(BaseSaleAPIView):
+
+    @extend_schema(
+        request=SaleSerializer,
+        responses={200: SaleSerializer},
+        parameters=[
+            OpenApiParameter(name='page', required=False, type=int),
+            OpenApiParameter(name='page_size', required=False, type=int),
+            OpenApiParameter(
+                name='text', required=False, type=str,
+                description='Filtering by name, genre, publisher, developer, platform'),
+            OpenApiParameter(name='order_by', required=False, type=str),
+            OpenApiParameter(name='genre', required=False, type=str),
+            OpenApiParameter(name='year_of_release', required=False, type=int),
+            OpenApiParameter(
+                name='yor_gt', required=False, type=int,
+                description='Year of release from'),
+            OpenApiParameter(
+                name='yor_lt', required=False, type=int,
+                description='Year of release to')]
+    )
     def get(self, request, format=None):
+        """
+        List of all Sales
+        """
+
         query_params = request.query_params
         sales = self.get_sales(query_params)
 
@@ -89,7 +128,14 @@ class SaleListAPIView(BaseSaleAPIView):
             'num_pages': num_pages
         }, status=status.HTTP_200_OK)
 
+    @extend_schema(
+        request=SaleSerializer,
+        responses={201: SaleSerializer}
+    )
     def post(self, request, format=None):
+        """
+        Create new Sale object
+        """
         serializer = SaleSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -97,6 +143,10 @@ class SaleListAPIView(BaseSaleAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(description='Retrieve a Sale', methods=["GET"])
+@extend_schema(description='Update a Sale', methods=["PUT"])
+@extend_schema(description='Delete a Sale', methods=["DELETE"])
+@extend_schema(description='Partially update a Sale', methods=["PATCH"])
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = []
@@ -106,7 +156,29 @@ class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'slug'
 
 
+@extend_schema(
+    responses={
+        200: inline_serializer(
+            name='FilterFields',
+            fields={
+                'order_by': serializers.ListField(),
+                'genres': serializers.ListField(),
+                'esrb_ratings': serializers.ListField()
+            })
+    },
+    examples=[OpenApiExample(
+        name="Example",
+        value=[{
+            'order_by': ['name', 'platform', '...'],
+            'genres': list(Sale.objects.all().unique_values('genre')),
+            'esrb_ratings': Game.ESRBRatings.names
+        }],
+    )],
+)
 class SaleFilterFieldsListAPIView(APIView):
+    """
+    Some possible filter for Sales List
+    """
     permission_classes = (IsAdminOrReadOnly,)
     authentication_classes = []
 
@@ -130,14 +202,6 @@ class SaleFilterFieldsListAPIView(APIView):
         }
 
         return Response(data, status=status.HTTP_200_OK)
-
-
-class SaleAnalysisAPIView(APIView):
-    permission_classes = (IsAdminOrReadOnly,)
-
-    def get(self, request, format=None):
-        # Add sub endpoints here
-        return Response({'Base Sale Analysis Endpoint'}, status=status.HTTP_200_OK)
 
 
 class BaseSaleAnalysisAPIView(BaseSaleAPIView):
@@ -189,7 +253,26 @@ class BaseSaleAnalysisAPIView(BaseSaleAPIView):
         }, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(
+    responses={
+        200: TopFieldSerializer(many=True),
+        400: None
+    },
+    parameters=[
+        OpenApiParameter(
+            name='n', required=False, type=int,
+            description='Number of rows, if n = -1 returns all rows'),
+        OpenApiParameter(
+            name='field', required=True, type=str,
+            description=f'Allowed: {", ".join(Sale.ALLOWED_FIELD_PARAMS)}'),
+        OpenApiParameter(
+            name='sales_type', required=False, type=str,
+            description=f'Allowed: {", ".join(Sale.get_sales_field_names())}')]
+)
 class SaleAnalysisTopFieldAPIView(BaseSaleAnalysisAPIView):
+    """
+    Retrieve top Sale rows for given field
+    """
     def get(self, request, format=None):
         query_params = QueryDict.copy(request.query_params)
         self.get_query_params(query_params)
@@ -206,7 +289,7 @@ class SaleAnalysisTopFieldAPIView(BaseSaleAnalysisAPIView):
 
         serializer = TopFieldSerializer(
             data,
-            field=self.field,
+            fields=[self.field, 'sales'],
             many=True
         )
 
@@ -220,17 +303,49 @@ class SaleAnalysisTopFieldAPIView(BaseSaleAnalysisAPIView):
         super().get_query_params(query_params)
 
 
+@extend_schema(
+    responses={
+        200: DescribeDynamicFieldsSerializer(
+            field_names=get_numeric_field_names([Sale, Game, Rating]),
+            field=DescribeNumericDataSerializer
+        )
+    }
+)
 class SaleAnalysisDescribeAPIView(BaseSaleAnalysisAPIView):
+    """
+    Retrieve Sales numeric description
+    """
     def get(self, request, format=None):
         query_params = QueryDict.copy(request.query_params)
         sales = self.get_sales(query_params)
 
         data = sales.describe()
 
-        return Response(data, status=status.HTTP_200_OK)
+        for key, val in data.items():
+            data[key] = DescribeNumericDataSerializer(val).data
+
+        serializer = DescribeDynamicFieldsSerializer(
+            data, field_names=list(data.keys()),
+            field=DescribeNumericDataSerializer
+        )
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@extend_schema(
+    responses={
+        200: UserCriticScoreSerializer(many=True),
+        400: None
+    },
+    parameters=[
+        OpenApiParameter(
+            name='n', required=False, type=int,
+            description='Number of rows, if n = -1 returns all rows')]
+)
 class SaleAnalysisScoreAPIView(BaseSaleAnalysisAPIView):
+    """
+    Retrieve User Critic Score Data
+    """
     n = 200
 
     def get(self, request, format=None):
@@ -250,7 +365,23 @@ class SaleAnalysisScoreAPIView(BaseSaleAnalysisAPIView):
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(
+    responses={
+        200: GamesAnnuallySerializer(many=True),
+        400: None
+    },
+    parameters=[
+        OpenApiParameter(
+            name='yor_gt', required=False, type=int,
+            description='Year of release from'),
+        OpenApiParameter(
+            name='yor_lt', required=False, type=int,
+            description='Year of release to')]
+)
 class SaleAnalysisGamesAnnuallyAPIView(BaseSaleAnalysisAPIView):
+    """
+    Retrieve how many Games released annually
+    """
     yor_lt = 2050
     yor_gt = 0
 
@@ -260,8 +391,9 @@ class SaleAnalysisGamesAnnuallyAPIView(BaseSaleAnalysisAPIView):
         sales = self.get_sales(query_params)
 
         data = sales.games_annually(yor_lt=self.yor_lt, yor_gt=self.yor_gt)
+        serializer = GamesAnnuallySerializer(data, many=True)
 
-        return Response(data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_query_params(self, query_params):
         yor_lt = query_params.pop('yor_lt', [self.yor_lt])[0]
@@ -275,8 +407,29 @@ class SaleAnalysisGamesAnnuallyAPIView(BaseSaleAnalysisAPIView):
 
 
 class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
+    """
+    Retrieve all Games by each unique value in field
+    """
     n = 5
 
+    @extend_schema(
+        responses={
+            200: GamesByFiedlDynamicFieldsSerializer(
+                field_names=Sale.objects.all().unique_values('genre'),
+                field=GamesByFieldGameSerializer
+            )
+        },
+        parameters=[
+            OpenApiParameter(
+                name='n', required=False, type=int,
+                description='Number of rows, if n = -1 returns all rows'),
+            OpenApiParameter(
+                name='field', required=True, type=str,
+                description=f'Allowed: {", ".join(Sale.ALLOWED_FIELD_PARAMS)}'),
+            OpenApiParameter(
+                name='sales_type', required=False, type=str,
+                description=f'Allowed: {", ".join(Sale.get_sales_field_names())}')]
+    )
     def get(self, request, format=None):
         query_params = QueryDict.copy(request.query_params)
         self.get_query_params(query_params)
@@ -291,7 +444,17 @@ class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
             n=self.n
         )
 
-        return Response(data, status=status.HTTP_200_OK)
+        for key, val in data.items():
+            print(val)
+            data[key] = GamesByFieldGameSerializer(val, many=True).data
+
+        serializers = GamesByFiedlDynamicFieldsSerializer(
+            data,
+            field_names=list(data.keys()),
+            field=lambda: GamesByFieldGameSerializer(many=True)
+        )
+
+        return Response(serializers.data, status=status.HTTP_200_OK)
 
     def get_query_params(self, query_params):
         self.get_field_param(query_params)

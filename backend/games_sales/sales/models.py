@@ -181,10 +181,10 @@ class SaleQuerySet(QuerySet):
         # Similar to pandas df.describe()
 
         fields = get_numeric_field_names([Sale, Game, Rating])
+
         db_fields = [field_to_db_field(field) for field in fields]
 
         data = {}
-
         for db_field in db_fields:
             data[cut_db_field(db_field)] = self.describe_field(db_field)
 
@@ -326,5 +326,5 @@ class Percentile(Aggregate):
         super().__init__(*args, **kwargs)
 
     function = 'PERCENTILE_CONT'
-    name = 'median'
+    name = 'percentile'
     output_field = models.FloatField()

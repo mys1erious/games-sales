@@ -3,6 +3,8 @@ from .base import *
 
 DEBUG = True
 
+ALLOWED_HOSTS = ['localhost']
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
 MEDIA_URL = '/media/'
@@ -33,4 +35,12 @@ INSTALLED_APPS += ['debug_toolbar']
 INTERNAL_IPS = [
     'localhost',
     '127.0.0.1'
+]
+
+
+SPECTACULAR_SETTINGS['SERVERS'] = [
+    {
+        'url': f'http://{ALLOWED_HOSTS[0]}:8000/api/v1',
+        'description': 'Local dev server'
+    }
 ]

@@ -190,14 +190,23 @@ EMAIL_HOST_PASSWORD = get_env_var('EMAIL_HOST_PASSWORD')
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Schema for Games Sales API',
-    'DESCRIPTION': 'Schema for API of Games Sales',
+    'TITLE': 'Games Sales API',
     'VERSION': '1.0.0',
+    'DESCRIPTION':
+        'API for Game Sales data taken from '
+        '[this](https://www.kaggle.com/datasets/rush4ratio/video-game-sales-with-ratings) dataset '
+        'and its Analysis',
     'SERVE_INCLUDE_SCHEMA': False,
+    'SERVERS': [{}],
 
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
+    'SCHEMA_PATH_PREFIX_TRIM': True,
 
     'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
-    # None will default to DRF's AUTHENTICATION_CLASSES
     'SERVE_AUTHENTICATION': None,
+
+    'OAUTH2_FLOWS': ['password'],
+    'OAUTH2_TOKEN_URL': '/auth/token/',
+    'OAUTH2_REFRESH_URL': '/auth/token/refresh/',
+    'OAUTH2_SCOPES': None
 }

@@ -1,11 +1,17 @@
-from django.urls import path, include
+from django.urls import path
+
+from drf_spectacular.views import SpectacularAPIView
 
 from sales.api import views as sale_views
 from reports.api import views as report_views
 from accounts.api import views as account_views
 
+from .views import SpectacularRapiDocView
 
-# Move paths to its own urls in apps ?
+
+app_name = 'core'
+
+
 urlpatterns = [
     # -- Sales --
     # {% url 'api:sales' %}
@@ -20,17 +26,11 @@ urlpatterns = [
         view=sale_views.SaleDetailAPIView.as_view(),
         name='sales'
     ),
-    # {% url 'api:sale_genres' %}
+    # {% url 'api:sale_filters' %}
     path(
         route='sale-filters/',
         view=sale_views.SaleFilterFieldsListAPIView.as_view(),
         name='sale_filters'
-    ),
-    # {% url 'api:sale_analysis' %}
-    path(
-        route='sale-analysis/',
-        view=sale_views.SaleAnalysisAPIView.as_view(),
-        name='sale_analysis'
     ),
     # {% url 'api:analysis_top_field' %}
     path(
@@ -72,10 +72,6 @@ urlpatterns = [
 
     # -- Auth --
     path(
-        route='auth/',
-        view=include('drf_social_oauth2.urls', namespace='drf'),
-    ),
-    path(
         route='auth/signup/',
         view=account_views.UserSignUpAPIView.as_view(),
         name='signup'
@@ -84,5 +80,17 @@ urlpatterns = [
         route='auth/confirm-email/',
         view=account_views.UserConfirmEmailAPIView.as_view(),
         name='confirm_email'
+    ),
+
+    # -- Docs --
+    path(
+        route='schema/',
+        view=SpectacularAPIView.as_view(),
+        name='schema'
+    ),
+    path(
+        route='',
+        view=SpectacularRapiDocView.as_view(),
+        name='documentation'
     )
 ]
