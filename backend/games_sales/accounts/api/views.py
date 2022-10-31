@@ -1,5 +1,3 @@
-import json
-
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import get_object_or_404
@@ -10,13 +8,26 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from drf_spectacular.utils import extend_schema, OpenApiParameter
+from drf_spectacular.types import OpenApiTypes
+
 
 from .serializers import UserSignUpSerializer
 from ..models import Account
 from ..utils import send_email
 
 
+@extend_schema(
+    request=UserSignUpSerializer,
+    responses={
+        201: UserSignUpSerializer,
+        400: None
+    }
+)
 class UserSignUpAPIView(APIView):
+    """
+    Registration
+    """
     permission_classes = (AllowAny, )
 
     def post(self, request, format=None):
@@ -48,11 +59,17 @@ class UserSignUpAPIView(APIView):
     def get_confirm_url(self, request, token, user):
         # Remove 'email' param ?
         current_site = get_current_site(request).domain
-        relative_link = reverse('confirm_email')
+        relative_link = reverse('api:confirm_email')
         return f'http://{current_site + relative_link}?token={token}&email={user.email}'
 
 
+@extend_schema(
+    responses={200: None, 400: None}
+)
 class UserConfirmEmailAPIView(APIView):
+    """
+    Email confirmation
+    """
     permission_classes = (AllowAny, )
 
     def get(self, request):

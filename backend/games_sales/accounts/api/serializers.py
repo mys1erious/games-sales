@@ -1,8 +1,31 @@
+from drf_spectacular.utils import extend_schema_serializer, OpenApiExample
 from rest_framework import serializers
 
 from ..models import Account, PasswordConfirmError
 
 
+@extend_schema_serializer(
+    examples=[
+        OpenApiExample(
+            'Example',
+            value={
+                'email': 'your.email@mail.com',
+                'username': 'your_username',
+                'password': 'your_password',
+                'password_confirmation': 'your_password'
+            },
+            request_only=True
+        ),
+        OpenApiExample(
+            'Example',
+            value={
+                'email': 'your.email@mail.com',
+                'username': 'your_username'
+            },
+            response_only=True
+        ),
+    ],
+)
 class UserSignUpSerializer(serializers.ModelSerializer):
     password_confirmation = serializers.CharField(label='Confirm Password', write_only=True)
 
