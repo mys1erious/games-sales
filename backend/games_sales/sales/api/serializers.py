@@ -72,7 +72,7 @@ class TopFieldSerializer(DynamicFieldsModelSerializer):
 
 
 class GamesAnnuallySerializer(serializers.ModelSerializer):
-    count = serializers.CharField()
+    count = serializers.FloatField()
 
     class Meta:
         model = Game
