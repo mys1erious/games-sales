@@ -73,6 +73,8 @@ class UserConfirmEmailAPIView(APIView):
     permission_classes = (AllowAny, )
 
     def get(self, request):
+        print(request.user)
+
         data = {'message': ''}
         token = request.GET.get('token')
         email = request.GET.get('email')

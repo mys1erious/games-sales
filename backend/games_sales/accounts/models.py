@@ -1,4 +1,6 @@
+from django.contrib.auth import password_validation
 from django.contrib.auth.tokens import default_token_generator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
@@ -8,14 +10,18 @@ class PasswordConfirmError(Exception):
 
 
 class AccountManager(BaseUserManager):
-    def create_user(self, email, password=None, password_confirmation=None, username=None):
+    def create_user(
+            self, email,
+            password=None,
+            password_confirmation=None,
+            username=None,
+            social_login=True
+    ):
         if email is None:
             raise TypeError('You need to enter your email.')
 
-        # if password is None:
-        #     raise TypeError('You need to enter your password.')
-        # elif password_confirmation is None:
-        #     raise TypeError('You need to confirm your password.')
+        if not social_login:
+            password_validation.validate_password(password)
 
         if password != password_confirmation:
             raise PasswordConfirmError('Passwords must match.')
