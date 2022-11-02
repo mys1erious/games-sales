@@ -199,8 +199,9 @@ SPECTACULAR_SETTINGS = {
     'SCHEMA_PATH_PREFIX': r'/api/v[0-9]',
     'SCHEMA_PATH_PREFIX_TRIM': True,
 
-    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
-    'SERVE_AUTHENTICATION': None,
+    'SERVE_PERMISSIONS': [
+        'rest_framework.permissions.AllowAny',
+    ],
 
     'OAUTH2_FLOWS': ['password'],
     'OAUTH2_TOKEN_URL': '/auth/token/',
