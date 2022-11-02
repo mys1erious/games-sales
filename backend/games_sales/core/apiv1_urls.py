@@ -66,8 +66,13 @@ urlpatterns = [
     # -- Reports --
     path(
         route='reports/',
-        view=report_views.ReportsListAPIView.as_view(),
+        view=report_views.UserReportsAPIView.as_view(),
         name='reports'
+    ),
+    path(
+        route='reports/<slug:slug>/',
+        view=report_views.UserReportDetailAPIView.as_view(),
+        name='report_detail'
     ),
 
     # -- Auth --
