@@ -63,6 +63,11 @@ export const postReport = async(data) => {
     finally {axiosInstance.defaults.headers['Content-Type'] = 'application/json';}
 };
 
+export const getReports = async() => {
+    return await axiosInstance.get(`/reports/`);
+};
+
+
 export const getReportBody = async(url) =>
     await axios.get(url, {responseType: 'blob'});
 

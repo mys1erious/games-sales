@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Box} from "@mui/material";
 
 import ReportsListItem from "./ReportsListItem";
-import {getReports} from "../../sales/services";
+import {getReports} from "../services";
 
 
 const ReportsList = () => {

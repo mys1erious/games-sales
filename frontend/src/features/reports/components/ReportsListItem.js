@@ -7,7 +7,6 @@ import {Button as BaseButton} from "features/core/components/Button";
 import {DEFAULT_COLOR} from "../constants";
 import {deleteReport, getReportBody} from "../services";
 import ReportsListItemPreview from "./ReportsListItemPreview";
-import {slugify} from "../../core/utils";
 
 
 const Button = ({onClick, children, color}) => (

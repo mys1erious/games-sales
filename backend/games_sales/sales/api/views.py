@@ -445,7 +445,6 @@ class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
         )
 
         for key, val in data.items():
-            print(val)
             data[key] = GamesByFieldGameSerializer(val, many=True).data
 
         serializers = GamesByFiedlDynamicFieldsSerializer(
