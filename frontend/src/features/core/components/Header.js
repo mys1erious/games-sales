@@ -31,7 +31,10 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
                     Home
                 </LinkButton>
                 <LinkButton to="/sales/">Sales</LinkButton>
-                <LinkButton to="/reports/">Reports</LinkButton>
+                {user.isLoggedIn
+                    ? <LinkButton to="/reports/">Reports</LinkButton>
+                    : null
+                }
                 <SalesSearchBar />
             </Typography>
 
