@@ -12,8 +12,10 @@ const Button = ({
 }) => (
     <BaseButton id={id} size={size}
                 variant={variant}
+                style={{paddingTop: "5px", paddingBottom: "3px"}}
                 color={color} sx={sx}
-                onClick={onClick}>
+                onClick={onClick}
+    >
         {children}
     </BaseButton>
 );
