@@ -3,9 +3,15 @@ from .base import *
 
 DEBUG = True
 
+ALLOWED_HOSTS = ['localhost']
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
+
+STATIC_URL = '/django_static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
 
 
 CORS_ALLOWED_ORIGINS = [
@@ -33,4 +39,12 @@ INSTALLED_APPS += ['debug_toolbar']
 INTERNAL_IPS = [
     'localhost',
     '127.0.0.1'
+]
+
+
+SPECTACULAR_SETTINGS['SERVERS'] = [
+    {
+        'url': f'http://{ALLOWED_HOSTS[0]}:8000/api/v1',
+        'description': 'Local dev server'
+    }
 ]

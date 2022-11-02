@@ -22,6 +22,7 @@ import {FIELDS, initYearParam} from "../constants";
 const DefaultListItem = ({field, subField, searchParams, setSearchParams, sx}) => {
     const onClick = () => {
         searchParams.set(field, slugify(subField));
+        searchParams.set('page', '1');
         setSearchParams(searchParams);
     };
 
@@ -44,6 +45,7 @@ const YORListItem = ({searchParams, setSearchParams}) => {
     const onClick = () => {
         searchParams.set('yor_gt', state[0] || initYearParam[0]);
         searchParams.set('yor_lt', state[1] || initYearParam[1]);
+        searchParams.set('page', '1');
         setSearchParams(searchParams);
     };
 
@@ -77,6 +79,7 @@ const FilterSubSidebar = (field, toggleSub, subFieldData) => {
          }
          else searchParams.delete(slugify(field));
 
+         searchParams.set('page', '1');
          setSearchParams(searchParams);
      };
 

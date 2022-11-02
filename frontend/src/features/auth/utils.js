@@ -16,8 +16,6 @@ const userIsLoggedIn = () => localStorage.getItem('access_token') !== null;
 export const handleUser = (setUser) => {
     if (userIsLoggedIn()){
         setUser(User({
-            email: localStorage.getItem('username'),
-            username: localStorage.getItem('email'),
             isLoggedIn: true
         }));
     }

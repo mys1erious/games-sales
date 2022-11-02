@@ -1,13 +1,23 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 
 import {Grid, Typography} from "@mui/material";
 
 import AuthGrid from "features/auth/components/AuthGrid";
 import SignUpForm from "features/auth/components/SignUpForm";
 import AuthCaptionLink from "features/auth/components/AuthCaptionLink";
+import {useNavigate} from "react-router-dom";
+import {UserContext} from "../features/auth/UserContext";
 
 
 const SignUp = () => {
+    const navigate = useNavigate();
+    const {user} = useContext(UserContext);
+
+    useEffect(() => {
+        if (user.isLoggedIn)
+            navigate(-1);
+    }, [user]);
+
     return(
         <AuthGrid>
             <Grid item xs={12}>

@@ -1,6 +1,7 @@
 import axiosInstance from "lib/axiosInstance";
 import {GAMES_BY_FIELDS, TOP_FIELDS} from "./constants";
 import {setMultSearchParams} from "features/core/utils";
+import axios from "axios";
 
 
 export const getGamesByFieldsData = async(searchParams, props={}) => {
@@ -54,8 +55,22 @@ export const getTopFieldData = async(searchParams, props={}) => {
 
 export const postReport = async(data) => {
     axiosInstance.defaults.headers['Content-Type'] = 'multipart/form-analysisData';
-    const res = await axiosInstance.post('/reports/', data);
-    console.log('SERVICE: ', res);
-    axiosInstance.defaults.headers['Content-Type'] = 'application/json';
-    return res;
+    try {
+        const res = await axiosInstance.post('/reports/', data);
+        console.log('created')
+        return res;
+    } catch (e) {console.log(e);}
+    finally {axiosInstance.defaults.headers['Content-Type'] = 'application/json';}
+};
+
+export const getReports = async() => {
+    return await axiosInstance.get(`/reports/`);
+};
+
+
+export const getReportBody = async(url) =>
+    await axios.get(url, {responseType: 'blob'});
+
+export const deleteReport = async(slug) => {
+    return await axiosInstance.delete(`/reports/${slug}/`)
 };

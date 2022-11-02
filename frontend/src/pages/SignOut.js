@@ -8,7 +8,12 @@ import {UserContext} from "features/auth/UserContext";
 
 const SignOut = () => {
     const navigate = useNavigate();
-    const {setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
+
+    useEffect(() => {
+        if (!user.isLoggedIn)
+            navigate('/signin/');
+    }, [user]);
 
     const handleSignOut = async() => {
         await signOut();
@@ -20,6 +25,10 @@ const SignOut = () => {
     };
 
     useEffect(() => {
+        if (!user.isLoggedIn) {
+            navigate('/signin/');
+            return;
+    }
         handleSignOut();
     }, []);
 
