@@ -6,8 +6,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost']
 
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
+STATIC_URL = '/django_static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'games_sales', 'media')
 
 
 CORS_ALLOWED_ORIGINS = [
