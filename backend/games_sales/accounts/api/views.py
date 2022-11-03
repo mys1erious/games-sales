@@ -57,7 +57,6 @@ class UserSignUpAPIView(APIView):
         return 'Verification link has been sent to your email.'
 
     def get_confirm_url(self, request, token, user):
-        # Remove 'email' param ?
         current_site = get_current_site(request).domain
         relative_link = reverse('api:confirm_email')
         return f'http://{current_site + relative_link}?token={token}&email={user.email}'
@@ -73,8 +72,6 @@ class UserConfirmEmailAPIView(APIView):
     permission_classes = (AllowAny, )
 
     def get(self, request):
-        print(request.user)
-
         data = {'message': ''}
         token = request.GET.get('token')
         email = request.GET.get('email')
