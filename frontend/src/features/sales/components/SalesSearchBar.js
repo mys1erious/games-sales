@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate, useSearchParams} from "react-router-dom";
 
-import {IconButton, TextField} from "@mui/material";
+import {Box, IconButton, TextField} from "@mui/material";
 import {Search} from '@mui/icons-material';
 
 
@@ -24,19 +24,19 @@ const SalesSearchBar = () => {
     };
 
     return(
-        <>
-        <TextField id="salesSearchBar" onInput={
-            (e) => setSearchText(e.target.value)}
-                   onKeyDown={(e) => e.key === 'Enter' ? search() : null}
-                   variant="outlined"
-                   placeholder="Search..."
-                   size="small" sx={{marginLeft: "30px"}}
-        />
-        <IconButton type="submit" aria-label="search" color="primary"
-                    onClick={search}>
-            <Search />
-        </IconButton>
-        </>
+        <Box whiteSpace="nowrap" display="inline">
+            <TextField id="salesSearchBar" onInput={
+                (e) => setSearchText(e.target.value)}
+                       onKeyDown={(e) => e.key === 'Enter' ? search() : null}
+                       variant="outlined"
+                       placeholder="Search..."
+                       size="small" sx={{marginLeft: "30px"}}
+            />
+            <IconButton type="submit" aria-label="search" color="primary"
+                        onClick={search} >
+                <Search />
+            </IconButton>
+        </Box>
     )
 };
 
