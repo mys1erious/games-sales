@@ -11,7 +11,7 @@ import ReportsListItemPreview from "./ReportsListItemPreview";
 
 const Button = ({onClick, children, color}) => (
     <BaseButton onClick={onClick}  color={color}
-                sx={{width: "170px", marginRight: "4px"}}>
+                sx={{width: "170px", marginRight: "4px", marginBottom: "4px"}}>
         {children}
     </BaseButton>
 );

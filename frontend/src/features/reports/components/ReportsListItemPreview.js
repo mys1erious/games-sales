@@ -19,7 +19,7 @@ const ReportsListItemPreview = ({url}) => {
 
     return (
         <ExpandButton text="Preview"
-            sx={{paddingY: "15px"}}>
+            sx={{paddingBottom: "15px"}}>
             <Box width="100%" height="100%" overflow="hidden">
                 <iframe title="Preview" srcDoc={html}
                         width="100%" height="600px"
@@ -27,7 +27,7 @@ const ReportsListItemPreview = ({url}) => {
                         style={{
                             border: 0,
                             overflowY: "scroll",
-                            paddingLeft: "16px",
+                            marginLeft: "16px",
                             boxSizing: "content-box"}}
                 />
             </Box>
