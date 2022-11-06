@@ -1,20 +1,35 @@
-import React, {useContext, useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
+import {AlertContext} from "features/core/AlertContext";
+
 import {signUp} from "../services";
-import {initialSignUpFormData, initSignUpFieldErrors} from "../constants";
+import {initSignUpFormData, initSignUpFieldErrors} from "../constants";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
-import {AlertContext} from "../../core/AlertContext";
+
+
+const parseFieldErrors = (fields) => {
+    const fieldErrors = {};
+    for (const field of Object.keys(fields)) {
+        const msg = fields[field][0]
+            .replace(/[\[\]',]/g, '');
+        fieldErrors[field] = {
+            msg: msg,
+            error: true
+        }
+    }
+    return fieldErrors;
+};
 
 
 const SignUpForm = () => {
     const navigate = useNavigate();
     const {alert, setAlert} = useContext(AlertContext);
 
-    const [formData, setFormData] = useState(initialSignUpFormData);
+    const [formData, setFormData] = useState(initSignUpFormData);
     const [fieldErrors, setFieldErrors] = useState(initSignUpFieldErrors);
     const [textFields, setTextFields] = useState([]);
 
@@ -64,19 +79,6 @@ const SignUpForm = () => {
             });
         }
 
-    };
-
-    const parseFieldErrors = (fields) => {
-        const fieldErrors = {};
-        for (const field of Object.keys(fields)) {
-            const msg = fields[field][0]
-                .replace(/[\[\]',]/g, '');
-            fieldErrors[field] = {
-                msg: msg,
-                error: true
-            }
-        }
-        return fieldErrors;
     };
 
     return(

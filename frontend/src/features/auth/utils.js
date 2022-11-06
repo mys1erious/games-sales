@@ -1,6 +1,5 @@
 export const localStorageUserFields = [
-    'access_token', 'refresh_token',
-    'email', 'username'
+    'access_token', 'refresh_token'
 ];
 
 export const User = ({
@@ -9,10 +8,10 @@ export const User = ({
     return {isLoggedIn}
 };
 
-const userIsLoggedIn = () => localStorage.getItem('access_token') !== null;
+const userHasAccessToken = () => localStorage.getItem('access_token') !== null;
 
 export const handleUser = (setUser) => {
-    if (userIsLoggedIn()){
+    if (userHasAccessToken()){
         setUser(User({
             isLoggedIn: true
         }));

@@ -1,15 +1,16 @@
 import React, {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
+import {AlertContext} from "features/core/AlertContext";
+
 import {setUserDataToLocalStorage, User} from "../utils";
 import {emailSignIn} from "../services";
 import {UserContext} from "../UserContext";
-import {initialSignInFormData} from "../constants";
+import {initSignInFormData} from "../constants";
 import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
-import {AlertContext} from "../../core/AlertContext";
 
 
 const SignInForm = () => {
@@ -17,7 +18,7 @@ const SignInForm = () => {
     const {setUser} = useContext(UserContext);
     const {alert, setAlert} = useContext(AlertContext);
 
-    const [formData, setFormData] = useState(initialSignInFormData);
+    const [formData, setFormData] = useState(initSignInFormData);
 
     const handleEmailSignIn = async(e) => {
         e.preventDefault();

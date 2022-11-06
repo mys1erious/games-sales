@@ -1,9 +1,9 @@
-export const initialSignInFormData = Object.freeze({
+export const initSignInFormData = Object.freeze({
     email: '',
     password: ''
 });
 
-export const initialSignUpFormData = Object.freeze({
+export const initSignUpFormData = Object.freeze({
     username: '',
     email: '',
     password: '',

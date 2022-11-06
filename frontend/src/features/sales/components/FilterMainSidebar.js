@@ -12,10 +12,11 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 import {Button} from "features/core/components/Button";
 import {setObjState, unslugify} from "features/core/utils";
+
 import {FIELDS, initSubFieldsData} from "../constants";
+import {getFilterFieldsData} from "../services";
 import FilterSubSidebar from "./FilterSubSidebar";
 import {skipSidebarToggle} from "./FilterSidebar";
-import {getFilterFieldsData} from "../services";
 
 
 const buttonsWidth = "100px";

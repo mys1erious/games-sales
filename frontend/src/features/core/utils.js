@@ -12,13 +12,6 @@ export const setFormState = (e, form, setForm) => {
     });
 };
 
-export const arrToObj = (arr, defVal) => {
-    const obj = {};
-    for (const key of arr)
-        obj[key] = defVal;
-    return obj;
-};
-
 export const slugify = (str) => {
     return str
         .toLowerCase()
@@ -31,7 +24,8 @@ export const slugify = (str) => {
 export const unslugify = (slug) => {
     return slug
         .replace(/game__|rating__/gi, '')
-        .split('_').map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.substring(1)).join(' ');
 }
 
 export const nameShortener = (name, maxLen) => (

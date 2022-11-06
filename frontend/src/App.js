@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import {Box, CssBaseline, ThemeProvider} from "@mui/material";
 
+import "App.css";
+
+import Home from "pages/Home";
 import Sales from "pages/Sales";
 import SaleDetail from "pages/SaleDetail";
 import SignIn from "pages/SignIn";
@@ -16,12 +19,9 @@ import Footer from "features/core/components/Footer";
 import {darkTheme, lightTheme} from "features/core/themes";
 import {handleUser, User} from "features/auth/utils";
 import {UserContext} from "features/auth/UserContext";
-
-import "App.css";
-import Home from "./pages/Home";
-import Alert from "./features/core/components/Alert";
-import {AlertContext} from "./features/core/AlertContext";
-import {initAlertData} from "./features/core/constants";
+import Alert from "features/core/components/Alert";
+import {AlertContext} from "features/core/AlertContext";
+import {initAlertData} from "features/core/constants";
 
 
 function App() {

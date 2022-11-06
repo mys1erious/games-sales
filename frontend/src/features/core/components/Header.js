@@ -1,17 +1,16 @@
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 
 import {
     AppBar, Toolbar, Typography,
-    FormControlLabel, Switch, useTheme, useMediaQuery, Box
+    FormControlLabel, Switch, useTheme, useMediaQuery
 } from "@mui/material";
 
+import logoSrc from "assets/logo.svg";
 import SalesSearchBar from "features/sales/components/SalesSearchBar";
 import {UserContext} from "features/auth/UserContext";
 
 import LinkButton from "./LinkButton";
 import Image from "./Image";
-
-import logoSrc from "assets/logo.svg";
 import HeaderDrawer from "./HeaderDrawer";
 
 

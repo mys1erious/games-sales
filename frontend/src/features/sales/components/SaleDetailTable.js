@@ -1,6 +1,10 @@
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
-import {unslugify} from "../../core/utils";
 import React from "react";
+import {
+    Paper, Table, TableBody,
+    TableCell, TableContainer,
+    TableHead, TableRow
+} from "@mui/material";
+import {unslugify} from "features/core/utils";
 
 const SaleDetailTable = ({obj, exclude=[]}) => (
     <TableContainer component={Paper}>

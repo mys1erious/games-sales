@@ -1,12 +1,12 @@
 import React, {useContext, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {Grid, Typography} from "@mui/material";
 
 import AuthGrid from "features/auth/components/AuthGrid";
 import SignUpForm from "features/auth/components/SignUpForm";
 import AuthCaptionLink from "features/auth/components/AuthCaptionLink";
-import {useNavigate} from "react-router-dom";
-import {UserContext} from "../features/auth/UserContext";
+import {UserContext} from "features/auth/UserContext";
 
 
 const SignUp = () => {

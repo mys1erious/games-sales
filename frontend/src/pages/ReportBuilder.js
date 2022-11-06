@@ -3,13 +3,12 @@ import React, {useContext, useState} from 'react';
 import {Box, TextField} from "@mui/material";
 
 import {Button} from "features/core/components/Button";
-import Alert from "features/core/components/Alert";
 import ReportBody from "features/reports/components/ReportBody";
 import {setFormState} from "features/core/utils";
 import {initReportHeaders} from "features/reports/constants";
 import {postReport} from "features/reports/services";
 import {createReportFile, HTMLDocumentToBlob} from "features/reports/reportGeneration";
-import {AlertContext} from "../features/core/AlertContext";
+import {AlertContext} from "features/core/AlertContext";
 
 
 const previewReport = (reportHeaders) => {
@@ -54,7 +53,6 @@ const ReportBuilder = () => {
                     msg: 'You need to be Signed In to save the report.'
                 })
             else if (e.response.status === 400){
-                console.log(e.response.data)
                 const fields = e.response.data;
                 const msg = parseResponseErrors(fields);
                 setAlert({
@@ -75,7 +73,6 @@ const ReportBuilder = () => {
     };
 
     return (
-        <>
         <Box padding="10px 20px 10px 20px" marginBottom="40px">
             <Box textAlign="center" marginBottom="15px" paddingTop="10px">
                 <TextField variant="outlined" label="Name" name="name"
@@ -100,7 +97,6 @@ const ReportBuilder = () => {
                 </Button>
             </Box>
         </Box>
-        </>
     );
 };
 

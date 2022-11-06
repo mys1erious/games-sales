@@ -1,7 +1,9 @@
-import axiosInstance from "lib/axiosInstance";
-import {GAMES_BY_FIELDS, TOP_FIELDS} from "./constants";
-import {setMultSearchParams} from "features/core/utils";
 import axios from "axios";
+
+import axiosInstance from "lib/axiosInstance";
+import {setMultSearchParams} from "features/core/utils";
+
+import {GAMES_BY_FIELDS, TOP_FIELDS} from "./constants";
 
 
 export const getGamesByFieldsData = async(searchParams, props={}) => {

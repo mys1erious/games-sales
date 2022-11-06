@@ -10,7 +10,7 @@ import {
 
 import {Button} from "features/core/components/Button";
 import {getSale} from "features/sales/services";
-import SaleDetailTable from "../features/sales/components/SaleDetailTable";
+import SaleDetailTable from "features/sales/components/SaleDetailTable";
 
 
 const buttonWidth = "70px";

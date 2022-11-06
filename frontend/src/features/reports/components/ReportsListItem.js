@@ -4,6 +4,7 @@ import {Box, Typography} from "@mui/material";
 import html2pdf from "html-to-pdf-js";
 
 import {Button as BaseButton} from "features/core/components/Button";
+
 import {DEFAULT_COLOR} from "../constants";
 import {deleteReport, getReportBody} from "../services";
 import ReportsListItemPreview from "./ReportsListItemPreview";

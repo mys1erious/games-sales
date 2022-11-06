@@ -3,6 +3,9 @@ import {useSearchParams} from "react-router-dom";
 
 import {Box, Grid} from "@mui/material";
 
+import DropDownButton from "features/core/components/DropDownButton";
+import {unslugify} from "features/core/utils";
+
 import {
     getGamesAnnuallyData,
     getGamesByFieldsData,
@@ -16,8 +19,6 @@ import {BarPieChartGridItems} from "./BarPieChart";
 import {ScatterPlotGridItem} from "./ScatterPlot";
 import {LineChartGridItem} from "./LineChart";
 import {ScatterBarPlotGridItem} from "./ScatterBarPlot";
-import DropDownButton from "features/core/components/DropDownButton";
-import {unslugify} from "../../core/utils";
 
 
 const ReportBody = () => {
