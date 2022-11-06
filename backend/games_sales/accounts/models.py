@@ -12,9 +12,9 @@ class PasswordConfirmError(Exception):
 class AccountManager(BaseUserManager):
     def create_user(
             self, email,
+            username,
             password=None,
             password_confirmation=None,
-            username=None,
             social_login=True
     ):
         if email is None:
@@ -32,8 +32,8 @@ class AccountManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email, password, username=None):
-        user = self.create_user(email, password, password, username=username)
+    def create_superuser(self, email, username, password):
+        user = self.create_user(email, username, password, password)
 
         user.is_verified = True
         user.is_staff = True
@@ -69,7 +69,7 @@ class Account(AbstractBaseUser):
     is_superuser = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
 
