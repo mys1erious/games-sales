@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import {Box, CssBaseline, ThemeProvider} from "@mui/material";
 
-import Home from "pages/Home";
 import Sales from "pages/Sales";
 import SaleDetail from "pages/SaleDetail";
 import SignIn from "pages/SignIn";
@@ -19,6 +18,7 @@ import {handleUser, User} from "features/auth/utils";
 import {UserContext} from "features/auth/UserContext";
 
 import "App.css";
+import Home from "./pages/Home";
 
 
 function App() {
@@ -39,7 +39,7 @@ function App() {
             <UserContext.Provider value={userProvider}>
                 <CssBaseline />
                 <Header isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}/>
-                <Box sx={{minHeight: "92vh", padding: "10px 20px 10px 20px"}}>
+                <Box sx={{minHeight: "92vh"}}>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
 
