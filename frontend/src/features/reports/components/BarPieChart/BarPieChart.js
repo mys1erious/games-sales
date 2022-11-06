@@ -8,13 +8,13 @@ const BAR = 'bar';
 const PIE = 'pie';
 
 
-const BarPieChart = ({data, title, xTitle, yTitle}) => {
+const BarPieChart = ({data, title, xTitle, yTitle, border}) => {
     const [type, setType] = useState(BAR);
 
     const charts = {
-        [BAR]: <BarChart data={data} title={title}
+        [BAR]: <BarChart data={data} title={title} border={border}
                          xTitle={xTitle} yTitle={yTitle}/>,
-        [PIE]: <PieChart data={data} title={title}
+        [PIE]: <PieChart data={data} title={title} border={border}
                          xTitle={xTitle} yTitle={yTitle}/>
     }
 

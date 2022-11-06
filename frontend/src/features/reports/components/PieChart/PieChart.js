@@ -19,7 +19,7 @@ const outerArc = d3.arc()
     .outerRadius(radius);
 
 
-const PieChart = ({data, title, xTitle, yTitle}) => {
+const PieChart = ({data, title, xTitle, yTitle, border}) => {
     const [pieChart, setPieChart] = useState(
         <svg viewBox={viewBox} />
     );
@@ -59,7 +59,7 @@ const PieChart = ({data, title, xTitle, yTitle}) => {
     }, [data]);
 
     return(
-        <PlotContainer title={title}>
+        <PlotContainer title={title} border={border}>
             {pieChart}
         </PlotContainer>
     );

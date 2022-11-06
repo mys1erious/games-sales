@@ -16,7 +16,7 @@ export const viewBox = `0 0 ${width} ${height}`;
 export const barMaxWidth = 55;
 
 
-const BarChart = ({data, title, xTitle, yTitle}) => {
+const BarChart = ({data, title, xTitle, yTitle, border}) => {
     const [barChart, setBarChart] = useState(<svg viewBox={viewBox}/>);
 
     const xScale = d3.scaleBand()
@@ -49,7 +49,7 @@ const BarChart = ({data, title, xTitle, yTitle}) => {
     }, [data]);
 
     return (
-        <PlotContainer title={title}>
+        <PlotContainer title={title} border={border}>
             {barChart}
         </PlotContainer>
     );
