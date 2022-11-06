@@ -1,7 +1,8 @@
 import React, {useContext} from "react";
 import {useNavigate} from "react-router-dom";
-
 import {GoogleOAuthProvider, useGoogleLogin} from "@react-oauth/google";
+
+import {AlertContext} from "features/core/AlertContext";
 
 import {setUserDataToLocalStorage, User} from "../utils";
 import {googleSignIn} from "../services";
@@ -12,25 +13,31 @@ import AuthButton from "./AuthButton";
 const AuthGoogleButtonLogic = ({children}) => {
     const navigate = useNavigate();
     const {setUser} = useContext(UserContext);
+    const {alert, setAlert} = useContext(AlertContext);
 
     const onSuccess = async(googleResponse) => {
         const response = await googleSignIn(googleResponse);
+        setUserDataToLocalStorage({
+            access_token: response.data.access_token,
+            refresh_token: response.data.refresh_token
+        });
+        setUser(User({
+            email: '',
+            isLoggedIn: true
+        }));
 
-            setUserDataToLocalStorage({
-                access_token: response.data.access_token,
-                refresh_token: response.data.refresh_token
-            });
-            setUser(User({
-                email: '',
-                isLoggedIn: true
-            }));
-
+        setAlert({
+            msg: 'Successfully signed in.',
+            type: 'success'
+        })
         navigate('/');
     };
 
     const onError = (googleResponse) => {
-        // Implement alert
-        console.log(googleResponse);
+        setAlert({
+            ...alert,
+            msg: 'Error occurred during sign un.',
+        })
     };
 
     const login = useGoogleLogin({
