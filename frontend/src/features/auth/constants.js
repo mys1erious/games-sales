@@ -10,8 +10,10 @@ export const initialSignUpFormData = Object.freeze({
     passwordConfirmation: ''
 });
 
-export const statusAlertTypeMap = {
-    201: 'success',
-    400: 'error',
-    'other': 'info'
-};
+const initSignUpFieldError = {msg: '', error: false};
+export const initSignUpFieldErrors = {
+    email: initSignUpFieldError,
+    username: initSignUpFieldError,
+    password: initSignUpFieldError,
+    password_confirmation: initSignUpFieldError
+}

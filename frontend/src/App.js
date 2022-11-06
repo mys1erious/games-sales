@@ -19,6 +19,9 @@ import {UserContext} from "features/auth/UserContext";
 
 import "App.css";
 import Home from "./pages/Home";
+import Alert from "./features/core/components/Alert";
+import {AlertContext} from "./features/core/AlertContext";
+import {initAlertData} from "./features/core/constants";
 
 
 function App() {
@@ -29,6 +32,8 @@ function App() {
         () => ({user, setUser}),
         [user, setUser]);
 
+    const [alert, setAlert] = useState(initAlertData);
+
     useEffect(() => {
         handleUser(setUser);
     }, []);
@@ -37,7 +42,9 @@ function App() {
         <Router>
             <ThemeProvider theme={isDarkTheme ? darkTheme : lightTheme}>
             <UserContext.Provider value={userProvider}>
+            <AlertContext.Provider value={{alert, setAlert}}>
                 <CssBaseline />
+                <Alert/>
                 <Header isDarkTheme={isDarkTheme} setIsDarkTheme={setIsDarkTheme}/>
                 <Box sx={{minHeight: "92vh"}}>
                     <Routes>
@@ -55,6 +62,7 @@ function App() {
                     </Routes>
                 </Box>
                 <Footer />
+            </AlertContext.Provider>
             </UserContext.Provider>
             </ThemeProvider>
         </Router>

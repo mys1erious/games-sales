@@ -1,5 +1,4 @@
-export const initialAlertData = Object.freeze({
-    isAlert: false,
-    type: '',
-    text: ''
-});
+export const initAlertData = {
+    msg: '',
+    type: 'error'
+};

@@ -30,7 +30,6 @@ axiosInstance.interceptors.response.use(
 		if (error.response.status === 401 &&
 			originalRequest.url === baseURL + 'auth/token/refresh/'
 		) {
-			window.location.href = '/signin/';
 			return Promise.reject(error);
 		}
 
@@ -41,37 +40,27 @@ axiosInstance.interceptors.response.use(
 		) {
 			const refreshToken = localStorage.getItem('refresh_token');
 			if (refreshToken) {
-				try {
-					axiosInstance.defaults.headers['Authorization'] = null;
-					axiosInstance.defaults.headers['Content-Type'] = 'application/json';
-					return axiosInstance
-						.post('/auth/token/',
-							{
-								refresh_token: refreshToken,
-								grant_type: 'refresh_token',
-								client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
-								client_secret: process.env.REACT_APP_OAUTH_CLIENT_SECRET
-							}).then((response) => {
-								localStorage.setItem('access_token', response.data.access_token);
-								localStorage.setItem('refresh_token', response.data.refresh_token);
+				axiosInstance.defaults.headers['Authorization'] = null;
+				axiosInstance.defaults.headers['Content-Type'] = 'application/json';
+				return axiosInstance
+					.post('/auth/token/',
+						{
+							refresh_token: refreshToken,
+							grant_type: 'refresh_token',
+							client_id: process.env.REACT_APP_OAUTH_CLIENT_ID,
+							client_secret: process.env.REACT_APP_OAUTH_CLIENT_SECRET
+						}).then((response) => {
+						localStorage.setItem('access_token', response.data.access_token);
+						localStorage.setItem('refresh_token', response.data.refresh_token);
 
-								const authHeader = `${response.data.token_type} ${response.data.access_token}`;
-								axiosInstance.defaults.headers['Authorization'] = authHeader;
-								originalRequest.headers['Authorization'] = authHeader;
+						const authHeader = `${response.data.token_type} ${response.data.access_token}`;
+						axiosInstance.defaults.headers['Authorization'] = authHeader;
+						originalRequest.headers['Authorization'] = authHeader;
 
-								return axiosInstance(originalRequest);
-							}).catch(err => console.log(err)); // Alert
-				} catch (e) {
-					console.log('Refresh token is expired or invalid.');
-					window.location.href = '/signin/';
-				}
-			} else {
-				console.log('Refresh token not available.');
-				window.location.href = '/signin/';
+						return axiosInstance(originalRequest);
+						})
 			}
 		}
-
-		// specific error handling done elsewhere
 		return Promise.reject(error);
 	}
 );

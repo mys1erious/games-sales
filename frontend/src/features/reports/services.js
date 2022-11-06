@@ -55,11 +55,7 @@ export const getTopFieldData = async(searchParams, props={}) => {
 
 export const postReport = async(data) => {
     axiosInstance.defaults.headers['Content-Type'] = 'multipart/form-analysisData';
-    try {
-        const res = await axiosInstance.post('/reports/', data);
-        console.log('created')
-        return res;
-    } catch (e) {console.log(e);}
+    try {return await axiosInstance.post('/reports/', data);}
     finally {axiosInstance.defaults.headers['Content-Type'] = 'application/json';}
 };
 

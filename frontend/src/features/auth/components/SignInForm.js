@@ -9,14 +9,13 @@ import AuthButton from "./AuthButton";
 import AuthTextField from "./AuthTextField";
 import AuthGoogleButton from "./AuthGoogleButton";
 import AuthBaseForm from "./AuthBaseForm";
-import AuthAlert, {triggerAlert} from "./AuthAlert";
-import {initialAlertData} from "features/core/constants";
+import {AlertContext} from "../../core/AlertContext";
 
 
 const SignInForm = () => {
     const navigate = useNavigate();
-    const [alert, setAlert] = useState(initialAlertData);
     const {setUser} = useContext(UserContext);
+    const {alert, setAlert} = useContext(AlertContext);
 
     const [formData, setFormData] = useState(initialSignInFormData);
 
@@ -26,26 +25,30 @@ const SignInForm = () => {
         try {
             const response = await emailSignIn(formData.email, formData.password);
 
-            // Should make a request to profile endpoint and get username, email
             setUserDataToLocalStorage({
                 access_token: response.data.access_token,
                 refresh_token: response.data.refresh_token
             });
             setUser(User({
-                email: '',
                 isLoggedIn: true
             }));
 
+            setAlert({
+                msg: 'Successfully signed in.',
+                type: 'success'
+            })
             navigate('/');
         }
         catch (e) {
-            triggerAlert(e.response, alert, setAlert);
+            setAlert({
+                ...alert,
+                msg: 'Incorrect username or password.'
+            })
         }
     };
 
     return(
         <>
-        {alert.isAlert ? <AuthAlert alert={alert}/> : null}
         <AuthBaseForm onKeyDown={
             (e) => e.key === 'Enter' ? handleEmailSignIn(e) : null}
             textFields={[

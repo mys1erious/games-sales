@@ -4,11 +4,9 @@ export const localStorageUserFields = [
 ];
 
 export const User = ({
-    email='',
-    username='',
     isLoggedIn=false
 }) => {
-    return {email, username, isLoggedIn}
+    return {isLoggedIn}
 };
 
 const userIsLoggedIn = () => localStorage.getItem('access_token') !== null;
