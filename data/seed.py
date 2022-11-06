@@ -17,11 +17,11 @@ def get_env_var(var_name):
 
 def get_access_token():
     data = {
-        'username': get_env_var('ADMIN_EMAIL'),
-        'password': get_env_var('ADMIN_PASSWORD'),
+        'username': USERNAME,
+        'password': PASSWORD,
         'grant_type': 'password',
-        'client_id': get_env_var('DJANGO_CLIENT_ID'),
-        'client_secret': get_env_var('DJANGO_CLIENT_SECRET')
+        'client_id': CLIENT_ID,
+        'client_secret': CLIENT_SECRET
     }
 
     req = requests.post(
@@ -33,9 +33,23 @@ def get_access_token():
     return json.loads(req.text)['access_token']
 
 
-URL = get_env_var('BASE_API_URL')
+DOMAIN = 'PA'
+
+if DOMAIN == 'localhost':
+    URL = get_env_var('BASE_API_URL_LOCAL')
+    USERNAME = get_env_var('ADMIN_EMAIL_LOCAL')
+    PASSWORD = get_env_var('ADMIN_PASSWORD_LOCAL')
+    CLIENT_ID = get_env_var('DJANGO_CLIENT_ID_LOCAL')
+    CLIENT_SECRET = get_env_var('DJANGO_CLIENT_SECRET_LOCAL')
+elif DOMAIN == 'PA':
+    URL = get_env_var('BASE_API_URL_PA')
+    USERNAME = get_env_var('ADMIN_EMAIL_PA')
+    PASSWORD = get_env_var('ADMIN_PASSWORD_PA')
+    CLIENT_ID = get_env_var('DJANGO_CLIENT_ID_PA')
+    CLIENT_SECRET = get_env_var('DJANGO_CLIENT_SECRET_PA')
+
 FILE_PATH = 'samples.json'
-NUM_OF_SAMPLES = 1000
+NUM_OF_SAMPLES = 100
 ACCESS_TOKEN = get_access_token()
 
 
