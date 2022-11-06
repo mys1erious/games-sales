@@ -29,7 +29,7 @@ const SignIn = () => {
             <Grid item xs={12}>
                 <Typography variant="caption">
                     Dont have an account?
-                    <AuthCaptionLink href="/signup/"> Sign Up.</AuthCaptionLink>
+                    <AuthCaptionLink href="/signup/">Sign Up.</AuthCaptionLink>
                 </Typography>
             </Grid>
         </AuthGrid>
