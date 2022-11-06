@@ -57,7 +57,7 @@ const Header = ({isDarkTheme, setIsDarkTheme}) => {
     );
 
     return (
-        <header>
+        <header style={{opacity: 0.7}}>
             <AppBar position="sticky" color="default" elevation={0}>
             <Toolbar sx={{justifyContent: "space-between"}}>
                 {showDrawer

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {TextField} from "@mui/material";
+import {Box, TextField} from "@mui/material";
 
 import {Button} from "features/core/components/Button";
 import ReportBody from "features/reports/components/ReportBody";
@@ -38,34 +38,30 @@ const ReportBuilder = () => {
     const [reportHeaders, setReportHeaders] = useState(initReportHeaders);
 
     return (
-        <>
-        <div style={{
-            textAlign: "center",
-            marginBottom: "15px",
-            paddingTop: "10px"
-        }}>
-            <TextField variant="outlined" label="Name" name="name"
-                       fullWidth sx={{marginBottom: "15px"}}
-                       onChange={(e) => setFormState(e, reportHeaders, setReportHeaders)}
-            />
-            <TextField variant="outlined" label="Remarks" name="remarks"
-                       fullWidth sx={{marginBottom: "15px"}}
-                       multiline minRows={8}
-                       onChange={(e) => setFormState(e, reportHeaders, setReportHeaders)}
-            />
-        </div>
+        <Box padding="10px 20px 10px 20px" marginBottom="40px">
+            <Box textAlign="center" marginBottom="15px" paddingTop="10px">
+                <TextField variant="outlined" label="Name" name="name"
+                           fullWidth sx={{marginBottom: "15px"}}
+                           onChange={(e) => setFormState(e, reportHeaders, setReportHeaders)}
+                />
+                <TextField variant="outlined" label="Remarks" name="remarks"
+                           fullWidth sx={{marginBottom: "15px"}}
+                           multiline minRows={8}
+                           onChange={(e) => setFormState(e, reportHeaders, setReportHeaders)}
+                />
+            </Box>
 
-        <ReportBody />
+            <ReportBody />
 
-        <div style={{marginTop: "10px", float: "right"}}>
-            <Button onClick={() => previewReport(reportHeaders)}>
-                Preview
-            </Button>
-            <Button color="success" onClick={() => saveReport(reportHeaders)}>
-                Save
-            </Button>
-        </div>
-        </>
+            <Box marginTop="10px" sx={{float: "right"}}>
+                <Button onClick={() => previewReport(reportHeaders)}>
+                    Preview
+                </Button>
+                <Button color="success" onClick={() => saveReport(reportHeaders)}>
+                    Save
+                </Button>
+            </Box>
+        </Box>
     );
 };
 

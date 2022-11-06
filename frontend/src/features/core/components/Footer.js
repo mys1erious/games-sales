@@ -5,7 +5,8 @@ import LinkButton from "./LinkButton";
 const Footer = () => (
     <footer>
     <Container maxWidth="lg" sx={{
-        marginY: "10px",
+        position: "sticky",
+        marginY: "12px",
         paddingY: "10px",
         borderTop: "1px solid gray"}}>
         <Grid container textAlign="center" direction="column">
