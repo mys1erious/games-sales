@@ -3,14 +3,17 @@
 from .base import *
 
 
-# Change to false
-DEBUG = True
-ALLOWED_HOSTS = []
-CORS_ALLOWED_ORIGINS = []
+DEBUG = False
+ALLOWED_HOSTS = ['mysterious.pythonanywhere.com']
+
+# For now
+CORS_ALLOWED_ORIGINS = [
+    'https://games-sales.mys1erious.com'
+]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': get_env_var('DATABASE_NAME'),
         'HOST': get_env_var('DATABASE_HOST'),
         'PORT': get_env_var('DATABASE_PORT'),
