@@ -1,0 +1,91 @@
+.pie-chart {
+    margin: auto;
+    max-width: 720px;
+    width: 100vw;
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .pie-chart {
+        width: 60vw;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .pie-chart {
+        width: 50vw;
+    }
+}
+
+.gamepad {
+    max-width: 400px;
+    width: 100vw;
+}
+
+
+@media screen and (min-width: 900px) {
+    .gamepad {
+        max-width: 720px;
+        width: 50vw;
+    }
+}
+
+@keyframes gamepad-rotation {
+    50% {
+        transform: rotate(900deg);
+    }
+    100% {
+        transform: rotate(-0deg);
+    }
+}
+
+.gamepad-animation {
+    animation: gamepad-rotation 4s;
+}
+
+.gamepad:hover {
+    scale: 1.01;
+}
+
+
+a {
+    text-decoration: underline;
+    text-decoration-color: #1976d2;
+}
+
+.title {
+    line-height: 95%;
+    margin-bottom: 20px;
+    font-size: clamp(16px, 8vw, 60px);
+}
+
+.paragraph {
+    margin: auto;
+    font-size: clamp(12px, 3vw, 25px);
+    max-width: 75%;
+}
+
+@media screen and (min-width: 0px) and (max-width: 900px) {
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-image: url("/src/assets/blue-right-side-bg-xs.png");
+        background-size: 100% 100%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        background-image: url("/src/assets/blue-right-side-bg.png");
+        background-size: 100% 100%;
+    }
+}

@@ -1,1 +1,1 @@
-# games-sales-v2
+# Games Sales
