@@ -192,9 +192,8 @@ class SaleQuerySet(QuerySet):
         return data
 
     def describe_field(self, db_field):
-
         # MySQL doesnt have PERCENTILE_CONT function, so for now using numpy to calculate a percentile
-        #   later switch to raw sql?
+        #   later switch to raw sql or sth?
         if connection.vendor == 'mysql':
             values = self\
                 .filter(**{f'{db_field}__isnull': False})\
@@ -251,16 +250,24 @@ class SaleQuerySet(QuerySet):
             sales=F(sales_type)
         )
 
-        res = qs.none()
-        for value in values:
-            res = res.union(
-                qs.filter(**{db_field: value})\
-                .order_by('-sales')[:n]
-            )
-        res = res.order_by(field, '-sales')
-
-        for obj in res:
-            data[obj[field]].append({'name': obj['name'], 'sales': obj['sales']})
+        # Chaining of unions leads to incorrect SQL query on MySQL,
+        #   so for now use slow loops for MySQL, might come up with better solution later ?
+        if connection.vendor == 'mysql':
+            for value in values:
+                obj_list = qs.filter(**{db_field: value}) \
+                               .order_by('-sales')[:n]
+                for obj in obj_list:
+                    data[obj[field]].append({'name': obj['name'], 'sales': obj['sales']})
+        else:
+            res = qs.none()
+            for value in values:
+                res = res.union(
+                    qs.filter(**{db_field: value})\
+                    .order_by('-sales')[:n]
+                )
+            res = res.order_by(field, '-sales')
+            for obj in res:
+                data[obj[field]].append({'name': obj['name'], 'sales': obj['sales']})
 
         return data
 
