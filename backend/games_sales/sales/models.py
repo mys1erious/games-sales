@@ -1,4 +1,5 @@
-from django.db import models
+import numpy as np
+from django.db import models, connection
 from django.db.models import Q, QuerySet, F, Sum, Count, Max, Avg, StdDev, Min, Aggregate
 from django.utils.text import slugify
 
@@ -191,16 +192,36 @@ class SaleQuerySet(QuerySet):
         return data
 
     def describe_field(self, db_field):
-        return self.aggregate(
-            count=Count(db_field),
-            mean=Avg(db_field),
-            std=StdDev(db_field),
-            min=Min(db_field),
-            p25=Percentile(db_field, percentile=0.25),
-            p50=Percentile(db_field, percentile=0.5),
-            p75=Percentile(db_field, percentile=0.75),
-            max=Max(db_field)
-        )
+
+        # MySQL doesnt have PERCENTILE_CONT function, so for now using numpy to calculate a percentile
+        #   later switch to raw sql?
+        if connection.vendor == 'mysql':
+            values = self\
+                .filter(**{f'{db_field}__isnull': False})\
+                .values_list(db_field, flat=True)
+            data = self.aggregate(
+                count=Count(db_field),
+                mean=Avg(db_field),
+                std=StdDev(db_field),
+                min=Min(db_field),
+                max=Max(db_field)
+            )
+            data['p25'] = np.percentile(values, 25)
+            data['p50'] = np.percentile(values, 50)
+            data['p75'] = np.percentile(values, 75)
+            return data
+
+        else:
+            return self.aggregate(
+                count=Count(db_field),
+                mean=Avg(db_field),
+                std=StdDev(db_field),
+                min=Min(db_field),
+                p25=Percentile(db_field, percentile=0.25),
+                p50=Percentile(db_field, percentile=0.5),
+                p75=Percentile(db_field, percentile=0.75),
+                max=Max(db_field)
+            )
 
     def games_annually(self, yor_lt=2050, yor_gt=0):
         field = 'year_of_release'
@@ -322,6 +343,7 @@ class Sale(models.Model):
 class Percentile(Aggregate):
     def __init__(self, *args, **kwargs):
         percentile = kwargs.pop("percentile", 0.5)
+
         self.template = f'%(function)s({percentile}) WITHIN GROUP (ORDER BY %(expressions)s)'
         super().__init__(*args, **kwargs)
 
