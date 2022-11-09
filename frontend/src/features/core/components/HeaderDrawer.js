@@ -1,4 +1,5 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {Box, Drawer, FormControlLabel, IconButton, Switch} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -26,8 +27,14 @@ const LinkButton = ({to, startIcon, children}) => (
 
 
 const HeaderDrawer = ({isDarkTheme, changeTheme}) => {
+    const navigate = useNavigate();
     const {user} = useContext(UserContext);
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(
+        () => setIsOpen(false),
+        [navigate]
+        );
 
     return (
         <>
@@ -45,7 +52,7 @@ const HeaderDrawer = ({isDarkTheme, changeTheme}) => {
         <Drawer anchor="left" open={isOpen} sx={{position: "relative"}}
                 onClose={() => setIsOpen(false)}>
             <Box padding="8px" height="48px">
-                <Button onClick={()=> setIsOpen(false)}>
+                <Button onClick={() => setIsOpen(false)}>
                     <NavigateBeforeIcon/>
                 </Button>
                 <FormControlLabel
