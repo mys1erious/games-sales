@@ -3,14 +3,15 @@ import axios from "axios";
 
 const baseURL = process.env.REACT_APP_BASE_API_URL;
 
+
 const axiosInstance = axios.create({
     baseURL: baseURL,
     timeout: 10000, // 5000
-    headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-    },
+	headers: {
+		'Content-Type': 'application/json',
+		accept: 'application/json',
+		Authorization: 'Bearer ' + localStorage.getItem('access_token')
+	},
 });
 
 
@@ -40,7 +41,7 @@ axiosInstance.interceptors.response.use(
 		) {
 			const refreshToken = localStorage.getItem('refresh_token');
 			if (refreshToken) {
-				axiosInstance.defaults.headers['Authorization'] = null;
+				delete axiosInstance.defaults.headers['Authorization'];
 				axiosInstance.defaults.headers['Content-Type'] = 'application/json';
 				return axiosInstance
 					.post('/auth/token/',

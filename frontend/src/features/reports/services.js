@@ -19,11 +19,15 @@ export const getGamesByFieldsData = async(searchParams, props={}) => {
 export const getGamesByFieldData = async(searchParams, props={}) => {
     const allowedProps = ['field', 'sales_type', 'n'];
     const params = setMultSearchParams(searchParams, allowedProps, props);
-    return await axiosInstance.get(`/sale-analysis/games-by-field/?${params}`);
+    return await axiosInstance.get(`/sale-analysis/games-by-field/?${params}`, {
+        headers: {Authorization: null}
+    });
 };
 
 export const getGamesAnnuallyData = async(searchParams, props={}) => {
-    return await axiosInstance.get(`/sale-analysis/games-annually/?${searchParams}`);
+    return await axiosInstance.get(`/sale-analysis/games-annually/?${searchParams}`, {
+        headers: {Authorization: null}
+    });
 };
 
 export const getScoreData = async(searchParams, props={}) => {
@@ -32,11 +36,15 @@ export const getScoreData = async(searchParams, props={}) => {
         ['n'],
         props
     );
-    return await axiosInstance.get(`/sale-analysis/score/?${params}`);
+    return await axiosInstance.get(`/sale-analysis/score/?${params}`, {
+        headers: {Authorization: null}
+    });
 };
 
 export const getDescribeData = async(searchParams) => {
-    return await axiosInstance.get(`/sale-analysis/describe/?${searchParams}`);
+    return await axiosInstance.get(`/sale-analysis/describe/?${searchParams}`, {
+        headers: {Authorization: null}
+    });
 };
 
 export const getTopFieldsData = async(searchParams, props={}) => {
@@ -52,7 +60,9 @@ export const getTopFieldsData = async(searchParams, props={}) => {
 export const getTopFieldData = async(searchParams, props={}) => {
     const allowedProps = ['field', 'sales_type', 'n'];
     const params = setMultSearchParams(searchParams, allowedProps, props);
-    return await axiosInstance.get(`/sale-analysis/top-field/?${params}`);
+    return await axiosInstance.get(`/sale-analysis/top-field/?${params}`, {
+        headers: {Authorization: null}
+    });
 };
 
 export const postReport = async(data) => {
@@ -64,7 +74,6 @@ export const postReport = async(data) => {
 export const getReports = async() => {
     return await axiosInstance.get(`/reports/`);
 };
-
 
 export const getReportBody = async(url) =>
     await axios.get(url, {responseType: 'blob'});
