@@ -8,7 +8,8 @@ ALLOWED_HOSTS = ['mysterious.pythonanywhere.com']
 
 # For now
 CORS_ALLOWED_ORIGINS = [
-    'https://games-sales.mys1erious.com'
+    'https://games-sales.mys1erious.com',
+    'https://games-sales-mys1erious.vercel.app'
 ]
 
 DATABASES = {
