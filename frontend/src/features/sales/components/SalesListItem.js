@@ -52,7 +52,7 @@ const SalesListItem = ({sale}) => {
             <ListItemSubText secondary={`Genre: ${sale.game.genre}`}/>
             <ListItemSubText secondary={`Platform: ${sale.game.platform}`}/>
             <ListItemSubText secondary={`Year of Release: ${sale.game.year_of_release}`}/>
-            <ListItemSubText secondary={`Global Sales: ${sale.global_sales}`}/>
+            <ListItemSubText secondary={`Global Sales: ${sale.global_sales}M`}/>
         </Collapse>
         </>
     )

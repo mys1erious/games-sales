@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 import {unslugify} from "features/core/utils";
 
-const SaleDetailTable = ({obj, exclude=[]}) => (
+const SaleDetailTable = ({obj, exclude=[], postfix=''}) => (
     <TableContainer component={Paper}>
         <Table sx={{minWidth: "25vw", border: "1px solid gray"}}>
             <TableHead>
@@ -21,7 +21,7 @@ const SaleDetailTable = ({obj, exclude=[]}) => (
                             ?
                             <TableRow key={field}>
                                 <TableCell>{unslugify(field)}</TableCell>
-                                <TableCell>{value || 'null'}</TableCell>
+                                <TableCell>{`${value}${postfix}` || 'null'}</TableCell>
                             </TableRow>
                             : null
                     )

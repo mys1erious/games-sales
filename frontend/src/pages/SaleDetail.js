@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 
 import {
     Box,
@@ -8,16 +8,11 @@ import {
     Typography
 } from "@mui/material";
 
-import {Button} from "features/core/components/Button";
 import {getSale} from "features/sales/services";
 import SaleDetailTable from "features/sales/components/SaleDetailTable";
 
 
-const buttonWidth = "70px";
-
-
 const SaleDetail = () => {
-    const navigate = useNavigate();
     const location = useLocation();
 
     const {saleSlug} = useParams();
@@ -47,17 +42,14 @@ const SaleDetail = () => {
 
     return(
         <Container component="main" maxWidth="xl">
-            <Button sx={{width: buttonWidth}} onClick={() => navigate(-1)}>
-                Back
-            </Button>
-            <Box textAlign="center">
+            <Box textAlign="center" paddingTop="20px">
                 <Typography variant="h4" marginBottom="20px">
                     Sale info:
                 </Typography>
                 <Grid container textAlign="center">
                     <Grid item xs={12} md={4}>
                         <Typography variant="h5">Sales</Typography>
-                        <SaleDetailTable obj={sale} exclude={['game', 'slug']}/>
+                        <SaleDetailTable obj={sale} exclude={['game', 'slug']} postfix="M"/>
                     </Grid>
                     <Grid item xs={12} md={4}>
                         <Typography variant="h5">Game</Typography>
