@@ -105,6 +105,7 @@ class DynamicFieldsSerializer(serializers.Serializer):
         """
         field_names = kwargs.pop('field_names', [])
         fields = kwargs.pop('fields', [])
+
         field = kwargs.pop('field', None)
 
         super().__init__(*args, **kwargs)
@@ -125,7 +126,7 @@ class DescribeDynamicFieldsSerializer(DynamicFieldsSerializer):
     ...
 
 
-class GamesByFiedlDynamicFieldsSerializer(DynamicFieldsSerializer):
+class GamesByFieldDynamicFieldsSerializer(DynamicFieldsSerializer):
     ...
 
 

@@ -25,7 +25,7 @@ from .serializers import (
     DescribeNumericDataSerializer,
     GamesAnnuallySerializer,
     DescribeDynamicFieldsSerializer,
-    GamesByFiedlDynamicFieldsSerializer,
+    GamesByFieldDynamicFieldsSerializer,
     GamesByFieldGameSerializer
 )
 
@@ -410,7 +410,7 @@ class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
 
     @extend_schema(
         responses={
-            200: GamesByFiedlDynamicFieldsSerializer(
+            200: GamesByFieldDynamicFieldsSerializer(
                 field_names=Sale.objects.all().unique_values('genre'),
                 field=GamesByFieldGameSerializer
             )
@@ -443,13 +443,13 @@ class SaleAnalysisGamesByFieldAPIView(BaseSaleAnalysisAPIView):
         for key, val in data.items():
             data[key] = GamesByFieldGameSerializer(val, many=True).data
 
-        serializers = GamesByFiedlDynamicFieldsSerializer(
+        serializer = GamesByFieldDynamicFieldsSerializer(
             data,
             field_names=list(data.keys()),
             field=lambda: GamesByFieldGameSerializer(many=True)
         )
 
-        return Response(serializers.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_query_params(self, query_params):
         self.get_field_param(query_params)

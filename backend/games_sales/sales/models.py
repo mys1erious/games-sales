@@ -148,6 +148,7 @@ class SaleQuerySet(QuerySet):
             .values_list(field_to_db_field(field), flat=True) \
             .distinct()
 
+
     def top_n_fields(
             self,
             field,
@@ -238,7 +239,16 @@ class SaleQuerySet(QuerySet):
 
     def top_games_by_field(self, field, sales_type='global_sales', n=5):
         db_field = field_to_db_field(field)
-        values = Sale.objects.all().unique_values(field)
+        values = list(Sale.objects.all().unique_values(field))
+
+        if None in values:
+            values.remove(None)
+
+        replace_chars = ['.']
+        for i, value in enumerate(values):
+            for char in replace_chars:
+                values[i] = value.replace(char, '')
+
         data = {value: [] for value in values}
 
         if n == -1:
