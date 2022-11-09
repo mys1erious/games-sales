@@ -34,8 +34,7 @@ const Home = () => {
         <>
         <Grid container textAlign="center"
               paddingTop="5vh"
-              alignItems="center"
-              height="80vh">
+              alignItems="center">
             <Grid item xs={12} md={9}
                   color="#1976d2"
                   className="text"
