@@ -3,13 +3,8 @@ import LinkButton from "./LinkButton";
 
 
 const Footer = () => (
-    <footer>
-    <Container maxWidth="lg" sx={{
-        position: "sticky",
-        marginY: "12px",
-        paddingY: "10px",
-        borderTop: "1px solid gray"}}>
-        <Grid container textAlign="center" direction="column">
+    <footer style={{borderTop: "1px solid gray", marginTop: "10px"}}>
+        <Grid container textAlign="center" direction="column" marginTop="8px">
             <Grid item xs={12}>
                 <Typography>
                     This website is made for educational and research purpose
@@ -23,7 +18,6 @@ const Footer = () => (
                 </LinkButton>
             </Grid>
         </Grid>
-    </Container>
     </footer>
     );
 
