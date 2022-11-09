@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
-import {Box, Drawer, FormControlLabel, IconButton, Switch} from "@mui/material";
+import {Box, Button as BaseButton, Drawer, FormControlLabel, IconButton, Switch} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 
@@ -10,19 +10,21 @@ import SalesSearchBar from "features/sales/components/SalesSearchBar";
 import {UserContext} from "features/auth/UserContext";
 
 import {Button} from "./Button";
-import BaseLinkButton from "./LinkButton";
 import Image from "./Image";
 
 
 const LinkButton = ({to, startIcon, children}) => (
-    <Box width="100%" textAlign="center"
-         border="1px solid gray" borderRadius={10}
-         marginBottom="4px"
-    >
-        <BaseLinkButton to={to} startIcon={startIcon}>
-            {children}
-        </BaseLinkButton>
-    </Box>
+        <BaseButton component={NavLink} to={to}
+                color="inherit" variant="text"
+                startIcon={startIcon}
+                sx={{width: "100%",
+                    border: "1px solid gray",
+                    borderRadius: 10,
+                    marginBottom: "4px",
+                    textAlign: "center"
+        }}>
+        {children}
+    </BaseButton>
 );
 
 
