@@ -32,7 +32,6 @@ from .serializers import (
 
 class BaseSaleAPIView(APIView, LimitOffsetPagination):
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = []
 
     query_search_param = 'text'
     filter_params = ['genre', 'esrb_rating', 'yor_lt', 'yor_gt', 'year_of_release', 'sales']
@@ -84,7 +83,6 @@ class BaseSaleAPIView(APIView, LimitOffsetPagination):
 
 
 class SaleListAPIView(BaseSaleAPIView):
-
     @extend_schema(
         request=SaleSerializer,
         responses={200: SaleSerializer},
@@ -149,7 +147,6 @@ class SaleListAPIView(BaseSaleAPIView):
 @extend_schema(description='Partially update a Sale', methods=["PATCH"])
 class SaleDetailAPIView(RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = []
 
     queryset = Sale.objects.all()
     serializer_class = SaleSerializer
@@ -180,7 +177,6 @@ class SaleFilterFieldsListAPIView(APIView):
     Some possible filter for Sales List
     """
     permission_classes = (IsAdminOrReadOnly,)
-    authentication_classes = []
 
     def get(self, request, format=None):
         order_by = [
