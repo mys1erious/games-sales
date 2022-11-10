@@ -49,14 +49,15 @@ elif DOMAIN == 'PA':
     CLIENT_SECRET = get_env_var('DJANGO_CLIENT_SECRET_PA')
 
 FILE_PATH = 'samples.json'
-NUM_OF_SAMPLES = 100
+SAMPLES_FROM = 10
+SAMPLES_TO = 1000
 ACCESS_TOKEN = get_access_token()
 
 
 def get_samples():
     with open(FILE_PATH, 'r') as f:
         data = json.load(f)
-        return data['samples'][:NUM_OF_SAMPLES]
+        return data['samples'][SAMPLES_FROM:SAMPLES_TO]
 
 
 def post_sale(sale):
@@ -85,5 +86,4 @@ def get_sales():
 
 if __name__ == '__main__':
     samples = get_samples()
-    # print(samples)
     post_sales(samples)
