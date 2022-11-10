@@ -1,5 +1,3 @@
-import requests
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
@@ -71,6 +69,7 @@ class UserReportDetailAPIView(APIView):
         Retrieve a Report
         """
         report = get_object_or_404(Report, user=request.user, slug=slug)
+
         serializer = ReportSerializer(report, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 

@@ -1,4 +1,3 @@
-from django.templatetags.static import static
 from rest_framework.renderers import TemplateHTMLRenderer
 from rest_framework.response import Response
 from rest_framework.reverse import reverse

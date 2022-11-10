@@ -1,12 +1,9 @@
-import os
-
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
 from .models import Report
 
 
-# transaction.on_commit(lambda: instance.report_body.delete(save=False)) ?
 @receiver(post_delete, sender=Report)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.report_body:

@@ -81,3 +81,4 @@ export const getReportBody = async(url) =>
 export const deleteReport = async(slug) => {
     return await axiosInstance.delete(`/reports/${slug}/`)
 };
+
