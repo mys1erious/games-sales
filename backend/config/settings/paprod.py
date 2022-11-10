@@ -24,7 +24,7 @@ DATABASES = {
 }
 
 
-STATIC_URL = '/django_static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'games_sales', 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectedstatic')
 
