@@ -10,8 +10,7 @@ from .models import Report
 @receiver(post_delete, sender=Report)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     if instance.report_body:
-        if os.path.isfile(instance.report_body.path):
-            instance.report_body.delete(save=False)
+        instance.report_body.delete(save=False)
 
 
 @receiver(pre_save, sender=Report)
@@ -26,5 +25,4 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
 
     new_file = instance.report_body
     if not old_file == new_file:
-        if os.path.isfile(old_file.path):
-            instance.report_body.delete(save=False)
+        instance.report_body.delete(save=False)
