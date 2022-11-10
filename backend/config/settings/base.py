@@ -214,25 +214,3 @@ SPECTACULAR_SETTINGS = {
     'OAUTH2_REFRESH_URL': '/auth/token/refresh/',
     'OAUTH2_SCOPES': None
 }
-
-# Security headers
-
-# Content Security Policy
-# Blocks some content. This helps stop XSS, clickjacking, and other kinds of injection attacks.
-CSP_IMG_SRC = ("'self'", "data:")
-CSP_STYLE_SRC = ("'self'", "'unsafe-inline'")
-CSP_FONT_SRC = (
-    "'self'",
-    'https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UNirkOUuhpKKSTjw.woff2',
-    'https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN_r8OUuhpKKSTjw.woff2'
-)
-CSP_SCRIPT_SRC = (
-    "'self'",
-    "https://cdn.jsdelivr.net/npm/rapidoc@latest/dist/rapidoc-min.js"
-)
-
-# X-XSS-Protection
-SECURE_BROWSER_XSS_FILTER = True
-
-# Refuses to connect to your domain name via an insecure connection (for a given period of time)
-SECURE_HSTS_SECONDS = 15768000
