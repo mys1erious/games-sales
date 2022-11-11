@@ -13,6 +13,7 @@
   - Postgresql(dev) / MySQL(PythonAnywhere)
   - Rapidoc
   - Spectacular
+  - A+ on [Mozilla Observatory](https://observatory.mozilla.org/)
 - Frontend:
   - JS/HTML/CSS
   - React
