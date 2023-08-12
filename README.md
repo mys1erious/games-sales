@@ -1,5 +1,7 @@
 # Games Sales App
 
+!!! S3 storage is deleted, so reports save doesn't work right now
+
 ## Links:
 - [API](https://mysterious.pythonanywhere.com)
 - [Frontend](https://games-sales.mys1erious.com)
